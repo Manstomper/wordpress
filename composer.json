@@ -1,8 +1,8 @@
 {
-    "name": "rig/demo",
+    "name": "rig/wp-demo-theme",
     "description": "WordPress theme with sample code",
     "version": "1.0.0",
-    "license": "CC-PDDC",
+    "license": "CC0 Public Domain Dedication",
     "authors": [
         {
             "email": "riina.grano@gmail.com",
