@@ -1,0 +1,37 @@
+// Breakpoints
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Dimensions
+
+$margin: 15px;
+
+// Fonts
+
+$serif: "Times New Roman", serif;
+$sans: Verdana, sans-serif;
+
+// Colors
+
+$white: #fff;
+$black: #000;
+$grey: #888;
+$red: red;
+$green: green;
+$blue: blue;
+
+// Animations
+
+@keyframes fade-in {
+
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,6 @@
+.wp-block{max-width:1140px}
+
+[data-type="rig/box"]{-webkit-box-flex:1;flex:1 1 0px;clear:both;margin-right:5px !important;margin-left:5px !important}[data-type="rig/box"]:first-child{margin-left:20px !important}[data-type="rig/box"]:nth-last-child(2){margin-right:20px !important}[data-type="rig/box"]>.editor-block-list__block-edit>[data-block]{padding-top:5px;padding-bottom:5px;outline:1px dashed #8d96a0}
+
+[data-type="rig/boxes"]>.editor-block-list__block-edit>[data-block]>.editor-inner-blocks>.editor-block-list__layout{display:-webkit-box;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-flow:row wrap;justify-content:space-around}[data-type="rig/boxes"]>.editor-block-list__block-edit>[data-block]>.editor-inner-blocks>.editor-block-list__layout>.block-list-appender{-webkit-box-flex:0 !important;flex:0 0 100% !important}
+

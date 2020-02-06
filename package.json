@@ -1,0 +1,30 @@
+{
+  "name": "wp-demo-theme",
+  "description": "",
+  "version": "1.0.0",
+  "author": "Riina Granö",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development --config assets/src/webpack.config.js --display-error-details",
+    "build": "webpack --mode production --config assets/src/webpack.config.js",
+    "watch": "webpack --mode development --config assets/src/webpack.config.js --watch",
+    "make-pot": "wp i18n make-pot ./ ./languages/rig.pot --domain=\"rig\" --exclude=\"assets/src\"",
+    "make-json": "wp i18n make-json ./languages --no-purge"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "css-loader": "^3.4.2",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "autoprefixer": "^9.7.4",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
+    "mini-css-extract-plugin": "^0.9.0"
+  },
+  "dependencies": {
+    "npm": "^6.12.0"
+  }
+}

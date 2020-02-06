@@ -1,0 +1,12 @@
+@charset 'UTF-8';
+
+@import "bootstrap";
+
+/*! Demo WordPress theme | License: Public domain */
+
+@import "variables";
+@import "global";
+
+// Gutenberg blocks
+
+@import "blocks/boxes";

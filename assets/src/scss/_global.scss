@@ -1,0 +1,63 @@
+// Typography and global styles
+
+body {
+  font-family: $sans;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wp-block-columns {
+  display: flex;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+
+img[src$=".svg"] {
+  width: 100%;
+}
+
+// Focus indicators
+
+a:focus,
+a:active,
+input:focus,
+input:active,
+button:focus,
+button:active {
+  outline: 1px solid orange;
+}
+
+// Color themes
+
+.theme {
+
+  > *:not(.theme) {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    &:first-child {
+      margin-top: 15px;
+    }
+
+    &:last-child {
+      margin-bottom: 15px;
+    }
+  }
+
+  &.primary {
+    background-color: $green;
+  }
+
+  &.secondary {
+    background-color: $blue;
+  }
+}
