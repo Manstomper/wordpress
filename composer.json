@@ -1,6 +1,7 @@
 {
     "name": "rig/wp-demo-theme",
     "description": "WordPress theme with sample code",
+    "type": "wordpress-theme",
     "version": "1.0.0",
     "license": "CC0 Public Domain Dedication",
     "authors": [
@@ -8,8 +9,5 @@
             "email": "riina.grano@gmail.com",
             "name": "Riina Granö"
         }
-    ],
-    "type": "wordpress-theme",
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    ]
 }
