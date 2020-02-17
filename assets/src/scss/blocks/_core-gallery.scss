@@ -1,0 +1,41 @@
+.wp-block-gallery {
+
+  .blocks-gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0 -5px;
+    padding: 0;
+  }
+
+  .blocks-gallery-item {
+    flex-grow: 1;
+  }
+
+  @for $i from 1 through 8 {
+
+    &.columns-#{$i} .blocks-gallery-item {
+      width: calc(100% / #{$i});
+    }
+  }
+
+  figure {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    height: 100%;
+    margin: 0;
+  }
+
+  img {
+    padding: 5px;
+  }
+
+  &.is-cropped .blocks-gallery-item a,
+  &.is-cropped .blocks-gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

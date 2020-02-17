@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Remove block library CSS
+ */
+add_action('wp_print_styles', function() {
+  wp_dequeue_style('wp-block-library');
+}, 100);
+
+/**
  * Enqueue block editor JS and CSS
  */
 function rig_block_editor_assets() {
@@ -17,8 +24,7 @@ add_action('enqueue_block_editor_assets', 'rig_block_editor_assets');
  */
 function rig_blocks_init() {
   $blocks = [
-    'boxes',
-    'box',
+    'sample',
   ];
 
   foreach ($blocks as $block) {
@@ -73,8 +79,58 @@ function rig_block_categories($categories, $post) {
 add_filter('block_categories', 'rig_block_categories', 10, 2);
 
 /**
- * Remove block library CSS
+ * Disable custom font sizes, then reduce number of available sizes
  */
-add_action('wp_print_styles', function() {
-  wp_dequeue_style('wp-block-library');
-}, 100);
+function rig_font_sizes() {
+  add_theme_support('disable-custom-font-sizes');
+  add_theme_support('editor-font-sizes', [
+    [
+      'name' => __('Normal', 'rig'),
+      'size' => null,
+      'slug' => ''
+    ],
+    [
+      'name' => __('Small', 'rig'),
+      'size' => 12,
+      'slug' => 'small'
+    ],
+    [
+      'name' => __('Large', 'rig'),
+      'size' => 36,
+      'slug' => 'large'
+    ],
+  ]);
+}
+
+add_action('after_setup_theme', 'rig_font_sizes');
+
+/**
+ * Disable custom colors, then add theme colors to picker
+ */
+function rig_color_palette() {
+  add_theme_support('disable-custom-colors');
+  add_theme_support('editor-color-palette', [
+    [
+      'name' => __('White', 'rig'),
+      'slug' => 'white',
+      'color' => '#fff',
+    ],
+    [
+      'name' => __('Black', 'rig'),
+      'slug' => 'black',
+      'color' => '#000',
+    ],
+    [
+      'name' => __('Primary', 'rig'),
+      'slug' => 'primary',
+      'color' => '#ff8552',
+    ],
+    [
+      'name' => __('Secondary', 'rig'),
+      'slug' => 'secondary',
+      'color' => '#297373',
+    ],
+  ]);
+}
+
+add_action('after_setup_theme', 'rig_color_palette');

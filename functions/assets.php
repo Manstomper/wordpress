@@ -4,7 +4,11 @@ function rig_enqueue() {
   $path = get_template_directory_uri() . '/assets/dist/';
 
   wp_enqueue_style('rig-app', $path . 'app.css');
-  wp_enqueue_script('rig-app',  $path . 'app.js', [], false, true);
+
+  // This is a temporary solution until I figure out the correct way to handle third-party libraries (same as jQuery?)
+  wp_enqueue_script('vue',  get_template_directory_uri() . '/assets/vue.min.js', [], false, true);
+
+  wp_enqueue_script('rig-app',  $path . 'app.js', ['vue'], false, true);
 }
 
 add_action('wp_enqueue_scripts', 'rig_enqueue');
@@ -17,7 +21,7 @@ add_action('wp_footer', function() {
 });
 
 /**
- * Remove jQuery from frontend (it's included in theme scripts)
+ * Remove jQuery from frontend (if necessary, it's included in theme scripts)
  */
 add_filter('wp_default_scripts', function(&$scripts) {
   if (!is_admin()) {

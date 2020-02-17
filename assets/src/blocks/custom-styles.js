@@ -3,7 +3,7 @@
  */
 wp.domReady(function() {
 
-  wp.blocks.registerBlockStyle('rig/boxes', [
+  wp.blocks.registerBlockStyle('rig/sample', [
     {
       name: 'default',
       label: 'Oletus',

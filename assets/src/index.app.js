@@ -1,6 +1,5 @@
 // JS
-import './js/rest-wp.js';
-import './js/rest-custom.js';
+import './js/rest.js';
 import './js/ajax.js';
 
 // CSS

@@ -2,15 +2,13 @@
 
 body {
   font-family: $sans;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 main {
-  max-width: 800px;
+  max-width: $max-width;
   margin: 0 auto;
-}
-
-.wp-block-columns {
-  display: flex;
 }
 
 img {
@@ -36,28 +34,58 @@ button:active {
   outline: 1px solid orange;
 }
 
-// Color themes
+// WordPress classes
 
-.theme {
+.has-text-align-left {
+  text-align: left;
+}
 
-  > *:not(.theme) {
-    padding-right: 15px;
-    padding-left: 15px;
+.has-text-align-center {
+  text-align: center;
+}
 
-    &:first-child {
-      margin-top: 15px;
-    }
+.has-text-align-right {
+  text-align: right;
+}
 
-    &:last-child {
-      margin-bottom: 15px;
-    }
-  }
+.has-small-font-size {
+  font-size: 16px;
+}
 
-  &.primary {
-    background-color: $green;
-  }
+.has-large-font-size {
+  font-size: 36px;
+}
 
-  &.secondary {
-    background-color: $blue;
-  }
+// WordPress color classes
+
+.has-black-background-color {
+  background-color: $black;
+}
+
+.has-white-background-color {
+  background-color: $white;
+}
+
+.has-primary-background-color {
+  background-color: $orange;
+}
+
+.has-secondary-background-color {
+  background-color: $green;
+}
+
+.has-black-color {
+  color: $black;
+}
+
+.has-white-color {
+  color: $white;
+}
+
+.has-primary-color {
+  color: $orange;
+}
+
+.has-secondary-color {
+  color: $green;
 }

@@ -7,6 +7,14 @@
 @import "variables";
 @import "global";
 
+// Components
+
+@import "components/footer";
+
 // Gutenberg blocks
 
-@import "blocks/boxes";
+@import "blocks/sample";
+@import "blocks/core-columns";
+@import "blocks/core-gallery";
+@import "blocks/core-cover";
+@import "blocks/core-media-text";

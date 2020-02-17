@@ -24,9 +24,13 @@ function rig_rest_posts($data) {
 
     $results[] = [
       'id' => get_the_ID(),
-      'title' => get_the_title(),
-      'content' => get_the_content(),
-      'permalink' => get_the_permalink(),
+      'title' => [
+        'rendered' => get_the_title(),
+      ],
+      'content' => [
+        'rendered' => get_the_content(),
+      ],
+      'link' => get_the_permalink(),
     ];
   }
 
@@ -79,5 +83,5 @@ function rig_ajax_example() {
   die();
 }
 
-add_action('wp_ajax_loadexample', 'rig_ajax_example');
-add_action('wp_ajax_nopriv_loadexample', 'rig_ajax_example');
+add_action('wp_ajax_rigexample', 'rig_ajax_example');
+add_action('wp_ajax_nopriv_rigexample', 'rig_ajax_example');

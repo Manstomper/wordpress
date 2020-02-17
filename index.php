@@ -13,18 +13,25 @@
 
   <hr>
 
-  <h1>Example REST query result</h1>
-  <div data-wp-rest></div>
+  <div id="rest-example">
 
-  <hr>
+    <h2>{{ title }}</h2>
 
-  <h1>Example custom REST results for search &quot;quick fox&quot;</h1>
-  <div data-wp-rest-custom></div>
+    <ul>
+      <rest-example
+        v-for="item in posts"
+        v-bind:post="item"
+        v-bind:key="item.id"
+      ></rest-example>
+    </ul>
 
-  <hr>
+    <button type="button" @click="searchPosts">Search &quot;quick fox&quot; in multiple post types</button>
 
-  <h1>Example admin-ajax query result</h1>
-  <div data-wp-ajax></div>
+  </div>
+
+  <h2>Example admin-ajax query result</h2>
+
+  <div data-ajax></div>
 
 </main>
 

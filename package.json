@@ -12,17 +12,17 @@
     "make-json": "wp i18n make-json ./languages --no-purge"
   },
   "devDependencies": {
+    "autoprefixer": "^9.7.4",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
     "css-loader": "^3.4.2",
+    "jquery": "^3.4.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
-    "autoprefixer": "^9.7.4",
-    "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
-    "mini-css-extract-plugin": "^0.9.0"
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "npm": "^6.12.0"

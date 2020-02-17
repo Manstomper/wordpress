@@ -1,11 +1,11 @@
-// Breakpoints
+// Content dimensions
 
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 
-// Dimensions
+$max-width: 800px;
 
 $margin: 15px;
 
@@ -19,19 +19,41 @@ $sans: Verdana, sans-serif;
 $white: #fff;
 $black: #000;
 $grey: #888;
-$red: red;
-$green: green;
-$blue: blue;
+$orange: #ff8552;
+$green: #297373;
 
 // Animations
 
-@keyframes fade-in {
+@keyframes fade-out {
 
   0% {
-    opacity: 0;
+    opacity: 1;
   }
 
   100% {
-    opacity: 1;
+    opacity: 0;
   }
+}
+
+@keyframes shake {
+
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+
+  25%, 75% {
+    transform: rotate(3deg);
+  }
+
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+.anim-enter-active {
+  animation: shake .5s;
+}
+
+.anim-leave-active {
+  animation: fade-out 2s;
 }

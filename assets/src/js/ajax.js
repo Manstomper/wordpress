@@ -1,28 +1,41 @@
-(function($) {
-  'use strict';
+/**
+ * Load posts using admin-ajax
+ * Example with plain JavaScript
+ */
+(function() {
 
-  $(document).ready(function() {
+  function doRequest(request, appendTo) {
+    if (request.status === 200) {
+      const result = JSON.parse(request.responseText);
 
-    var el = $('[data-wp-ajax]');
+      if (result.html) {
+        appendTo.insertAdjacentHTML('beforeend', result.html);
+      }
+    }
+    else {
+      console.debug('Request failed. Reason: ' + request.status + ' ' + request.statusText);
+    }
+  }
 
-    if (!el || !el.length) {
+  function sendRequest() {
+    window.removeEventListener('load', sendRequest, false);
+
+    const el = document.querySelector('[data-ajax]');
+
+    if (!el) {
       return;
     }
 
-    $.ajax({
-      url: '/wp/wp-admin/admin-ajax.php',
-      method: 'POST',
-      data: {
-        action: 'loadexample'
-      }
-    })
-    .done(function(response) {
-      el.append(response.html);
-    })
-    .fail(function(obj) {
-      console.debug('Request failed. Reason: ' + obj.status + ' ' + obj.statusText);
-    });
+    const request = new XMLHttpRequest();
 
-  });
+    request.open('POST', '/wp/wp-admin/admin-ajax.php');
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    request.onload = function() {
+      doRequest(request, el);
+    };
+    request.send(encodeURI('action=rigexample'));
+  }
 
-})(jQuery);
+  window.addEventListener('load', sendRequest, false);
+
+})();

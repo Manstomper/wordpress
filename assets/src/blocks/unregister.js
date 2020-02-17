@@ -7,23 +7,33 @@ wp.domReady(function() {
     'core/block',
     'core/columns',
     'core/column',
-    'core/column',
     'core/group',
     'core/heading',
     'core/paragraph',
     'core/list',
     'core/table',
     'core/quote',
+    'core/button',
+    'core/spacer',
     'core/image',
     'core/gallery',
+    'core/cover',
+    'core/media-text',
+    'core/audio',
+    'core/video',
+    'core/file',
     'core/html',
     'core/freeform',
-    'rig/boxes',
-    'rig/box'
+    'embed/vimeo',
+    'embed/youtube',
+    'embed/twitter',
+    'embed/facebook',
+    'embed/instagram'
   ];
 
   wp.blocks.getBlockTypes().forEach(function(blockType) {
-    if (allowedBlocks.indexOf(blockType.name) === -1) {
+    // Unregister only core blocks
+    if (blockType.name.indexOf('core') === 0 && allowedBlocks.indexOf(blockType.name) === -1) {
       wp.blocks.unregisterBlockType(blockType.name);
     }
   });
