@@ -1,3 +1,14 @@
 .wp-block {
   max-width: 1140px;
 }
+
+.has-background-image {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  // Prevent background color from covering background image
+  .has-background-color {
+    background-color: transparent !important;
+  }
+}

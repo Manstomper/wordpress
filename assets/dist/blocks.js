@@ -116,16 +116,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
 /* harmony import */ var _blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks_background_image_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
-/* harmony import */ var _blocks_background_image_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_background_image_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(0);
-/* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_styles_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _blocks_color_theme_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
+/* harmony import */ var _blocks_color_theme_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_color_theme_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _blocks_background_image_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
+/* harmony import */ var _blocks_background_image_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_background_image_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
+/* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6__);
 // Editor JS
 
 
 
 
-//import './blocks/color-theme.js';
+
 
 
 // Editor CSS
@@ -136,7 +138,7 @@ function importAll(r) {
   r.keys().forEach(r);
 }
 
-importAll(__webpack_require__(13));
+importAll(__webpack_require__(14));
 
 
 /***/ }),
@@ -301,8 +303,99 @@ wp.domReady(function() {
 /***/ (function(module, exports) {
 
 /**
- * Add background image selection
- * Note that at the time of writing, it's not possible to add attributes to custom blocks. You need to add "theme: {type: 'string'}" when registering your block.
+ * Add background and text color settings to blocks
+ * Note that at the time of writing, it's not possible to add attributes to custom blocks. You need to add "example: {type: 'something'}" when registering your block.
+ * https://github.com/WordPress/gutenberg/issues/9757
+ *
+ * In this example we're not adding custom class names to the output. Instead, color slugs are written to attributes and handled in a template override.
+ */
+
+(function() {
+
+  const {__} = wp.i18n;
+
+  const enableForBlocks = [
+    'core/column',
+    'rig/sample'
+  ];
+
+  /**
+   * Register attributes
+   */
+  wp.hooks.addFilter('blocks.registerBlockType', 'rig/color-attributes', function(settings, name) {
+    if (enableForBlocks.includes(name)) {
+      settings.attributes = {
+        ...settings.attributes,
+        backgroundColor: {
+          type: 'string'
+        },
+        textColor: {
+          type: 'string'
+        }
+      };
+    }
+
+    return settings;
+  });
+
+  /**
+   * Add color palette to Inspector Controls
+   */
+  const onEdit = function(BlockEdit, props) {
+    if (!enableForBlocks.includes(props.name)) {
+      return wp.element.createElement(BlockEdit, props);
+    }
+
+    return wp.element.createElement('div',
+      {
+        className: (props.backgroundColor.color ? 'has-background-color' : ''),
+        style: {backgroundColor: props.backgroundColor.color, color: props.textColor.color}
+      },
+      wp.element.createElement(
+        wp.element.Fragment, null,
+        wp.element.createElement(
+          BlockEdit,
+          props
+        ),
+        wp.element.createElement(wp.editor.InspectorControls, null,
+          wp.element.createElement(wp.editor.PanelColorSettings, {
+            title: __('Color settings', 'rig'),
+            colorSettings: [
+              {
+                label: __('Background color', 'rig'),
+                value: props.backgroundColor.color,
+                onChange: props.setBackgroundColor
+              },
+              {
+                label: __('Text color', 'rig'),
+                value: props.textColor.color,
+                onChange: props.setTextColor
+              }
+            ]
+          })
+        )
+      )
+    );
+  };
+
+  const withColorSettings = wp.compose.createHigherOrderComponent(function(BlockEdit) {
+    return wp.editor.withColors('backgroundColor', 'textColor')(function(props) {
+      return onEdit(BlockEdit, props);
+    });
+  }, 'withColorSettings');
+
+  wp.hooks.addFilter('editor.BlockEdit', 'rig/color-controls', withColorSettings);
+
+}());
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+/**
+ * Add background image setting
+ * Note that at the time of writing, it's not possible to add attributes to custom blocks. You need to add "example: {type: 'something'}" when registering your block.
  * https://github.com/WordPress/gutenberg/issues/9757
  */
 
@@ -317,7 +410,7 @@ wp.domReady(function() {
   /**
    * Register attribute(s)
    */
-  wp.hooks.addFilter('blocks.registerBlockType', 'rig/background-image-attribute', function(settings, name) {
+  wp.hooks.addFilter('blocks.registerBlockType', 'rig/background-image-attributes', function(settings, name) {
     if (enableForBlocks.includes(name)) {
       settings.attributes = {
         ...settings.attributes,
@@ -336,56 +429,53 @@ wp.domReady(function() {
   /**
    * Add background image selection to Inspector Controls
    */
-  const withBackgroundImage = wp.compose.createHigherOrderComponent(function(BlockEdit) {
-    return function (props) {
-      if (!enableForBlocks.includes(props.name)) {
-        return wp.element.createElement(BlockEdit, props);
-      }
+  const onEdit = function(BlockEdit, props) {
+    if (!enableForBlocks.includes(props.name)) {
+      return wp.element.createElement(BlockEdit, props);
+    }
 
-      // Default elements
-      var image = null;
-      var controls = wp.element.createElement(wp.components.Button,
-        {
-          isDefault: true,
-          isSmall: true,
-          onClick: function() {
-            props.setAttributes({imageId: null, imageUrl: null});
+    // Default elements
+    var imageUrl = '';
+    var image = wp.element.createElement('p', null, __('Loading', 'rig'));
+    var controls = wp.element.createElement(wp.components.Button,
+      {
+        isDefault: true,
+        isSmall: true,
+        onClick: function() {
+          props.setAttributes({imageId: null, imageUrl: null});
+        }
+      },
+      __('Clear', 'rig')
+    );
+
+    // Image has not been selected, show media placeholder
+    if (!props.attributes.imageId) {
+      image = null;
+
+      controls = wp.element.createElement(
+        wp.editor.MediaPlaceholder, {
+          allowedTypes: ['image'],
+          multiple: false,
+          onSelect: function(val) {
+            props.setAttributes({imageId: val.id});
           }
-        },
-        __('Clear', 'rig')
+        }
       );
+    }
+    // Image data has been fetched, show image
+    else if (props.image) {
+      imageUrl = props.image.media_details.sizes.large.source_url;
+      image = wp.element.createElement('div', null,
+        wp.element.createElement('img', {src: props.image.media_details.sizes.medium.source_url})
+      );
+    }
 
-      // True after query is done
-      if (props.attributes.imageUrl) {
-        image = wp.element.createElement('div', null,
-          wp.element.createElement('img', {src: props.attributes.imageUrl})
-        );
-      }
-      // Fetch image using REST API and then update attribute
-      else if (props.attributes.imageId) {
-        image = wp.element.createElement('p', null, __('Loading', 'rig'));
-
-        wp.apiFetch({
-          path: wp.url.addQueryArgs('/wp/v2/media', {id: props.attributes.imageId})
-        })
-        .then(function(result) {
-          props.setAttributes({imageUrl: result[0].media_details.sizes.medium.source_url});
-        });
-      }
-      // No image is selected
-      else {
-        controls = wp.element.createElement(
-          wp.editor.MediaPlaceholder, {
-            allowedTypes: ['image'],
-            multiple: false,
-            onSelect: function(val) {
-              props.setAttributes({imageId: val.id});
-            }
-          }
-        )
-      }
-
-      return wp.element.createElement(
+    return wp.element.createElement('div',
+      {
+        className: (imageUrl ? 'has-background-image' : ''),
+        style: {backgroundImage: 'url(' + imageUrl + ')'}
+      },
+      wp.element.createElement(
         wp.element.Fragment, null,
         wp.element.createElement(
           BlockEdit,
@@ -397,11 +487,19 @@ wp.domReady(function() {
             wp.element.createElement(wp.components.PanelRow, null, controls)
           )
         )
-      );
-    };
+      )
+    );
+  }
+
+  const withBackgroundImage = wp.compose.createHigherOrderComponent(function(BlockEdit) {
+    return wp.data.withSelect(function(select, props) {
+      return {image: props.attributes.imageId ? select('core').getMedia(props.attributes.imageId) : null};
+    })(function(props) {
+      return onEdit(BlockEdit, props);
+    });
   }, 'withBackgroundImage');
 
-  wp.hooks.addFilter('editor.BlockEdit', 'rig/control-background-image', withBackgroundImage);
+  wp.hooks.addFilter('editor.BlockEdit', 'rig/background-image-controls', withBackgroundImage);
 
   /**
    * Modify save function
@@ -411,9 +509,7 @@ wp.domReady(function() {
       return element;
     }
 
-    // Delete unnecessary attributes to keep database clean
-    delete attributes.imageUrl;
-
+    // Delete empty attribute to keep database clean
     if (!attributes.imageId) {
       delete attributes.imageId;
     }
@@ -427,12 +523,14 @@ wp.domReady(function() {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./sample/block.js": 14,
-	"./sample/styles.scss": 15,
+	"./list-posts/block.js": 15,
+	"./list-posts/styles.scss": 16,
+	"./sample/block.js": 17,
+	"./sample/styles.scss": 18,
 	"./styles.scss": 0
 };
 
@@ -454,10 +552,108 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 13;
+webpackContext.id = 14;
 
 /***/ }),
-/* 14 */
+/* 15 */
+/***/ (function(module, exports) {
+
+(function() {
+
+  const {__} = wp.i18n;
+
+  wp.blocks.registerBlockType('rig/list-posts', {
+    title: __('List posts', 'rig'),
+    icon: 'list-view',
+    category: 'layout',
+    attributes: {
+      postIds: {
+        type: 'array'
+      }
+    },
+    edit: wp.compose.compose(
+      wp.data.withSelect(function(select, props) {
+        const hasPostIds = props.attributes.postIds && props.attributes.postIds.length;
+        return {posts: hasPostIds ? select('rig').getPosts({include: props.attributes.postIds}) : []};
+      }),
+      wp.compose.withState({postUrl: []})
+    )(onEdit),
+    save: function() {}
+  });
+
+  function onEdit(props) {
+    var timer;
+
+    const getPost = function(val) {
+      wp.apiFetch({
+        path: wp.url.addQueryArgs('/rig/posts', {search: val})
+      })
+      .then(function(results) {
+        props.setAttributes({postIds: (props.attributes.postIds ? props.attributes.postIds.concat([results[0].id]) : [results[0].id])});
+      });
+    }
+
+    const url = wp.element.createElement(
+      wp.editor.URLInput, {
+        value: props.postUrl,
+        onChange: function(val) {
+          window.clearTimeout(timer);
+          timer = window.setTimeout(function() {
+            if (val.indexOf('http') === 0) {
+              getPost(val);
+            }
+          }, 500);
+          props.setState({postUrl: val});
+        }
+      }
+    );
+
+    const removePost = function(e) {
+      let ids = [];
+      for (let i = 0; i < props.attributes.postIds.length; i++) {
+        if (props.attributes.postIds[i] != e.currentTarget.dataset.id) {
+          ids.push(props.attributes.postIds[i]);
+        }
+      }
+      props.setAttributes({postIds: ids});
+    };
+
+    const items = [];
+
+    if (Array.isArray(props.posts)) {
+      props.posts.forEach(function(value) {
+        items.push(
+          wp.element.createElement('li', null,
+            wp.element.createElement(wp.components.IconButton,
+              {
+                icon: 'no-alt',
+                onClick: removePost,
+                'data-id': value.id
+              }
+            ),
+            value.title.rendered
+          )
+        )
+      });
+    }
+
+    return [
+      url,
+      (items.length ? wp.element.createElement('ul', {className: 'items'}, items) : null),
+    ];
+  }
+
+}());
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports) {
 
 (function() {
@@ -472,16 +668,14 @@ webpackContext.id = 13;
       backgroundColor: {
         type: 'string'
       },
+      textColor: {
+        type: 'string'
+      },
       imageId: {
         type: 'number'
-      },
-      imageUrl: {
-        type: 'string'
       }
     },
-    edit: wp.compose.compose(
-      wp.editor.withColors('backgroundColor')
-    )(onEdit),
+    edit: onEdit,
     save: onSave
   });
 
@@ -495,48 +689,30 @@ webpackContext.id = 13;
           'core/heading',
           'core/paragraph',
           'core/list',
-          'core/image'
+          'core/image',
+          'rig/list-posts'
         ]
       }
     );
 
-    /*
-    Color controls for sidebar
-    */
-    const colorControls = wp.element.createElement(wp.editor.PanelColorSettings, {
-      title: __('Color settings', 'rig'),
-      colorSettings: [
-        {
-          label: __('Background color', 'rig'),
-          value: props.backgroundColor.color,
-          onChange: props.setBackgroundColor
-        }
-      ]
-    });
-
-    /*
-    InspectorControls (Sidebar)
-    */
-    inspectorControls = wp.element.createElement(wp.editor.InspectorControls, null,
-      colorControls
-    );
-
     return [
-      wp.element.createElement('div',
-        {
-          className: props.backgroundColor.class,
-          style: {backgroundColor: props.backgroundColor.color}
-        },
-        inspectorControls,
-        blocks
-      )
+      blocks
     ];
   }
 
   function onSave(props) {
+    var classNames = [
+      wp.editor.getColorClassName('background-color', props.attributes.backgroundColor),
+      wp.editor.getColorClassName('color', props.attributes.textColor),
+    ];
+
+    classNames = classNames.filter(function(value) {
+      return value;
+    });
+
     return wp.element.createElement('div',
       {
-        className: wp.editor.getColorClassName('background-color', props.attributes.backgroundColor)
+        className: classNames.join(' ')
       },
       wp.element.createElement(wp.editor.InnerBlocks.Content)
     );
@@ -546,7 +722,7 @@ webpackContext.id = 13;
 
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin

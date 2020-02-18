@@ -11,8 +11,20 @@ function rig_rest_posts($data) {
     'ignore_sticky_posts' => true,
   ];
 
+  if (isset($data['include'])) {
+    $args['post__in'] = $data['include'];
+    $args['orderby'] = 'post__in';
+  }
+
   if (isset($data['search'])) {
-    $args['s'] = $data['search'];
+    if (strpos($data['search'], get_site_url()) === 0) {
+      // Search string is a post URL, determine ID
+      $args['post__in'] = [url_to_postid($data['search'])];
+      $args['posts_per_page'] = 1;
+    }
+    else {
+      $args['s'] = $data['search'];
+    }
   }
 
   $q = new \WP_Query($args);
@@ -46,6 +58,13 @@ add_action('rest_api_init', function() {
       'search' => [
         'description' => '',
         'type' => 'string',
+      ],
+      'include' => [
+        'description' => '',
+        'type' => 'array',
+        'items' => [
+          'type' => 'integer',
+        ],
       ],
     ],
     'callback' => 'rig_rest_posts',

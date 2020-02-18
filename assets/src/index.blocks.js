@@ -3,7 +3,7 @@ import './blocks/unregister.js';
 import './blocks/recategorize.js';
 import './blocks/data-stores.js';
 import './blocks/custom-styles.js';
-//import './blocks/color-theme.js';
+import './blocks/color-theme.js';
 import './blocks/background-image.js';
 
 // Editor CSS

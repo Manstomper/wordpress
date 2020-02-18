@@ -10,16 +10,14 @@
       backgroundColor: {
         type: 'string'
       },
+      textColor: {
+        type: 'string'
+      },
       imageId: {
         type: 'number'
-      },
-      imageUrl: {
-        type: 'string'
       }
     },
-    edit: wp.compose.compose(
-      wp.editor.withColors('backgroundColor')
-    )(onEdit),
+    edit: onEdit,
     save: onSave
   });
 
@@ -33,48 +31,30 @@
           'core/heading',
           'core/paragraph',
           'core/list',
-          'core/image'
+          'core/image',
+          'rig/list-posts'
         ]
       }
     );
 
-    /*
-    Colors for Inspector controls
-    */
-    const colorControls = wp.element.createElement(wp.editor.PanelColorSettings, {
-      title: __('Color settings', 'rig'),
-      colorSettings: [
-        {
-          label: __('Background color', 'rig'),
-          value: props.backgroundColor.color,
-          onChange: props.setBackgroundColor
-        }
-      ]
-    });
-
-    /*
-    Inspector controls
-    */
-    inspectorControls = wp.element.createElement(wp.editor.InspectorControls, null,
-      colorControls
-    );
-
     return [
-      wp.element.createElement('div',
-        {
-          className: props.backgroundColor.class,
-          style: {backgroundColor: props.backgroundColor.color}
-        },
-        inspectorControls,
-        blocks
-      )
+      blocks
     ];
   }
 
   function onSave(props) {
+    var classNames = [
+      wp.editor.getColorClassName('background-color', props.attributes.backgroundColor),
+      wp.editor.getColorClassName('color', props.attributes.textColor),
+    ];
+
+    classNames = classNames.filter(function(value) {
+      return value;
+    });
+
     return wp.element.createElement('div',
       {
-        className: wp.editor.getColorClassName('background-color', props.attributes.backgroundColor)
+        className: classNames.join(' ')
       },
       wp.element.createElement(wp.editor.InnerBlocks.Content)
     );

@@ -4,6 +4,7 @@
  * Register custom post types and taxonomies
  */
 function rig_add_post_type() {
+  // Custom post type
   register_post_type('sample_post_type', [
     'labels' => [
       'name' => __('Example post type', 'rig'),
@@ -15,6 +16,7 @@ function rig_add_post_type() {
     'supports' => ['editor', 'title', 'thumbnail', 'excerpt', 'custom-fields', 'revisions'],
   ]);
 
+  // Custom taxonomy
   register_taxonomy('sample_custom_category', 'sample_post_type', [
     'labels' => [
       'name' => __('Example categories', 'rig'),
@@ -24,6 +26,7 @@ function rig_add_post_type() {
     'show_in_rest' => true,
   ]);
 
+  // Register taxonomy for post type
   register_taxonomy_for_object_type('sample_post_type', 'sample_post_type');
 };
 

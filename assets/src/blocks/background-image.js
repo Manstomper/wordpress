@@ -1,6 +1,6 @@
 /**
- * Add background image selection
- * Note that at the time of writing, it's not possible to add attributes to custom blocks. You need to add "theme: {type: 'string'}" when registering your block.
+ * Add background image setting
+ * Note that at the time of writing, it's not possible to add attributes to custom blocks. You need to add "example: {type: 'something'}" when registering your block.
  * https://github.com/WordPress/gutenberg/issues/9757
  */
 
@@ -15,7 +15,7 @@
   /**
    * Register attribute(s)
    */
-  wp.hooks.addFilter('blocks.registerBlockType', 'rig/background-image-attribute', function(settings, name) {
+  wp.hooks.addFilter('blocks.registerBlockType', 'rig/background-image-attributes', function(settings, name) {
     if (enableForBlocks.includes(name)) {
       settings.attributes = {
         ...settings.attributes,
@@ -34,56 +34,53 @@
   /**
    * Add background image selection to Inspector Controls
    */
-  const withBackgroundImage = wp.compose.createHigherOrderComponent(function(BlockEdit) {
-    return function (props) {
-      if (!enableForBlocks.includes(props.name)) {
-        return wp.element.createElement(BlockEdit, props);
-      }
+  const onEdit = function(BlockEdit, props) {
+    if (!enableForBlocks.includes(props.name)) {
+      return wp.element.createElement(BlockEdit, props);
+    }
 
-      // Default elements
-      var image = null;
-      var controls = wp.element.createElement(wp.components.Button,
-        {
-          isDefault: true,
-          isSmall: true,
-          onClick: function() {
-            props.setAttributes({imageId: null, imageUrl: null});
+    // Default elements
+    var imageUrl = '';
+    var image = wp.element.createElement('p', null, __('Loading', 'rig'));
+    var controls = wp.element.createElement(wp.components.Button,
+      {
+        isDefault: true,
+        isSmall: true,
+        onClick: function() {
+          props.setAttributes({imageId: null, imageUrl: null});
+        }
+      },
+      __('Clear', 'rig')
+    );
+
+    // Image has not been selected, show media placeholder
+    if (!props.attributes.imageId) {
+      image = null;
+
+      controls = wp.element.createElement(
+        wp.editor.MediaPlaceholder, {
+          allowedTypes: ['image'],
+          multiple: false,
+          onSelect: function(val) {
+            props.setAttributes({imageId: val.id});
           }
-        },
-        __('Clear', 'rig')
+        }
       );
+    }
+    // Image data has been fetched, show image
+    else if (props.image) {
+      imageUrl = props.image.media_details.sizes.large.source_url;
+      image = wp.element.createElement('div', null,
+        wp.element.createElement('img', {src: props.image.media_details.sizes.medium.source_url})
+      );
+    }
 
-      // True after query is done
-      if (props.attributes.imageUrl) {
-        image = wp.element.createElement('div', null,
-          wp.element.createElement('img', {src: props.attributes.imageUrl})
-        );
-      }
-      // Fetch image using REST API and then update attribute
-      else if (props.attributes.imageId) {
-        image = wp.element.createElement('p', null, __('Loading', 'rig'));
-
-        wp.apiFetch({
-          path: wp.url.addQueryArgs('/wp/v2/media', {id: props.attributes.imageId})
-        })
-        .then(function(result) {
-          props.setAttributes({imageUrl: result[0].media_details.sizes.medium.source_url});
-        });
-      }
-      // No image is selected
-      else {
-        controls = wp.element.createElement(
-          wp.editor.MediaPlaceholder, {
-            allowedTypes: ['image'],
-            multiple: false,
-            onSelect: function(val) {
-              props.setAttributes({imageId: val.id});
-            }
-          }
-        )
-      }
-
-      return wp.element.createElement(
+    return wp.element.createElement('div',
+      {
+        className: (imageUrl ? 'has-background-image' : ''),
+        style: {backgroundImage: 'url(' + imageUrl + ')'}
+      },
+      wp.element.createElement(
         wp.element.Fragment, null,
         wp.element.createElement(
           BlockEdit,
@@ -95,11 +92,19 @@
             wp.element.createElement(wp.components.PanelRow, null, controls)
           )
         )
-      );
-    };
+      )
+    );
+  }
+
+  const withBackgroundImage = wp.compose.createHigherOrderComponent(function(BlockEdit) {
+    return wp.data.withSelect(function(select, props) {
+      return {image: props.attributes.imageId ? select('core').getMedia(props.attributes.imageId) : null};
+    })(function(props) {
+      return onEdit(BlockEdit, props);
+    });
   }, 'withBackgroundImage');
 
-  wp.hooks.addFilter('editor.BlockEdit', 'rig/control-background-image', withBackgroundImage);
+  wp.hooks.addFilter('editor.BlockEdit', 'rig/background-image-controls', withBackgroundImage);
 
   /**
    * Modify save function
@@ -109,9 +114,7 @@
       return element;
     }
 
-    // Delete unnecessary attributes to keep database clean
-    delete attributes.imageUrl;
-
+    // Delete empty attribute to keep database clean
     if (!attributes.imageId) {
       delete attributes.imageId;
     }

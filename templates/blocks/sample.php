@@ -3,6 +3,6 @@ $image = (isset($attributes['imageId']) ? rig_image($attributes['imageId'], 'ful
 $css = $image ? 'style="background-image: url(\'' .  $image . '\')"' : '';
 ?>
 
-<div class="block-sample" <?= $css; ?>>
+<div <?= $css; ?>>
   <?= $content; ?>
 </div>

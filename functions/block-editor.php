@@ -24,6 +24,7 @@ add_action('enqueue_block_editor_assets', 'rig_block_editor_assets');
  */
 function rig_blocks_init() {
   $blocks = [
+    'list-posts',
     'sample',
   ];
 
@@ -32,7 +33,7 @@ function rig_blocks_init() {
       'editor_script' => 'rig-editor-js',
       'render_callback' => function($attributes, $content) use ($block) {
         ob_start();
-        include get_template_directory() . '/assets/src/blocks/' . $block . '/template.php';
+        include get_template_directory() . '/templates/blocks/' . $block . '.php';
         return ob_get_clean();
       },
     ]);
@@ -53,7 +54,7 @@ function rig_core_block_templates() {
     register_block_type('core/' . $block, [
       'render_callback' => function($attributes, $content) use ($block) {
         ob_start();
-        include get_template_directory() . '/assets/src/blocks/core-' . $block . '/template.php';
+        include get_template_directory() . '/templates/blocks/core-' . $block . '.php';
         return ob_get_clean();
       },
     ]);
