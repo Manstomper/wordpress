@@ -1,6 +1,6 @@
 <?php
 $q = new \WP_Query([
-  'post__in' => !empty($attributes['postIds']) ? $attributes['postIds'] : [0],
+  'post__in' => $attributes['postIds'] ?? [0],
   'post_type' => ['post', 'page', 'sample_post_type'],
   'orderby' => 'post__in',
   'posts_per_page' => 100,

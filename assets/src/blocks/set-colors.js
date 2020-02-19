@@ -11,7 +11,6 @@
   const {__} = wp.i18n;
 
   const enableForBlocks = [
-    'core/column',
     'rig/sample'
   ];
 

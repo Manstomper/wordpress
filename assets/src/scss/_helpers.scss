@@ -1,0 +1,33 @@
+// Animations
+
+.anim-enter-active {
+  animation: shake .5s;
+}
+
+.anim-leave-active {
+  animation: fade-out 2s;
+}
+
+// Block Editor classes
+
+@each $align in (left, center, right) {
+  .has-text-align-#{$align} {
+    text-align: $align;
+  }
+}
+
+@each $slug, $size in (small: 16px, large: 36px) {
+  .has-#{$slug}-font-size {
+    font-size: $size;
+  }
+}
+
+@each $slug, $color in $theme-colors {
+  .has-#{$slug}-background-color {
+    background-color: $color;
+  }
+
+  .has-#{$slug}-color {
+    color: $color;
+  }
+}

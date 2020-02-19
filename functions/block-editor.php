@@ -44,11 +44,10 @@ add_action('init', 'rig_blocks_init');
 
 /**
  * Set a custom render callbacks (php template) for core blocks
+ * Not currently used, it only serves as an example
  */
 function rig_core_block_templates() {
-  $blocks = [
-    'column',
-  ];
+  $blocks = [];
 
   foreach ($blocks as $block) {
     register_block_type('core/' . $block, [

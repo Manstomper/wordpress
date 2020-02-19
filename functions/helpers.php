@@ -17,3 +17,13 @@ function rig_image($id, $size = 'thumbnail') {
 
   return $image[0];
 }
+
+function rig_color_class($color, $type) {
+  if ($color) {
+    return 'has-' . $color . '-' . ($type ?? 'color');
+  }
+
+  return '';
+}
+
+add_filter('rig_color_class', 'rig_color_class', 10, 2);

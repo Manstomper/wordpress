@@ -3,8 +3,8 @@ import './blocks/unregister.js';
 import './blocks/recategorize.js';
 import './blocks/data-stores.js';
 import './blocks/custom-styles.js';
-import './blocks/color-theme.js';
-import './blocks/background-image.js';
+import './blocks/set-colors.js';
+import './blocks/set-background-image.js';
 
 // Editor CSS
 import './blocks/styles.scss';

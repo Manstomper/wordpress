@@ -1,10 +1,13 @@
+$gallery-image-spacing: 5px;
+
 .wp-block-gallery {
+  overflow: hidden;
 
   .blocks-gallery-grid {
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
-    margin: 0 -5px;
+    margin: -$gallery-image-spacing;
     padding: 0;
   }
 
@@ -13,7 +16,6 @@
   }
 
   @for $i from 1 through 8 {
-
     &.columns-#{$i} .blocks-gallery-item {
       width: calc(100% / #{$i});
     }
@@ -28,7 +30,7 @@
   }
 
   img {
-    padding: 5px;
+    padding: $gallery-image-spacing;
   }
 
   &.is-cropped .blocks-gallery-item a,

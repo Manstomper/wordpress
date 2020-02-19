@@ -1,26 +1,37 @@
 // Content dimensions
 
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
+$breakpoint-sm: map-get($grid-breakpoints, 'sm');
+$breakpoint-md: map-get($grid-breakpoints, 'md');
+$breakpoint-lg: map-get($grid-breakpoints, 'lg');
+$breakpoint-xl: map-get($grid-breakpoints, 'xl');
 
-$max-width: 800px;
-
-$margin: 15px;
+$max-width: map-get($container-max-widths, 'xl');
+$gutter: $grid-gutter-width;
+$spacer: 1rem;
 
 // Fonts
-
-$serif: "Times New Roman", serif;
-$sans: Verdana, sans-serif;
 
 // Colors
 
 $white: #fff;
 $black: #000;
-$grey: #888;
-$orange: #ff8552;
-$green: #297373;
+$primary: #B25035;
+$secondary: #BEA948;
+$tertiary: #4D333B;
+
+$body-bg: #51564F;
+$body-color: #D6D4B8;
+
+$link-color: red;
+$link-hover-color: blue;
+
+$theme-colors: (
+  "white": $white,
+  "black": $black,
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary
+);
 
 // Animations
 
@@ -48,12 +59,4 @@ $green: #297373;
   50% {
     transform: rotate(-3deg);
   }
-}
-
-.anim-enter-active {
-  animation: shake .5s;
-}
-
-.anim-leave-active {
-  animation: fade-out 2s;
 }

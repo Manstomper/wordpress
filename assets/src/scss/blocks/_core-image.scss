@@ -1,0 +1,23 @@
+.wp-block-image {
+  margin-bottom: $spacer;
+
+  figure {
+    margin-bottom: 0;
+  }
+
+  .alignright {
+    float: right;
+    margin-left: $gutter;
+  }
+
+  .aligncenter {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .alignleft {
+    float: left;
+    margin-right: $gutter;
+  }
+}

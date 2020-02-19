@@ -116,10 +116,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
 /* harmony import */ var _blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks_color_theme_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
-/* harmony import */ var _blocks_color_theme_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_color_theme_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _blocks_background_image_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
-/* harmony import */ var _blocks_background_image_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_background_image_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _blocks_set_colors_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
+/* harmony import */ var _blocks_set_colors_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_set_colors_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _blocks_set_background_image_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
+/* harmony import */ var _blocks_set_background_image_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_set_background_image_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
 /* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6__);
 // Editor JS
@@ -315,7 +315,6 @@ wp.domReady(function() {
   const {__} = wp.i18n;
 
   const enableForBlocks = [
-    'core/column',
     'rig/sample'
   ];
 
@@ -701,21 +700,7 @@ webpackContext.id = 14;
   }
 
   function onSave(props) {
-    var classNames = [
-      wp.editor.getColorClassName('background-color', props.attributes.backgroundColor),
-      wp.editor.getColorClassName('color', props.attributes.textColor),
-    ];
-
-    classNames = classNames.filter(function(value) {
-      return value;
-    });
-
-    return wp.element.createElement('div',
-      {
-        className: classNames.join(' ')
-      },
-      wp.element.createElement(wp.editor.InnerBlocks.Content)
-    );
+    return wp.element.createElement(wp.editor.InnerBlocks.Content);
   }
 
 }());

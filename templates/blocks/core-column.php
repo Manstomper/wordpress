@@ -1,17 +1,16 @@
 <?php
-$classes = 'wp-block-column';
-$classes .= (isset($attributes['backgroundColor']) ? ' has-' . $attributes['backgroundColor'] . '-background-color' : '');
-$classes .= (isset($attributes['textColor']) ? ' has-' . $attributes['textColor'] . '-color' : '');
+$classes = array_filter([
+  'wp-block-column',
+  apply_filters('rig_color_class', ($attributes['backgroundColor'] ?? null), 'background-color'),
+  apply_filters('rig_color_class', ($attributes['textColor'] ?? null), 'color'),
+]);
 
-$width = (isset($attributes['width']) ? $attributes['width'] : 50);
-
-// This is one way of customizing core block output. Unlike adding a custom class name, it doesn't lock the site into using custom logic.
-// Could also just add a wrapper and ignore the fact that flex-basis is set twice.
-$content = trim($content);
-$content = preg_replace('/^\<div[^\>]+\>/', '', $content);
-$content = preg_replace('/\<\/div\>$/', '', $content);
+// This is one way of customizing core block output. Unlike adding a class name, it does not lock the site into using custom logic.
+// Could also just add a wrapper and ignore styles and/or class names
+// NOTE that this template is not currently used, it only servers as an example.
+$content = preg_replace(['/^\<div[^\>]+\>/', '/\<\/div\>$/'], '', trim($content));
 ?>
 
-<div class="<?= $classes; ?>" style="flex-basis: <?= $width; ?>%">
+<div class="<?= implode($classes, ' '); ?>" style="flex-basis: <?= $attributes['width'] ?? 50; ?>%">
   <?= $content; ?>
 </div>

@@ -7,7 +7,7 @@
   background-position: center center;
   background-size: cover;
 
-  // Prevent background color from covering background image
+  // Prevent background color from covering background image if color has been added after image
   .has-background-color {
     background-color: transparent !important;
   }

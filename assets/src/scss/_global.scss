@@ -1,26 +1,11 @@
 // Typography and global styles
 
-body {
-  font-family: $sans;
-  font-size: 18px;
-  line-height: 24px;
-}
-
-main {
-  max-width: $max-width;
-  margin: 0 auto;
-}
+body {}
 
 img {
   display: inline-block;
   max-width: 100%;
   height: auto;
-  vertical-align: middle;
-  -ms-interpolation-mode: bicubic;
-}
-
-img[src$=".svg"] {
-  width: 100%;
 }
 
 // Focus indicators
@@ -34,59 +19,21 @@ button:active {
   outline: 1px solid orange;
 }
 
-// WordPress classes
+// Main content area margins
 
-.has-text-align-left {
-  text-align: left;
-}
+main > * {
+  max-width: $max-width;
+  margin: $spacer * 2 auto 0;
 
-.has-text-align-center {
-  text-align: center;
-}
+  @media screen and (min-width: $breakpoint-md) {
+    margin-top: $spacer * 4;
+  }
 
-.has-text-align-right {
-  text-align: right;
-}
+  &:last-child {
+    margin-bottom: $spacer * 2;
 
-.has-small-font-size {
-  font-size: 16px;
-}
-
-.has-large-font-size {
-  font-size: 36px;
-}
-
-// WordPress color classes
-// @TODO Do this with a function
-
-.has-black-background-color {
-  background-color: $black;
-}
-
-.has-white-background-color {
-  background-color: $white;
-}
-
-.has-primary-background-color {
-  background-color: $orange;
-}
-
-.has-secondary-background-color {
-  background-color: $green;
-}
-
-.has-black-color {
-  color: $black;
-}
-
-.has-white-color {
-  color: $white;
-}
-
-.has-primary-color {
-  color: $orange;
-}
-
-.has-secondary-color {
-  color: $green;
+    @media screen and (min-width: $breakpoint-md) {
+      margin-bottom: $spacer * 4;
+    }
+  }
 }
