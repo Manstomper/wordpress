@@ -8,13 +8,11 @@ $q = new \WP_Query([
 ?>
 
 <?php if ($q->have_posts()) { ?>
-  <div class="block-list-posts">
-    <ul>
-      <?php while ($q->have_posts()) { ?>
-        <?php $q->the_post(); ?>
-        <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-      <?php } ?>
-      <?php wp_reset_postdata(); ?>
-    </ul>
-  </div>
+  <ul class="block-list-posts">
+    <?php while ($q->have_posts()) { ?>
+      <?php $q->the_post(); ?>
+      <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+    <?php } ?>
+    <?php wp_reset_postdata(); ?>
+  </ul>
 <?php } ?>

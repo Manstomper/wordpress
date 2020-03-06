@@ -4,11 +4,18 @@
 (function() {
 
   wp.hooks.addFilter('blocks.registerBlockType', 'rig/recategorize', function(settings, name) {
-    if (name === 'core/table' || name === 'core/html' || name === 'core/freeform') {
+    const common = ['core/table', 'core/button', 'core/html', 'core/freeform'];
+    const layout = ['core/pullquote'];
+    const media = ['core/image', 'core/gallery', 'core/cover', 'core/audio', 'core/video', 'core/file']
+
+    if (common.includes(name)) {
       settings.category = 'common';
     }
-    else if (name === 'core/gallery') {
+    else if (layout.includes(name)) {
       settings.category = 'layout';
+    }
+    else if (media.includes(name)) {
+      settings.category = 'media';
     }
 
     return settings;

@@ -44,16 +44,16 @@ add_action('init', 'rig_blocks_init');
 
 /**
  * Set a custom render callbacks (php template) for core blocks
- * Not currently used, it only serves as an example
+ * Not currently used, serves as code example
  */
 function rig_core_block_templates() {
   $blocks = [];
 
   foreach ($blocks as $block) {
-    register_block_type('core/' . $block, [
+    register_block_type($block, [
       'render_callback' => function($attributes, $content) use ($block) {
         ob_start();
-        include get_template_directory() . '/templates/blocks/core-' . $block . '.php';
+        include get_template_directory() . '/templates/blocks/' . (str_replace('/', '-', $block)) . '.php';
         return ob_get_clean();
       },
     ]);
@@ -63,13 +63,13 @@ function rig_core_block_templates() {
 add_action('init', 'rig_core_block_templates');
 
 /**
- * Add custom block categories (code example, not used)
+ * Add custom block categories
  */
 function rig_block_categories($categories, $post) {
   $new = [
     [
-      'slug' => 'example-category',
-      'title' => __('Example category', 'rig'),
+      'slug' => 'media',
+      'title' => __('Media', 'rig'),
     ],
   ];
 

@@ -19,21 +19,27 @@ button:active {
   outline: 1px solid orange;
 }
 
-// Main content area margins
+// Main content area
 
-main > * {
-  max-width: $max-width;
-  margin: $spacer * 2 auto 0;
+main > article {
 
-  @media screen and (min-width: $breakpoint-md) {
-    margin-top: $spacer * 4;
+  > * {
+    max-width: $max-width;
+    margin: $spacer auto;
   }
 
-  &:last-child {
-    margin-bottom: $spacer * 2;
+  > .alignfull {
+    max-width: 100%;
+  }
 
-    @media screen and (min-width: $breakpoint-md) {
-      margin-bottom: $spacer * 4;
-    }
+  > .alignwide {
+    max-width: round(1.25*$max-width);
+  }
+
+  > .wp-block-group,
+  > .wp-block-columns,
+  > .wp-block-gallery {
+    margin-top: 2*$spacer;
+    margin-bottom: 2*$spacer;
   }
 }

@@ -18,9 +18,17 @@ function rig_image($id, $size = 'thumbnail') {
   return $image[0];
 }
 
-function rig_color_class($color, $type) {
+/**
+ * Change color slug to CSS class name (e.g. "green" to "has-green-background-color")
+ *
+ * @param string $color Color slug
+ * @param string $type "background-color" or "color"
+ *
+ * @return string CSS class name
+ */
+function rig_color_class($color, $type = 'color') {
   if ($color) {
-    return 'has-' . $color . '-' . ($type ?? 'color');
+    return 'has-' . $color . '-' . $type;
   }
 
   return '';

@@ -51,12 +51,14 @@
 
 // Theme Gutenberg blocks
 @import "blocks/sample";
+@import "blocks/core-group";
 @import "blocks/core-columns";
 @import "blocks/core-gallery";
 @import "blocks/core-cover";
 @import "blocks/core-media-text";
 @import "blocks/core-image";
 @import "blocks/core-quote";
+@import "blocks/core-video";
 
 // Must be loaded last
 @import "helpers";

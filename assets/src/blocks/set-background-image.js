@@ -6,7 +6,14 @@
 
 (function() {
 
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
+  const { addFilter } = wp.hooks;
+  const { withSelect } = wp.data;
+  const { createHigherOrderComponent } = wp.compose;
+  const { Fragment } = wp.element;
+  const { InspectorControls, MediaPlaceholder } = wp.editor;
+  const { PanelBody, PanelRow, Button } = wp.components;
+  const el = wp.element.createElement;
 
   const enableForBlocks = [
     'rig/sample'
@@ -15,7 +22,7 @@
   /**
    * Register attribute(s)
    */
-  wp.hooks.addFilter('blocks.registerBlockType', 'rig/background-image-attributes', function(settings, name) {
+  addFilter('blocks.registerBlockType', 'rig/background-image-attributes', function(settings, name) {
     if (enableForBlocks.includes(name)) {
       settings.attributes = {
         ...settings.attributes,
@@ -36,18 +43,18 @@
    */
   const onEdit = function(BlockEdit, props) {
     if (!enableForBlocks.includes(props.name)) {
-      return wp.element.createElement(BlockEdit, props);
+      return el(BlockEdit, props);
     }
 
     // Default elements
     var imageUrl = '';
-    var image = wp.element.createElement('p', null, __('Loading', 'rig'));
-    var controls = wp.element.createElement(wp.components.Button,
+    var image = el('p', null, __('Loading', 'rig'));
+    var controls = el(Button,
       {
         isDefault: true,
         isSmall: true,
         onClick: function() {
-          props.setAttributes({imageId: null, imageUrl: null});
+          props.setAttributes({ imageId: null, imageUrl: null });
         }
       },
       __('Clear', 'rig')
@@ -57,12 +64,12 @@
     if (!props.attributes.imageId) {
       image = null;
 
-      controls = wp.element.createElement(
-        wp.editor.MediaPlaceholder, {
+      controls = el(
+        MediaPlaceholder, {
           allowedTypes: ['image'],
           multiple: false,
           onSelect: function(val) {
-            props.setAttributes({imageId: val.id});
+            props.setAttributes({ imageId: val.id });
           }
         }
       );
@@ -70,41 +77,41 @@
     // Image data has been fetched, show image
     else if (props.image) {
       imageUrl = props.image.media_details.sizes.large.source_url;
-      image = wp.element.createElement('div', null,
-        wp.element.createElement('img', {src: props.image.media_details.sizes.medium.source_url})
+      image = el('div', null,
+        el('img', { src: props.image.media_details.sizes.medium.source_url })
       );
     }
 
-    return wp.element.createElement('div',
+    return el('div',
       {
         className: (imageUrl ? 'has-background-image' : ''),
-        style: {backgroundImage: 'url(' + imageUrl + ')'}
+        style: { backgroundImage: 'url(' + imageUrl + ')' }
       },
-      wp.element.createElement(
-        wp.element.Fragment, null,
-        wp.element.createElement(
+      el(
+        Fragment, null,
+        el(
           BlockEdit,
           props
         ),
-        wp.element.createElement(wp.editor.InspectorControls, null,
-          wp.element.createElement(wp.components.PanelBody, {title: __('Background image', 'rig'), initialOpen: true},
-            wp.element.createElement(wp.components.PanelRow, null, image),
-            wp.element.createElement(wp.components.PanelRow, null, controls)
+        el(InspectorControls, null,
+          el(PanelBody, { title: __('Background image', 'rig'), initialOpen: true },
+            el(PanelRow, null, image),
+            el(PanelRow, null, controls)
           )
         )
       )
     );
   }
 
-  const withBackgroundImage = wp.compose.createHigherOrderComponent(function(BlockEdit) {
-    return wp.data.withSelect(function(select, props) {
-      return {image: props.attributes.imageId ? select('core').getMedia(props.attributes.imageId) : null};
+  const withBackgroundImage = createHigherOrderComponent(function(BlockEdit) {
+    return withSelect(function(select, props) {
+      return { image: props.attributes.imageId ? select('core').getMedia(props.attributes.imageId) : null };
     })(function(props) {
       return onEdit(BlockEdit, props);
     });
   }, 'withBackgroundImage');
 
-  wp.hooks.addFilter('editor.BlockEdit', 'rig/background-image-controls', withBackgroundImage);
+  addFilter('editor.BlockEdit', 'rig/background-image-controls', withBackgroundImage);
 
   /**
    * Modify save function
@@ -122,6 +129,6 @@
     return element;
   }
 
-  wp.hooks.addFilter('blocks.getSaveElement', 'rig/save-background-image', saveBackgroundImage);
+  addFilter('blocks.getSaveElement', 'rig/save-background-image', saveBackgroundImage);
 
 }());

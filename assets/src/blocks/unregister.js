@@ -3,6 +3,9 @@
  */
 wp.domReady(function() {
 
+  const { unregisterBlockType, getBlockTypes } = wp.blocks;
+  const richText = wp.richText;
+
   var allowedBlocks = [
     'core/block',
     'core/columns',
@@ -14,33 +17,29 @@ wp.domReady(function() {
     'core/table',
     'core/quote',
     'core/button',
-    'core/spacer',
     'core/image',
     'core/gallery',
     'core/cover',
-    'core/media-text',
     'core/audio',
     'core/video',
     'core/file',
+    'core/embed',
     'core/html',
     'core/freeform',
-    'embed/vimeo',
-    'embed/youtube',
-    'embed/twitter',
-    'embed/facebook',
-    'embed/instagram'
+    'core-embed/vimeo',
+    'core-embed/youtube',
+    'core-embed/twitter',
+    'core-embed/facebook',
+    'core-embed/instagram'
   ];
 
-  wp.blocks.getBlockTypes().forEach(function(blockType) {
+  getBlockTypes().forEach(function(blockType) {
     // Unregister only core blocks
     if (blockType.name.indexOf('core') === 0 && allowedBlocks.indexOf(blockType.name) === -1) {
-      wp.blocks.unregisterBlockType(blockType.name);
+      unregisterBlockType(blockType.name);
     }
   });
 
-  wp.richText.unregisterFormatType('core/strikethrough');
-
-  wp.blocks.unregisterBlockStyle('core/quote', 'regular');
-  wp.blocks.unregisterBlockStyle('core/quote', 'large');
+  richText.unregisterFormatType('core/strikethrough');
 
 });

@@ -1,6 +1,10 @@
 .wp-block-image {
   margin-bottom: $spacer;
 
+  &.alignfull {
+    text-align: center;
+  }
+
   figure {
     margin-bottom: 0;
   }

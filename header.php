@@ -3,8 +3,10 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php wp_title('|', true, 'right'); ?></title>
+  <title><?php wp_title('|', true, 'right') ?? bloginfo('title'); ?></title>
   <?php wp_head(); ?>
 </head>
 
 <body>
+
+<?php get_template_part('templates/partial/top-bar'); ?>

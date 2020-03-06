@@ -114,14 +114,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_recategorize_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_recategorize_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
 /* harmony import */ var _blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blocks_data_stores_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
-/* harmony import */ var _blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_custom_styles_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _blocks_block_styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(11);
+/* harmony import */ var _blocks_block_styles_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blocks_block_styles_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _blocks_set_colors_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
 /* harmony import */ var _blocks_set_colors_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blocks_set_colors_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _blocks_set_background_image_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
 /* harmony import */ var _blocks_set_background_image_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_set_background_image_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
-/* harmony import */ var _blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_styles_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _blocks_css_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
+/* harmony import */ var _blocks_css_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_css_scss__WEBPACK_IMPORTED_MODULE_6__);
 // Editor JS
 
 
@@ -150,6 +150,9 @@ importAll(__webpack_require__(14));
  */
 wp.domReady(function() {
 
+  const { unregisterBlockType, getBlockTypes } = wp.blocks;
+  const richText = wp.richText;
+
   var allowedBlocks = [
     'core/block',
     'core/columns',
@@ -161,34 +164,30 @@ wp.domReady(function() {
     'core/table',
     'core/quote',
     'core/button',
-    'core/spacer',
     'core/image',
     'core/gallery',
     'core/cover',
-    'core/media-text',
     'core/audio',
     'core/video',
     'core/file',
+    'core/embed',
     'core/html',
     'core/freeform',
-    'embed/vimeo',
-    'embed/youtube',
-    'embed/twitter',
-    'embed/facebook',
-    'embed/instagram'
+    'core-embed/vimeo',
+    'core-embed/youtube',
+    'core-embed/twitter',
+    'core-embed/facebook',
+    'core-embed/instagram'
   ];
 
-  wp.blocks.getBlockTypes().forEach(function(blockType) {
+  getBlockTypes().forEach(function(blockType) {
     // Unregister only core blocks
     if (blockType.name.indexOf('core') === 0 && allowedBlocks.indexOf(blockType.name) === -1) {
-      wp.blocks.unregisterBlockType(blockType.name);
+      unregisterBlockType(blockType.name);
     }
   });
 
-  wp.richText.unregisterFormatType('core/strikethrough');
-
-  wp.blocks.unregisterBlockStyle('core/quote', 'regular');
-  wp.blocks.unregisterBlockStyle('core/quote', 'large');
+  richText.unregisterFormatType('core/strikethrough');
 
 });
 
@@ -203,11 +202,18 @@ wp.domReady(function() {
 (function() {
 
   wp.hooks.addFilter('blocks.registerBlockType', 'rig/recategorize', function(settings, name) {
-    if (name === 'core/table' || name === 'core/html' || name === 'core/freeform') {
+    const common = ['core/table', 'core/button', 'core/html', 'core/freeform'];
+    const layout = ['core/pullquote'];
+    const media = ['core/image', 'core/gallery', 'core/cover', 'core/audio', 'core/video', 'core/file']
+
+    if (common.includes(name)) {
       settings.category = 'common';
     }
-    else if (name === 'core/gallery') {
+    else if (layout.includes(name)) {
       settings.category = 'layout';
+    }
+    else if (media.includes(name)) {
+      settings.category = 'media';
     }
 
     return settings;
@@ -241,7 +247,7 @@ wp.domReady(function() {
   };
 
   wp.data.registerStore('rig', {
-    reducer(state = {posts: {}}, action) {
+    reducer(state = { posts: {} }, action) {
       if (action.type === 'SET_POSTS') {
         return {
           ...state,
@@ -283,15 +289,18 @@ wp.domReady(function() {
  */
 wp.domReady(function() {
 
-  wp.blocks.registerBlockStyle('rig/sample', [
+  const { __ } = wp.i18n;
+  const { registerBlockStyle } = wp.blocks;
+
+  registerBlockStyle('rig/sample', [
     {
       name: 'default',
-      label: 'Oletus',
+      label: __('Default', 'rig'),
       isDefault: true
     },
     {
       name: 'test',
-      label: 'Testi'
+      label: __('Test', 'rig')
     }
   ]);
 
@@ -312,7 +321,12 @@ wp.domReady(function() {
 
 (function() {
 
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
+  const { addFilter } = wp.hooks;
+  const { createHigherOrderComponent } = wp.compose;
+  const { Fragment } = wp.element;
+  const { withColors, InspectorControls, PanelColorSettings } = wp.editor;
+  const el = wp.element.createElement;
 
   const enableForBlocks = [
     'rig/sample'
@@ -321,7 +335,7 @@ wp.domReady(function() {
   /**
    * Register attributes
    */
-  wp.hooks.addFilter('blocks.registerBlockType', 'rig/color-attributes', function(settings, name) {
+  addFilter('blocks.registerBlockType', 'rig/color-attributes', function(settings, name) {
     if (enableForBlocks.includes(name)) {
       settings.attributes = {
         ...settings.attributes,
@@ -342,22 +356,22 @@ wp.domReady(function() {
    */
   const onEdit = function(BlockEdit, props) {
     if (!enableForBlocks.includes(props.name)) {
-      return wp.element.createElement(BlockEdit, props);
+      return el(BlockEdit, props);
     }
 
-    return wp.element.createElement('div',
+    return el('div',
       {
         className: (props.backgroundColor.color ? 'has-background-color' : ''),
-        style: {backgroundColor: props.backgroundColor.color, color: props.textColor.color}
+        style: { backgroundColor: props.backgroundColor.color, color: props.textColor.color }
       },
-      wp.element.createElement(
-        wp.element.Fragment, null,
-        wp.element.createElement(
+      el(
+        Fragment, null,
+        el(
           BlockEdit,
           props
         ),
-        wp.element.createElement(wp.editor.InspectorControls, null,
-          wp.element.createElement(wp.editor.PanelColorSettings, {
+        el(InspectorControls, null,
+          el(PanelColorSettings, {
             title: __('Color settings', 'rig'),
             colorSettings: [
               {
@@ -377,13 +391,13 @@ wp.domReady(function() {
     );
   };
 
-  const withColorSettings = wp.compose.createHigherOrderComponent(function(BlockEdit) {
-    return wp.editor.withColors('backgroundColor', 'textColor')(function(props) {
+  const withColorSettings = createHigherOrderComponent(function(BlockEdit) {
+    return withColors('backgroundColor', 'textColor')(function(props) {
       return onEdit(BlockEdit, props);
     });
   }, 'withColorSettings');
 
-  wp.hooks.addFilter('editor.BlockEdit', 'rig/color-controls', withColorSettings);
+  addFilter('editor.BlockEdit', 'rig/color-controls', withColorSettings);
 
 }());
 
@@ -400,7 +414,14 @@ wp.domReady(function() {
 
 (function() {
 
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
+  const { addFilter } = wp.hooks;
+  const { withSelect } = wp.data;
+  const { createHigherOrderComponent } = wp.compose;
+  const { Fragment } = wp.element;
+  const { InspectorControls, MediaPlaceholder } = wp.editor;
+  const { PanelBody, PanelRow, Button } = wp.components;
+  const el = wp.element.createElement;
 
   const enableForBlocks = [
     'rig/sample'
@@ -409,7 +430,7 @@ wp.domReady(function() {
   /**
    * Register attribute(s)
    */
-  wp.hooks.addFilter('blocks.registerBlockType', 'rig/background-image-attributes', function(settings, name) {
+  addFilter('blocks.registerBlockType', 'rig/background-image-attributes', function(settings, name) {
     if (enableForBlocks.includes(name)) {
       settings.attributes = {
         ...settings.attributes,
@@ -430,18 +451,18 @@ wp.domReady(function() {
    */
   const onEdit = function(BlockEdit, props) {
     if (!enableForBlocks.includes(props.name)) {
-      return wp.element.createElement(BlockEdit, props);
+      return el(BlockEdit, props);
     }
 
     // Default elements
     var imageUrl = '';
-    var image = wp.element.createElement('p', null, __('Loading', 'rig'));
-    var controls = wp.element.createElement(wp.components.Button,
+    var image = el('p', null, __('Loading', 'rig'));
+    var controls = el(Button,
       {
         isDefault: true,
         isSmall: true,
         onClick: function() {
-          props.setAttributes({imageId: null, imageUrl: null});
+          props.setAttributes({ imageId: null, imageUrl: null });
         }
       },
       __('Clear', 'rig')
@@ -451,12 +472,12 @@ wp.domReady(function() {
     if (!props.attributes.imageId) {
       image = null;
 
-      controls = wp.element.createElement(
-        wp.editor.MediaPlaceholder, {
+      controls = el(
+        MediaPlaceholder, {
           allowedTypes: ['image'],
           multiple: false,
           onSelect: function(val) {
-            props.setAttributes({imageId: val.id});
+            props.setAttributes({ imageId: val.id });
           }
         }
       );
@@ -464,41 +485,41 @@ wp.domReady(function() {
     // Image data has been fetched, show image
     else if (props.image) {
       imageUrl = props.image.media_details.sizes.large.source_url;
-      image = wp.element.createElement('div', null,
-        wp.element.createElement('img', {src: props.image.media_details.sizes.medium.source_url})
+      image = el('div', null,
+        el('img', { src: props.image.media_details.sizes.medium.source_url })
       );
     }
 
-    return wp.element.createElement('div',
+    return el('div',
       {
         className: (imageUrl ? 'has-background-image' : ''),
-        style: {backgroundImage: 'url(' + imageUrl + ')'}
+        style: { backgroundImage: 'url(' + imageUrl + ')' }
       },
-      wp.element.createElement(
-        wp.element.Fragment, null,
-        wp.element.createElement(
+      el(
+        Fragment, null,
+        el(
           BlockEdit,
           props
         ),
-        wp.element.createElement(wp.editor.InspectorControls, null,
-          wp.element.createElement(wp.components.PanelBody, {title: __('Background image', 'rig'), initialOpen: true},
-            wp.element.createElement(wp.components.PanelRow, null, image),
-            wp.element.createElement(wp.components.PanelRow, null, controls)
+        el(InspectorControls, null,
+          el(PanelBody, { title: __('Background image', 'rig'), initialOpen: true },
+            el(PanelRow, null, image),
+            el(PanelRow, null, controls)
           )
         )
       )
     );
   }
 
-  const withBackgroundImage = wp.compose.createHigherOrderComponent(function(BlockEdit) {
-    return wp.data.withSelect(function(select, props) {
-      return {image: props.attributes.imageId ? select('core').getMedia(props.attributes.imageId) : null};
+  const withBackgroundImage = createHigherOrderComponent(function(BlockEdit) {
+    return withSelect(function(select, props) {
+      return { image: props.attributes.imageId ? select('core').getMedia(props.attributes.imageId) : null };
     })(function(props) {
       return onEdit(BlockEdit, props);
     });
   }, 'withBackgroundImage');
 
-  wp.hooks.addFilter('editor.BlockEdit', 'rig/background-image-controls', withBackgroundImage);
+  addFilter('editor.BlockEdit', 'rig/background-image-controls', withBackgroundImage);
 
   /**
    * Modify save function
@@ -516,7 +537,7 @@ wp.domReady(function() {
     return element;
   }
 
-  wp.hooks.addFilter('blocks.getSaveElement', 'rig/save-background-image', saveBackgroundImage);
+  addFilter('blocks.getSaveElement', 'rig/save-background-image', saveBackgroundImage);
 
 }());
 
@@ -526,11 +547,11 @@ wp.domReady(function() {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./css.scss": 0,
 	"./list-posts/block.js": 15,
-	"./list-posts/styles.scss": 16,
+	"./list-posts/css.scss": 16,
 	"./sample/block.js": 17,
-	"./sample/styles.scss": 18,
-	"./styles.scss": 0
+	"./sample/css.scss": 18
 };
 
 
@@ -560,8 +581,14 @@ webpackContext.id = 14;
 (function() {
 
   const {__} = wp.i18n;
+  const { registerBlockType } = wp.blocks;
+  const { compose, withState } = wp.compose;
+  const { withSelect } = wp.data;
+  const { URLInput } = wp.editor;
+  const { IconButton } = wp.components;
+  const el = wp.element.createElement;
 
-  wp.blocks.registerBlockType('rig/list-posts', {
+  registerBlockType('rig/list-posts', {
     title: __('List posts', 'rig'),
     icon: 'list-view',
     category: 'layout',
@@ -570,12 +597,12 @@ webpackContext.id = 14;
         type: 'array'
       }
     },
-    edit: wp.compose.compose(
-      wp.data.withSelect(function(select, props) {
+    edit: compose(
+      withSelect(function(select, props) {
         const hasPostIds = props.attributes.postIds && props.attributes.postIds.length;
-        return {posts: hasPostIds ? select('rig').getPosts({include: props.attributes.postIds}) : []};
+        return { posts: hasPostIds ? select('rig').getPosts({include: props.attributes.postIds}) : [] };
       }),
-      wp.compose.withState({postUrl: []})
+      withState({ postUrl: '', isURLInputOpen: false })
     )(onEdit),
     save: function() {}
   });
@@ -585,15 +612,16 @@ webpackContext.id = 14;
 
     const getPost = function(val) {
       wp.apiFetch({
-        path: wp.url.addQueryArgs('/rig/posts', {search: val})
+        path: wp.url.addQueryArgs('/rig/posts', { search: val })
       })
       .then(function(results) {
-        props.setAttributes({postIds: (props.attributes.postIds ? props.attributes.postIds.concat([results[0].id]) : [results[0].id])});
+        const ids = (props.attributes.postIds ? props.attributes.postIds.concat([results[0].id]) : [results[0].id]);
+        props.setAttributes({ postIds: ids });
       });
     }
 
-    const url = wp.element.createElement(
-      wp.editor.URLInput, {
+    const url = el(
+      URLInput, {
         value: props.postUrl,
         onChange: function(val) {
           window.clearTimeout(timer);
@@ -602,7 +630,7 @@ webpackContext.id = 14;
               getPost(val);
             }
           }, 500);
-          props.setState({postUrl: val});
+          props.setState({ postUrl: val });
         }
       }
     );
@@ -614,7 +642,7 @@ webpackContext.id = 14;
           ids.push(props.attributes.postIds[i]);
         }
       }
-      props.setAttributes({postIds: ids});
+      props.setAttributes({ postIds: ids });
     };
 
     const items = [];
@@ -622,8 +650,8 @@ webpackContext.id = 14;
     if (Array.isArray(props.posts)) {
       props.posts.forEach(function(value) {
         items.push(
-          wp.element.createElement('li', null,
-            wp.element.createElement(wp.components.IconButton,
+          el('li', null,
+            el(IconButton,
               {
                 icon: 'no-alt',
                 onClick: removePost,
@@ -637,8 +665,8 @@ webpackContext.id = 14;
     }
 
     return [
-      url,
-      (items.length ? wp.element.createElement('ul', {className: 'items'}, items) : null),
+      (items.length ? el('ul', { className: 'items' }, items) : null),
+      url
     ];
   }
 
@@ -657,10 +685,13 @@ webpackContext.id = 14;
 
 (function() {
 
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
+  const { registerBlockType } = wp.blocks;
+  const { InnerBlocks } = wp.editor;
+  const el = wp.element.createElement;
 
   wp.blocks.registerBlockType('rig/sample', {
-    title: __('Block with all toppings', 'rig'),
+    title: __('Sample block', 'rig'),
     icon: 'carrot',
     category: 'layout',
     attributes: {
@@ -682,8 +713,8 @@ webpackContext.id = 14;
     /*
     InnerBlocks
     */
-    const blocks = wp.element.createElement(
-      wp.editor.InnerBlocks, {
+    const blocks = el(
+      InnerBlocks, {
         allowedBlocks: [
           'core/heading',
           'core/paragraph',
@@ -700,7 +731,7 @@ webpackContext.id = 14;
   }
 
   function onSave(props) {
-    return wp.element.createElement(wp.editor.InnerBlocks.Content);
+    return el(InnerBlocks.Content);
   }
 
 }());

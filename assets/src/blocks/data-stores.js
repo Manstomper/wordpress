@@ -19,7 +19,7 @@
   };
 
   wp.data.registerStore('rig', {
-    reducer(state = {posts: {}}, action) {
+    reducer(state = { posts: {} }, action) {
       if (action.type === 'SET_POSTS') {
         return {
           ...state,

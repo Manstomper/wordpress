@@ -8,7 +8,12 @@
 
 (function() {
 
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
+  const { addFilter } = wp.hooks;
+  const { createHigherOrderComponent } = wp.compose;
+  const { Fragment } = wp.element;
+  const { withColors, InspectorControls, PanelColorSettings } = wp.editor;
+  const el = wp.element.createElement;
 
   const enableForBlocks = [
     'rig/sample'
@@ -17,7 +22,7 @@
   /**
    * Register attributes
    */
-  wp.hooks.addFilter('blocks.registerBlockType', 'rig/color-attributes', function(settings, name) {
+  addFilter('blocks.registerBlockType', 'rig/color-attributes', function(settings, name) {
     if (enableForBlocks.includes(name)) {
       settings.attributes = {
         ...settings.attributes,
@@ -38,22 +43,22 @@
    */
   const onEdit = function(BlockEdit, props) {
     if (!enableForBlocks.includes(props.name)) {
-      return wp.element.createElement(BlockEdit, props);
+      return el(BlockEdit, props);
     }
 
-    return wp.element.createElement('div',
+    return el('div',
       {
         className: (props.backgroundColor.color ? 'has-background-color' : ''),
-        style: {backgroundColor: props.backgroundColor.color, color: props.textColor.color}
+        style: { backgroundColor: props.backgroundColor.color, color: props.textColor.color }
       },
-      wp.element.createElement(
-        wp.element.Fragment, null,
-        wp.element.createElement(
+      el(
+        Fragment, null,
+        el(
           BlockEdit,
           props
         ),
-        wp.element.createElement(wp.editor.InspectorControls, null,
-          wp.element.createElement(wp.editor.PanelColorSettings, {
+        el(InspectorControls, null,
+          el(PanelColorSettings, {
             title: __('Color settings', 'rig'),
             colorSettings: [
               {
@@ -73,12 +78,12 @@
     );
   };
 
-  const withColorSettings = wp.compose.createHigherOrderComponent(function(BlockEdit) {
-    return wp.editor.withColors('backgroundColor', 'textColor')(function(props) {
+  const withColorSettings = createHigherOrderComponent(function(BlockEdit) {
+    return withColors('backgroundColor', 'textColor')(function(props) {
       return onEdit(BlockEdit, props);
     });
   }, 'withColorSettings');
 
-  wp.hooks.addFilter('editor.BlockEdit', 'rig/color-controls', withColorSettings);
+  addFilter('editor.BlockEdit', 'rig/color-controls', withColorSettings);
 
 }());

@@ -4,15 +4,6 @@
 
   <h1><?= __('Welcome', 'rig'); ?></h1>
 
-  <ul>
-    <?php while (have_posts()) { ?>
-      <?php the_post(); ?>
-      <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-    <?php } ?>
-  </ul>
-
-  <hr>
-
   <div id="rest-example">
 
     <h2>{{ title }}</h2>

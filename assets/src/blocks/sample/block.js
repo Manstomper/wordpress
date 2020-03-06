@@ -1,9 +1,12 @@
 (function() {
 
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
+  const { registerBlockType } = wp.blocks;
+  const { InnerBlocks } = wp.editor;
+  const el = wp.element.createElement;
 
   wp.blocks.registerBlockType('rig/sample', {
-    title: __('Block with all toppings', 'rig'),
+    title: __('Sample block', 'rig'),
     icon: 'carrot',
     category: 'layout',
     attributes: {
@@ -25,8 +28,8 @@
     /*
     InnerBlocks
     */
-    const blocks = wp.element.createElement(
-      wp.editor.InnerBlocks, {
+    const blocks = el(
+      InnerBlocks, {
         allowedBlocks: [
           'core/heading',
           'core/paragraph',
@@ -43,7 +46,7 @@
   }
 
   function onSave(props) {
-    return wp.element.createElement(wp.editor.InnerBlocks.Content);
+    return el(InnerBlocks.Content);
   }
 
 }());

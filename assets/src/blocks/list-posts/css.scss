@@ -1,39 +1,36 @@
 [data-type="rig/list-posts"] {
 
-  [data-block] {
-    display: flex;
-  }
-
   .items {
-    flex: 1;
     margin: 0;
-    padding: 0 0 0 40px;
+    padding: 10px 0 0 20px;
     list-style-type: none;
 
     li {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .components-button {
-      flex: 0 0 30px;
-      padding: 6px;
+      flex: 0 0 18px;
+      margin-right: 15px;
+      padding: 1px;
+      background-color: #eee;
 
       &:hover {
-        color: firebrick !important;
-        box-shadow: inset 0 0 0 1px firebrick !important;
+        color: #e74c3c !important;
+        box-shadow: inset 0 0 0 1px #ec7063 !important;
       }
 
       svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
       }
     }
   }
 
   .editor-url-input {
-    flex: 0 0 300px;
-    margin-top: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
     input[type="text"] {
       padding: 6px 8px;
