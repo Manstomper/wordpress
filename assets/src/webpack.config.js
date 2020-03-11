@@ -3,6 +3,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+const themePublicPath = '/wp/wp-content/themes/wp-demo-theme/assets/dist';
+
 module.exports = {
   entry: {
     app: [
@@ -49,6 +51,55 @@ module.exports = {
           },
           {
             loader: 'sass-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              fallback: 'file-loader',
+              publicPath: themePublicPath + '/img',
+              outputPath: 'img'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: themePublicPath + '/img',
+              outputPath: 'img'
+            }
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeTitle: true },
+                { convertColors: { shorthex: false } },
+                { convertPathData: false }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: themePublicPath + '/fonts',
+              outputPath: 'fonts',
+              name: '[name].[ext]'
+            }
           }
         ]
       }
