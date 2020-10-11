@@ -26,6 +26,7 @@
     "svgo-loader": "^2.2.1",
     "autoprefixer": "^9.7.4",
     "bootstrap": "^4.4.1",
+    "vue": "^2.6.11",
     "jquery": "^3.4.1"
   },
   "dependencies": {

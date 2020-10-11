@@ -1,7 +1,7 @@
 <?php
 $q = new \WP_Query([
   'post__in' => $attributes['postIds'] ?? [0],
-  'post_type' => ['post', 'page', 'sample_post_type'],
+  'post_type' => ['post', 'page', 'rig_post'],
   'orderby' => 'post__in',
   'posts_per_page' => 100,
 ]);

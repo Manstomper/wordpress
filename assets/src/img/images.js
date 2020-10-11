@@ -5,8 +5,14 @@ import star from '../img/star.svg';
  */
 (function() {
 
+  const imgContainer = document.querySelector('.sample-images');
+
+  if (!imgContainer) {
+    return;
+  }
+
   const img = document.createElement('img');
   img.src = star;
-  document.querySelector('.sample-images').appendChild(img)
+  imgContainer.appendChild(img)
 
 })();

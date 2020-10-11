@@ -10,8 +10,8 @@ module.exports = {
     app: [
       path.resolve(__dirname) + '/index.app.js'
     ],
-    blocks: [
-      path.resolve(__dirname) + '/index.blocks.js'
+    admin: [
+      path.resolve(__dirname) + '/index.admin.js'
     ]
   },
   output: {
@@ -22,6 +22,8 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        // Only minify public assets, not admin, to preserve __ function
+        // @TODO check if it's possible to not obfuscate certain function names
         test: /app\.js/
       })
     ]
@@ -72,8 +74,10 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
+              limit: 8192,
+              fallback: 'file-loader',
               publicPath: themePublicPath + '/img',
               outputPath: 'img'
             }

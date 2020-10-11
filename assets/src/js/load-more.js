@@ -9,7 +9,6 @@ function doRequest(vueApp, url) {
   request.open('GET', url);
   request.onload = function() {
     if (request.status === 200) {
-      vueApp.posts = [];
       const result = JSON.parse(request.responseText);
       for (let [key, value] of Object.entries(result)) {
         vueApp.posts.push({
@@ -26,24 +25,22 @@ function doRequest(vueApp, url) {
   request.send();
 }
 
-Vue.component('rest-example', {
+Vue.component('load-more', {
   props: ['post'],
   template: '<li><a :href="post.url">{{ post.title }}</a></li>'
 });
 
-const restExample = new Vue({
-  el: '#rest-example',
+const loadMoreExample = new Vue({
+  el: '#load-more-example',
   data: {
     posts: [],
-    title: 'Example REST query results'
+    page: 1,
+    title: 'Load more posts'
   },
   methods: {
     getPosts: function() {
-      doRequest(this, '/wp/wp-json/wp/v2/posts?per_page=3');
-    },
-    searchPosts: function() {
-      doRequest(this, '/wp/wp-json/rig/posts?search=quick+fox');
-      this.title = 'Example query results for custom REST endpoint'
+      doRequest(this, '/wp/wp-json/wp/v2/posts?per_page=1&page=' + this.page);
+      this.page++;
     }
   },
   mounted: function() {

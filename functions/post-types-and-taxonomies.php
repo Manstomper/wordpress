@@ -5,7 +5,8 @@
  */
 function rig_add_post_type() {
   // Custom post type
-  register_post_type('sample_post_type', [
+  register_post_type('rig_post', [
+    //'label' => '',
     'labels' => [
       'name' => __('Example post type', 'rig'),
       'singular_name' => __('Example post type', 'rig'),
@@ -13,11 +14,11 @@ function rig_add_post_type() {
     'public' => true,
     'menu_position' => 4,
     'show_in_rest' => true,
-    'supports' => ['editor', 'title', 'thumbnail', 'excerpt', 'custom-fields', 'revisions'],
+    'supports' => ['editor', 'title', 'thumbnail', 'excerpt', 'comments', 'custom-fields', 'revisions'],
   ]);
 
   // Custom taxonomy
-  register_taxonomy('sample_custom_category', 'sample_post_type', [
+  register_taxonomy('rig_taxonomy', 'rig_post', [
     'labels' => [
       'name' => __('Example categories', 'rig'),
       'singular_name' => __('Example category', 'rig'),
@@ -27,7 +28,7 @@ function rig_add_post_type() {
   ]);
 
   // Register taxonomy for post type
-  register_taxonomy_for_object_type('sample_post_type', 'sample_post_type');
+  register_taxonomy_for_object_type('rig_taxonomy', 'rig_post');
 };
 
 add_action('init', 'rig_add_post_type');

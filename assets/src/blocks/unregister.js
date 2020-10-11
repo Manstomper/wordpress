@@ -20,6 +20,7 @@ wp.domReady(function() {
     'core/image',
     'core/gallery',
     'core/cover',
+    'core/media-text',
     'core/audio',
     'core/video',
     'core/file',
