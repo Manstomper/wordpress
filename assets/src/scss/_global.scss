@@ -50,28 +50,3 @@ button:focus,
 button:active {
   outline: 1px solid orange;
 }
-
-// Main content area
-
-main > article {
-
-  > * {
-    max-width: $max-width;
-    margin: $spacer auto;
-  }
-
-  > .alignfull {
-    max-width: 100%;
-  }
-
-  > .alignwide {
-    max-width: round(1.25*$max-width);
-  }
-
-  > .wp-block-group,
-  > .wp-block-columns,
-  > .wp-block-gallery {
-    margin-top: 2*$spacer;
-    margin-bottom: 2*$spacer;
-  }
-}

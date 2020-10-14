@@ -3,7 +3,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const themePublicPath = '/wp/wp-content/themes/wp-demo-theme/assets/dist';
+const packageInfo = require('./../../package.json');
+const themePublicPath = '/wp-content/themes/' + packageInfo.name + '/assets/dist';
 
 module.exports = {
   entry: {

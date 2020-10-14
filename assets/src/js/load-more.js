@@ -1,46 +1,36 @@
 /**
  * Load posts using the WP REST API
- * Example with Vue
  */
 import Vue from 'vue/dist/vue.js';
-
-function doRequest(vueApp, url) {
-  const request = new XMLHttpRequest();
-  request.open('GET', url);
-  request.onload = function() {
-    if (request.status === 200) {
-      const result = JSON.parse(request.responseText);
-      for (let [key, value] of Object.entries(result)) {
-        vueApp.posts.push({
-          id: value.id,
-          url: value.link,
-          title: value.title.rendered
-        });
-      }
-    }
-    else {
-      console.debug('Request failed. Reason: ' + request.status + ' ' + request.statusText);
-    }
-  };
-  request.send();
-}
+import axios from 'axios';
 
 Vue.component('load-more', {
   props: ['post'],
-  template: '<li><a :href="post.url">{{ post.title }}</a></li>'
+  template: '<li><a :href="post.link">{{ post.title.rendered }}</a></li>'
 });
 
-const loadMoreExample = new Vue({
-  el: '#load-more-example',
+const loadMore = new Vue({
+  el: '#load-more-rest',
   data: {
     posts: [],
     page: 1,
-    title: 'Load more posts'
+    title: 'Load posts using REST API',
+    isDisabled: false
   },
   methods: {
     getPosts: function() {
-      doRequest(this, '/wp/wp-json/wp/v2/posts?per_page=1&page=' + this.page);
-      this.page++;
+      this.isDisabled = true;
+      axios.get('/wp-json/wp/v2/posts?per_page=1&page=' + this.page)
+        .then(response => {
+          this.posts = [...this.posts, ...response.data];
+          this.page++;
+          this.isDisabled = false;
+        })
+        .catch(error => {
+          if (error.message.indexOf('code 400') !== -1) {
+            this.buttonIsDisabled = true;
+          }
+        });
     }
   },
   mounted: function() {

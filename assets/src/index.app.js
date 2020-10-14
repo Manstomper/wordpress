@@ -1,7 +1,9 @@
 // JS
-import './js/rest.js';
-import './js/ajax.js';
-import './js/load-more.js';
+function importAll(r) {
+  r.keys().forEach(r);
+}
+
+importAll(require.context('./js/', true, /.\.js/));
 
 // CSS
 import './scss/main.scss';

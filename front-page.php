@@ -1,56 +1,61 @@
 <?php get_header(); ?>
+<?php get_template_part('templates/top-bar'); ?>
 
-<?php get_sidebar(); ?>
+<?php the_post(); ?>
 
-<main class="demo">
+<main>
 
-  <div id="load-more-example">
+  <h1><?php the_title(); ?></h1>
+  <?php the_content(); ?>
 
-    <h2>{{ title }}</h2>
+  <div class="demo">
 
-    <ul>
-      <load-more
-        v-for="item in posts"
-        v-bind:post="item"
-        v-bind:key="item.id"
-      ></load-more>
-    </ul>
+    <!-- REST -->
 
-    <button type="button" @click="getPosts">Load another post</button>
+    <div id="load-more-rest">
 
-  </div>
+      <h2>{{ title }}</h2>
 
-  <!-- REST -->
+      <ul>
+        <load-more
+          v-for="item in posts"
+          v-bind:post="item"
+          v-bind:key="item.id"
+        ></load-more>
+      </ul>
 
-  <div id="rest-example">
+      <button type="button" @click="getPosts" v-bind:disabled="isDisabled">Load another post</button>
 
-    <h2>{{ title }}</h2>
+    </div>
 
-    <ul>
-      <rest-example
-        v-for="item in posts"
-        v-bind:post="item"
-        v-bind:key="item.id"
-      ></rest-example>
-    </ul>
+    <!-- Admin ajax -->
 
-    <button type="button" @click="searchPosts">Search &quot;quick fox&quot; in multiple post types</button>
+    <div id="get-posts-ajax">
 
-  </div>
+      <h2>{{ title }}</h2>
 
-  <!-- Admin ajax -->
+      <div v-html="posts"></div>
 
-  <div data-ajax>
-    <h2>Example admin-ajax query result</h2>
-  </div>
+    </div>
 
-  <!-- Images and Fontello -->
+    <!-- Images and Fontello -->
 
-  <div class="sample-images">
-    <i class="icon-right-open"></i>
-    <div class="sample-background-image"></div>
+    <div class="sample-images">
+      <h2>Fontello icon</h2>
+      <i class="icon-right-open"></i>
+
+      <h2>CSS background image</h2>
+      <div class="sample-background-image"></div>
+
+      <h2>SVG image with Vue</h2>
+      <img id="image-with-js" v-bind:src="imageSource" v-bind:alt="alternativeText">
+
+      <h2>SVG image dynamically appended to document</h2>
+    </div>
+
   </div>
 
 </main>
 
+<?php get_template_part('templates/footer'); ?>
 <?php get_footer(); ?>

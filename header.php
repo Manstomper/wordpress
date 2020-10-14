@@ -8,5 +8,3 @@
 </head>
 
 <body>
-
-<?php get_template_part('templates/partial/top-bar'); ?>

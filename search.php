@@ -1,10 +1,11 @@
 <?php get_header(); ?>
-
-<?php global $wp_query; ?>
+<?php get_template_part('templates/top-bar'); ?>
 
 <main>
 
   <h1><?= __('Search', 'rig'); ?></h1>
+
+  <?php global $wp_query; ?>
 
   <p>
     <?= sprintf(_n('%s result for', '%s results for', $wp_query->found_posts, 'rig'), $wp_query->found_posts); ?>
@@ -26,4 +27,5 @@
 
 </main>
 
+<?php get_template_part('templates/footer'); ?>
 <?php get_footer(); ?>

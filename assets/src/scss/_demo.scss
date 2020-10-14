@@ -1,12 +1,43 @@
+body {
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+header,
+main,
+footer {
+  padding: 20px;
+  outline: 1px dashed $grey;
+}
+
+/*main > article {
+
+  > * {
+    max-width: $max-width;
+    margin: 0 auto $spacer;
+  }
+
+  > .alignfull {
+    max-width: 100%;
+  }
+
+  > .alignwide {
+    max-width: round(1.25*$max-width);
+  }
+
+  > .wp-block-group,
+  > .wp-block-columns,
+  > .wp-block-gallery {
+    margin-bottom: 2*$spacer;
+  }
+}*/
+
 .demo {
-  max-width: 1000px;
-  margin-right: auto;
-  margin-left: auto;
 
   > div {
     margin-bottom: 15px;
     padding: 30px;
-    border: 1px solid $black;
+    border: 1px dotted $black;
   }
 
   .sample-images {
