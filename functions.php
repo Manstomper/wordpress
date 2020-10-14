@@ -111,3 +111,14 @@ function rig_single_template($template) {
 }
 
 add_filter('single_template', 'rig_single_template');
+
+/**
+ * Add SVG to allowed file types in plupload (a client-side check is done before any server requests are sent)
+ */
+add_filter('plupload_default_settings', function($defaults) {
+  if (isset($defaults['filters']['mime_types'][0]['extensions'])) {
+    $defaults['filters']['mime_types'][0]['extensions'] .= ',svg';
+  }
+
+  return $defaults;
+});
