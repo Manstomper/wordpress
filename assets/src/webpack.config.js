@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const packageInfo = require('./../../package.json');
@@ -58,6 +59,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.(png|jpe?g|gif)$/,
         use: [
           {
@@ -87,9 +92,9 @@ module.exports = {
             loader: 'svgo-loader',
             options: {
               plugins: [
-                { removeTitle: true },
-                { convertColors: { shorthex: false } },
-                { convertPathData: false }
+                {removeTitle: true},
+                {convertColors: {shorthex: false}},
+                {convertPathData: false}
               ]
             }
           }
@@ -111,6 +116,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }),
