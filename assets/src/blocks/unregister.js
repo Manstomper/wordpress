@@ -27,6 +27,7 @@ wp.domReady(function() {
     'core/embed',
     'core/html',
     'core/freeform',
+    'core/latest-posts',
     'core-embed/vimeo',
     'core-embed/youtube',
     'core-embed/twitter',

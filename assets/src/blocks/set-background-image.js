@@ -49,8 +49,8 @@
     // Default elements
     var imageUrl = '';
     var image = el('p', null, __('Loading', 'rig'));
-    var controls = el(Button,
-      {
+    var controls = el(
+      Button, {
         isDefault: true,
         isSmall: true,
         onClick: function() {
@@ -77,13 +77,17 @@
     // Image data has been fetched, show image
     else if (props.image) {
       imageUrl = props.image.media_details.sizes.large.source_url;
-      image = el('div', null,
-        el('img', { src: props.image.media_details.sizes.medium.source_url })
+      image = el(
+        'div', null,
+        el(
+          'img', {
+            src: props.image.media_details.sizes.medium.source_url
+          }
+        )
       );
     }
 
-    return el('div',
-      {
+    return el('div', {
         className: (imageUrl ? 'has-background-image' : ''),
         style: { backgroundImage: 'url(' + imageUrl + ')' }
       },
@@ -93,7 +97,8 @@
           BlockEdit,
           props
         ),
-        el(InspectorControls, null,
+        el(
+          InspectorControls, null,
           el(PanelBody, { title: __('Background image', 'rig'), initialOpen: true },
             el(PanelRow, null, image),
             el(PanelRow, null, controls)

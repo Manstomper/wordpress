@@ -46,8 +46,8 @@
       return el(BlockEdit, props);
     }
 
-    return el('div',
-      {
+    return el(
+      'div', {
         className: (props.backgroundColor.color ? 'has-background-color' : ''),
         style: { backgroundColor: props.backgroundColor.color, color: props.textColor.color }
       },

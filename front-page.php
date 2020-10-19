@@ -4,7 +4,13 @@
 <?php the_post(); ?>
 
 <main>
+
+  <div class="demo-block-container">
+    <?php the_content(); ?>
+  </div>
+
   <div id="app"/>
+
 </main>
 
 <?php get_template_part('templates/footer'); ?>

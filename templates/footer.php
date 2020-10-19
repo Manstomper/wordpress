@@ -35,7 +35,7 @@
 
   <!-- Image set in main.scss -->
 
-  <div id="image"></div>
+  <div id="sample-image"></div>
 
   <!-- Fontello icons -->
 

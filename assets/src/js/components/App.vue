@@ -1,7 +1,7 @@
 <template>
-  <main id="main">
+  <div id="app">
     <NewestArticles/>
-  </main>
+  </div>
 </template>
 
 <script>

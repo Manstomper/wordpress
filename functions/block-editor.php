@@ -11,8 +11,8 @@ add_action('wp_print_styles', function() {
  * Enqueue block editor JS and CSS
  */
 function rig_block_editor_assets() {
-  wp_enqueue_style('rig-editor-css', get_stylesheet_directory_uri() . '/assets/dist/blocks.css');
-  wp_enqueue_script('rig-editor-js', get_stylesheet_directory_uri() . '/assets/dist/blocks.js', ['wp-editor', 'wp-blocks', 'wp-rich-text', 'wp-dom-ready', 'wp-edit-post']);
+  wp_enqueue_style('rig-editor-css', get_stylesheet_directory_uri() . '/assets/dist/admin.css');
+  wp_enqueue_script('rig-editor-js', get_stylesheet_directory_uri() . '/assets/dist/admin.js', ['wp-editor', 'wp-blocks', 'wp-rich-text', 'wp-dom-ready', 'wp-edit-post']);
 
   wp_set_script_translations('rig-editor-js', 'rig', realpath(get_template_directory() . '/languages'));
 }

@@ -1,5 +1,6 @@
 /**
  * Move some blocks to a different category to reduce number of accordions
+ * @TODO check if this is still necessary
  */
 (function() {
 

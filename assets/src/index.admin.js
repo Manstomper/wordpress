@@ -2,7 +2,7 @@
 import './blocks/unregister.js';
 import './blocks/recategorize.js';
 import './blocks/data-stores.js';
-import './blocks/block-styles.js';
+import './blocks/formats-styles.js';
 import './blocks/set-colors.js';
 import './blocks/set-background-image.js';
 

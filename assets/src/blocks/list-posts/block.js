@@ -5,7 +5,6 @@
   const { compose, withState } = wp.compose;
   const { withSelect } = wp.data;
   const { URLInput } = wp.editor;
-  const { IconButton } = wp.components;
   const el = wp.element.createElement;
 
   registerBlockType('rig/list-posts', {
@@ -22,7 +21,7 @@
         const hasPostIds = props.attributes.postIds && props.attributes.postIds.length;
         return { posts: hasPostIds ? select('rig').getPosts({include: props.attributes.postIds}) : [] };
       }),
-      withState({ postUrl: '', isURLInputOpen: false })
+      withState({ postUrl: '' })
     )(onEdit),
     save: function() {}
   });
@@ -30,24 +29,23 @@
   function onEdit(props) {
     var timer;
 
-    const getPost = function(val) {
-      wp.apiFetch({
-        path: wp.url.addQueryArgs('/rig/posts', { search: val })
-      })
-      .then(function(results) {
-        const ids = (props.attributes.postIds ? props.attributes.postIds.concat([results[0].id]) : [results[0].id]);
-        props.setAttributes({ postIds: ids });
-      });
-    }
-
     const url = el(
       URLInput, {
+        className: 'rig-url-input',
         value: props.postUrl,
         onChange: function(val) {
           window.clearTimeout(timer);
           timer = window.setTimeout(function() {
             if (val.indexOf('http') === 0) {
-              getPost(val);
+              wp.apiFetch({
+                path: wp.url.addQueryArgs('/rig/posts', { search: val })
+              })
+              .then(function(results) {
+                if (results.length) {
+                  props.setAttributes({ postIds: [results[0].id, ...props.attributes.postIds] });
+                  props.setState({ postUrl: '' });
+                }
+              });
             }
           }, 500);
           props.setState({ postUrl: val });
@@ -55,38 +53,30 @@
       }
     );
 
-    const removePost = function(e) {
-      let ids = [];
-      for (let i = 0; i < props.attributes.postIds.length; i++) {
-        if (props.attributes.postIds[i] != e.currentTarget.dataset.id) {
-          ids.push(props.attributes.postIds[i]);
-        }
-      }
-      props.setAttributes({ postIds: ids });
-    };
-
     const items = [];
 
     if (Array.isArray(props.posts)) {
-      props.posts.forEach(function(value) {
+      props.posts.forEach(function(post) {
         items.push(
-          el('li', null,
-            el(IconButton,
-              {
-                icon: 'no-alt',
-                onClick: removePost,
-                'data-id': value.id
+          el(
+            'li', {
+              'data-id': post.id,
+              onClick: function(e) {
+                const id = parseInt(e.target.dataset.id);
+                let ids = [...props.attributes.postIds];
+                ids.splice(ids.indexOf(id), 1);
+                props.setAttributes({ postIds: ids });
               }
-            ),
-            value.title.rendered
+            },
+            post.title.rendered
           )
         )
       });
     }
 
     return [
-      (items.length ? el('ul', { className: 'items' }, items) : null),
-      url
+      url,
+      (items.length ? el('ul', { className: 'items' }, items) : null)
     ];
   }
 

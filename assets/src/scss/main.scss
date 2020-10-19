@@ -68,19 +68,7 @@
 Example code. Not to be used as-is in production.
 */
 
-body {
-  max-width: $max-width;
-  margin: 0 auto;
-}
-
-header,
-main,
-footer {
-  padding: 20px;
-  outline: 1px dashed $grey;
-}
-
-/*main > article {
+.demo-block-container {
 
   > * {
     max-width: $max-width;
@@ -100,18 +88,9 @@ footer {
   > .wp-block-gallery {
     margin-bottom: 2*$spacer;
   }
-}*/
-
-.demo {
-
-  > div {
-    margin-bottom: 15px;
-    padding: 30px;
-    border: 1px dotted $black;
-  }
 }
 
-#image {
+#sample-image {
   width: 200px;
   height: 120px;
   background-color: salmon;
