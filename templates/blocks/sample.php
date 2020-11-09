@@ -7,6 +7,6 @@ $image = rig_image($attributes['imageId'] ?? null, 'full');
 $css = $image ? 'background-image: url(\'' .  $image . '\')' : '';
 ?>
 
-<div class="<?= implode($classes, ' '); ?>" style="<?= $css; ?>">
+<div class="<?= implode(' ', $classes); ?>" style="<?= $css; ?>">
   <?= $content; ?>
 </div>

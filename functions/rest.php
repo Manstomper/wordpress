@@ -68,5 +68,6 @@ add_action('rest_api_init', function() {
       ],
     ],
     'callback' => 'rig_rest_posts',
+    'permission_callback' => '__return_true',
   ]);
 });

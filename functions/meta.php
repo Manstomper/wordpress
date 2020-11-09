@@ -38,3 +38,13 @@ function rig_save_fruit($postId) {
 }
 
 add_action('save_post', 'rig_save_fruit');
+
+add_filter('manage_post_posts_columns', function($columns) {
+  return array_merge($columns, ['fruit-column' => __('Example column showing a fruit', 'rig')]);
+}, 10, 1);
+
+add_action('manage_post_posts_custom_column', function($columnKey, $postId) {
+  if ($columnKey === 'fruit-column') {
+    echo get_post_meta($postId, 'fruit', true);
+  }
+}, 10, 2);

@@ -124,7 +124,8 @@ add_filter('plupload_default_settings', function($defaults) {
 });
 
 /**
- * Add autocomplete="off" to comment form
+ * Add autocomplete="off" to comment form to avoid vulnerability issue
+ * @TODO consider something less hacky
  */
 add_filter('comment_form_field_author', function($field) {
   if (strpos($field, 'autocomplete') === false) {
@@ -134,13 +135,3 @@ add_filter('comment_form_field_author', function($field) {
 
   return $field;
 }, 10, 1);
-
-add_filter('manage_post_posts_columns', function($columns) {
-  return array_merge($columns, ['example-column' => __('Example column', 'rig')]);
-}, 10, 1);
-
-add_action('manage_post_posts_custom_column', function($columnKey, $postId) {
-  if ($columnKey === 'example-column') {
-    echo get_post_meta($postId, 'fruit', true);
-  }
-}, 10, 2);
