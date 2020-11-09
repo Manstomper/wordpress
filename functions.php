@@ -6,7 +6,7 @@ require_once __DIR__ . '/functions/post-types-and-taxonomies.php';
 require_once __DIR__ . '/functions/rest.php';
 require_once __DIR__ . '/functions/ajax.php';
 require_once __DIR__ . '/functions/block-editor.php';
-require_once __DIR__ . '/functions/meta-boxes.php';
+require_once __DIR__ . '/functions/meta.php';
 require_once __DIR__ . '/functions/assets.php';
 require_once __DIR__ . '/widgets/example.php';
 
@@ -122,3 +122,25 @@ add_filter('plupload_default_settings', function($defaults) {
 
   return $defaults;
 });
+
+/**
+ * Add autocomplete="off" to comment form
+ */
+add_filter('comment_form_field_author', function($field) {
+  if (strpos($field, 'autocomplete') === false) {
+    $insertAt = strpos($field, '<input ') + 7;
+    $field = substr_replace($field, 'autocomplete="off" ', $insertAt, 0);
+  }
+
+  return $field;
+}, 10, 1);
+
+add_filter('manage_post_posts_columns', function($columns) {
+  return array_merge($columns, ['example-column' => __('Example column', 'rig')]);
+}, 10, 1);
+
+add_action('manage_post_posts_custom_column', function($columnKey, $postId) {
+  if ($columnKey === 'example-column') {
+    echo get_post_meta($postId, 'fruit', true);
+  }
+}, 10, 2);

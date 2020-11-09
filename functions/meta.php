@@ -10,6 +10,7 @@ function rig_fruit_meta($post) {
     <div class="components-base-control__field">
       <label class="components-base-control__label" for="rig-fruit"><?= __('Select fruit', 'rig'); ?></label>
       <select id="rig-fruit" class="components-select-control__input" style="width: 85%;" name="rig_fruit">
+        <option value=""></option>
         <option value="banana" <?= ($value == 'banana' ? 'selected' : ''); ?>><?= __('Banana', 'rig'); ?></option>
         <option value="apple" <?= ($value == 'apple' ? 'selected' : ''); ?>><?= __('Apple', 'rig'); ?></option>
         <option value="mango" <?= ($value == 'mango' ? 'selected' : ''); ?>><?= __('Mango', 'rig'); ?></option>
@@ -26,10 +27,13 @@ function rig_add_fruit_meta() {
 add_action('add_meta_boxes', 'rig_add_fruit_meta');
 
 function rig_save_fruit($postId) {
-  $fruit = array_key_exists('rig_fruit', $_POST) ? $_POST['rig_fruit'] : null;
+  $fruit = $_POST['rig_fruit'] ?? null;
 
-  if ($fruit !== null) {
-    update_post_meta($postId, 'fruit', (int) $fruit);
+  if ($fruit) {
+    update_post_meta($postId, 'fruit', $fruit);
+  }
+  else {
+    delete_post_meta($postId, 'fruit');
   }
 }
 
