@@ -61,40 +61,14 @@
 @import "blocks/core-quote";
 @import "blocks/core-video";
 
-// Must be loaded last
-@import "helpers";
-
 /*
 Example code. Not to be used as-is in production.
 */
 
-.demo-block-container {
-
-  > * {
-    max-width: $max-width;
-    margin: 0 auto $spacer;
-  }
-
-  > .alignfull {
-    max-width: 100%;
-  }
-
-  > .alignwide {
-    max-width: round(1.25*$max-width);
-  }
-
-  > .wp-block-group,
-  > .wp-block-columns,
-  > .wp-block-gallery {
-    margin-bottom: 2*$spacer;
-  }
-}
-
 #sample-image {
   width: 200px;
   height: 120px;
-  background-color: salmon;
-  background-image: url("./../img/turku-castle.jpg");
+  background-image: url("./../img/photo-sample.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

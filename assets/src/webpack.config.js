@@ -24,7 +24,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // Only minify public assets, not admin, to preserve __ function
+        // Only minify public assets, not admin, to preserve the __ function
         // @TODO check if it's possible to not obfuscate certain function names
         test: /app\.js/
       })
@@ -33,7 +33,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.(scss|css)$/,
         enforce: 'pre',
         use: [
           {
@@ -41,17 +41,6 @@ module.exports = {
           },
           {
             loader: 'css-loader'
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function () {
-                return [
-                  require('precss'),
-                  require('autoprefixer')
-                ];
-              }
-            }
           },
           {
             loader: 'sass-loader'
@@ -63,7 +52,7 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(png|jpe?g|gif|svg)$/,
         use: [
           {
             loader: 'url-loader',
@@ -72,30 +61,6 @@ module.exports = {
               fallback: 'file-loader',
               publicPath: themePublicPath + '/img',
               outputPath: 'img'
-            }
-          }
-        ]
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              fallback: 'file-loader',
-              publicPath: themePublicPath + '/img',
-              outputPath: 'img'
-            }
-          },
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: [
-                {removeTitle: true},
-                {convertColors: {shorthex: false}},
-                {convertPathData: false}
-              ]
             }
           }
         ]
@@ -120,6 +85,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }),
+    // Demonstration, not used and should be deleted if the project is new
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'

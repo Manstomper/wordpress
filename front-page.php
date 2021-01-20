@@ -1,16 +1,8 @@
 <?php get_header(); ?>
 <?php get_template_part('templates/top-bar'); ?>
 
-<?php the_post(); ?>
-
 <main>
-
-  <div class="demo-block-container">
-    <?php the_content(); ?>
-  </div>
-
-  <div id="app"/>
-
+  <?php include __DIR__ . '/.sample-content.php'; ?>
 </main>
 
 <?php get_template_part('templates/footer'); ?>

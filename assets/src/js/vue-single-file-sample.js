@@ -5,10 +5,10 @@ Vue.filter('striptags', function(str) {
   const el = document.createElement('div');
   el.innerHTML = str;
 
-  return el.textContent || el.innerText || '';
+  return el.innerText;
 });
 
 new Vue({
-  el: '#app',
+  el: '#sample-app',
   render: h => h(App)
 });
