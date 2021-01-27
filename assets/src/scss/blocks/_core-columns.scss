@@ -19,6 +19,14 @@
     align-items: flex-end;
   }
 
+  &.is-style-collapse {
+    max-width: $max-width;
+
+    .wp-block-column {
+      padding: 0;
+    }
+  }
+
   .wp-block-column {
     flex-grow: 1;
     flex-basis: 50%;

@@ -13,8 +13,20 @@ wp.domReady(function() {
       isDefault: true
     },
     {
-      name: 'test',
+      name: 'example',
       label: __('Test', 'rig')
+    }
+  ]);
+
+  registerBlockStyle('core/columns', [
+    {
+      name: 'default',
+      label: __('Default', 'rig'),
+      isDefault: true
+    },
+    {
+      name: 'collapse',
+      label: __('Collapse', 'rig')
     }
   ]);
 

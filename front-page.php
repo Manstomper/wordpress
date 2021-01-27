@@ -2,7 +2,7 @@
 <?php get_template_part('templates/top-bar'); ?>
 
 <main>
-  <?php include __DIR__ . '/.sample-content.php'; ?>
+  <?php include __DIR__ . '/.vue-examples.php'; ?>
 </main>
 
 <?php get_template_part('templates/footer'); ?>

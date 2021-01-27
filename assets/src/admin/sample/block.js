@@ -38,7 +38,7 @@
       {
         style: { color: 'blue' }
       },
-      'This is a basic block with some CSS. You cannot edit its content, nor will it be saved to database.'
+      'This is a basic paragraph. You cannot edit its content, nor will it be saved to database.'
     );
 
     /*
