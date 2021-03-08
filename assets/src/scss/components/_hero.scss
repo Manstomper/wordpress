@@ -1,1 +1,9 @@
-.hero {}
+.hero {
+  max-width: unset;
+  height: 80vh;
+  min-height: 300px;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}

@@ -16,6 +16,7 @@ wp.domReady(function() {
     'core/list',
     'core/table',
     'core/quote',
+    'core/buttons',
     'core/button',
     'core/image',
     'core/gallery',
@@ -27,12 +28,7 @@ wp.domReady(function() {
     'core/embed',
     'core/html',
     'core/freeform',
-    'core/latest-posts',
-    'core-embed/vimeo',
-    'core-embed/youtube',
-    'core-embed/twitter',
-    'core-embed/facebook',
-    'core-embed/instagram'
+    'core/latest-posts'
   ];
 
   getBlockTypes().forEach(function(blockType) {

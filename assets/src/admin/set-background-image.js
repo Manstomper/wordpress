@@ -16,6 +16,7 @@
   const el = wp.element.createElement;
 
   const enableForBlocks = [
+    'rig/hero',
     'rig/sample'
   ];
 
