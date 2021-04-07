@@ -9,5 +9,5 @@ $css = $image ? 'background-image: url(\'' .  $image . '\')' : '';
 ?>
 
 <div class="<?= implode(' ', $classes); ?>" style="<?= $css; ?>">
-  <?= $content; ?>
+    <?= $content; ?>
 </div>

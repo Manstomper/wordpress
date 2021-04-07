@@ -4,9 +4,9 @@
 <?php the_post(); ?>
 
 <main>
-  <article>
-    <?php get_template_part('templates/content', get_post_type()); ?>
-  </article>
+    <article>
+        <?php get_template_part('templates/content', get_post_type()); ?>
+    </article>
 </main>
 
 <?php get_template_part('templates/footer'); ?>

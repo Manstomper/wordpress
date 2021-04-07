@@ -8,14 +8,15 @@
  *
  * @return string Image URL
  */
-function rig_image($id, $size = 'thumbnail') {
-  $image = wp_get_attachment_image_src($id, $size);
+function rig_image($id, $size = 'thumbnail')
+{
+    $image = wp_get_attachment_image_src($id, $size);
 
-  if (empty($image[0])) {
-    return '';
-  }
+    if (empty($image[0])) {
+        return '';
+    }
 
-  return $image[0];
+    return $image[0];
 }
 
 /**
@@ -26,12 +27,13 @@ function rig_image($id, $size = 'thumbnail') {
  *
  * @return string CSS class name
  */
-function rig_color_class($color, $type = 'color') {
-  if ($color) {
-    return 'has-' . $color . '-' . $type;
-  }
+function rig_color_class($color, $type = 'color')
+{
+    if ($color) {
+        return 'has-' . $color . '-' . $type;
+    }
 
-  return '';
+    return '';
 }
 
 add_filter('rig_color_class', 'rig_color_class', 10, 2);

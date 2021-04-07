@@ -1,10 +1,11 @@
 <?php
 
-function rig_enqueue() {
-  $path = get_template_directory_uri() . '/assets/dist/';
+function rig_enqueue()
+{
+    $path = get_template_directory_uri() . '/assets/dist/';
 
-  wp_enqueue_style('rig-app', $path . 'app.css');
-  wp_enqueue_script('rig-app',  $path . 'app.js', [], false, true);
+    wp_enqueue_style('rig-app', $path . 'app.css');
+    wp_enqueue_script('rig-app',  $path . 'app.js', [], false, true);
 }
 
 add_action('wp_enqueue_scripts', 'rig_enqueue');
@@ -12,15 +13,15 @@ add_action('wp_enqueue_scripts', 'rig_enqueue');
 /**
  * Remove wp-embed script from footer
  */
-add_action('wp_footer', function() {
-  wp_deregister_script('wp-embed');
+add_action('wp_footer', function () {
+    wp_deregister_script('wp-embed');
 });
 
 /**
  * Remove jQuery from frontend (if necessary, it's included in theme scripts)
  */
-add_filter('wp_default_scripts', function(&$scripts) {
-  if (!is_admin()) {
-    $scripts->remove('jquery');
-  }
+add_filter('wp_default_scripts', function (&$scripts) {
+    if (!is_admin()) {
+        $scripts->remove('jquery');
+    }
 });
