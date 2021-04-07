@@ -69,11 +69,6 @@ function rig_font_sizes()
     add_theme_support('disable-custom-font-sizes');
     add_theme_support('editor-font-sizes', [
         [
-            'name' => __('Normal', 'rig'),
-            'size' => null,
-            'slug' => ''
-        ],
-        [
             'name' => __('Small', 'rig'),
             'size' => 12,
             'slug' => 'small'
@@ -124,3 +119,27 @@ function rig_color_palette()
 }
 
 add_action('after_setup_theme', 'rig_color_palette');
+
+/**
+ * Remove core block patterns, add custom patterns
+ */
+function rig_block_patterns()
+{
+    remove_theme_support('core-block-patterns');
+
+    register_block_pattern(
+        'rig/sample-list',
+        [
+            'title' => __('Title here', 'rig'),
+            'description' => __('Description here', 'rig'),
+            'categories' => ['text'],
+            'content' => '<!-- wp:list {"className":"sample-class"} -->'
+                . '<ul class="sample-class">'
+                . '<li><a href="#anchor">Link</a></li>'
+                . '</ul>'
+                . '<!-- /wp:list -->',
+        ],
+    );
+}
+
+add_action('after_setup_theme', 'rig_block_patterns');
