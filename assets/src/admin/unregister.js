@@ -1,8 +1,7 @@
 /**
  * Unregister blocks, formats and styles
  */
-wp.domReady(function() {
-
+wp.domReady(function () {
   const { unregisterBlockType, getBlockTypes } = wp.blocks;
   const richText = wp.richText;
 
@@ -31,7 +30,7 @@ wp.domReady(function() {
     'core/latest-posts'
   ];
 
-  getBlockTypes().forEach(function(blockType) {
+  getBlockTypes().forEach(function (blockType) {
     // Unregister only core blocks
     if (blockType.name.indexOf('core') === 0 && allowedBlocks.indexOf(blockType.name) === -1) {
       unregisterBlockType(blockType.name);
@@ -39,5 +38,8 @@ wp.domReady(function() {
   });
 
   richText.unregisterFormatType('core/strikethrough');
-
+  richText.unregisterFormatType('core/image');
+  richText.unregisterFormatType('core/keyboard');
+  richText.unregisterFormatType('core/code');
+  richText.unregisterFormatType('core/text-color');
 });

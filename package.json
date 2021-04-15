@@ -5,9 +5,9 @@
   "author": "Riina Granö",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --mode development --config assets/src/webpack.config.js --watch",
     "dev": "webpack --mode development --config assets/src/webpack.config.js --display-error-details",
     "build": "webpack --mode production --config assets/src/webpack.config.js",
-    "watch": "webpack --mode development --config assets/src/webpack.config.js --watch",
     "make-pot": "wp i18n make-pot ./ ./languages/rig.pot --domain=\"rig\" --exclude=\"assets/src\"",
     "make-json": "wp i18n make-json ./languages --no-purge"
   },

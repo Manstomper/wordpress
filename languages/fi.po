@@ -3,16 +3,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: RiG Demo 1.0\n"
-"Report-Msgid-Bugs-To: riina.grano@gmail.com\n"
-"POT-Creation-Date: 2020-02-06T07:00:51+01:00\n"
-"PO-Revision-Date: 2020-02-06 08:04+0200\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-demo-theme\n"
+"POT-Creation-Date: 2021-04-15T12:00:32+00:00\n"
+"PO-Revision-Date: 2021-04-15 15:02+0300\n"
 "Last-Translator: Riina Granö <riina.grano@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Domain: rig\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -21,89 +21,198 @@ msgid "RiG Demo"
 msgstr ""
 
 #. Author of the theme
-msgid "Riina Granö"
+msgid "Anonymous"
 msgstr ""
 
-#: functions/block-editor.php:66 functions/post-types.php:21
-msgid "Example category"
-msgstr "Esimerkkikategoria"
+#: .reference-code.php:85
+msgid "Hello"
+msgstr ""
 
-#: functions/meta-boxes.php:11
-msgid "Select fruit"
-msgstr "Valitse hedelmä"
+#: functions/block-editor.php:55
+msgid "Media"
+msgstr ""
 
-#: functions/meta-boxes.php:13
-msgid "Banana"
-msgstr "Banaani"
+#: functions/block-editor.php:72
+msgid "Small"
+msgstr ""
 
-#: functions/meta-boxes.php:14
-msgid "Apple"
-msgstr "Omena"
+#: functions/block-editor.php:77
+msgid "Large"
+msgstr ""
 
-#: functions/meta-boxes.php:15
-msgid "Mango"
-msgstr "Mango"
-
-#: functions/meta-boxes.php:23
-msgid "Example meta box"
-msgstr "Meta box-esimerkki"
-
-#: functions/post-types.php:9 functions/post-types.php:10
-msgid "Example post type"
-msgstr "Artikkelityyppiesimerkki"
-
-#: functions/post-types.php:20
-msgid "Example categories"
-msgstr "Esimerkkikategoria"
-
-#: index.php:5
-msgid "Welcome"
-msgstr "Tervetuloa"
-
-#: assets/dist/blocks.js:281
+#: functions/block-editor.php:94
 msgid "White"
 msgstr "Valkoinen"
 
-#: assets/dist/blocks.js:282
-msgid "Green"
-msgstr "Vihreä"
+#: functions/block-editor.php:99
+msgid "Black"
+msgstr "Musta"
 
-#: assets/dist/blocks.js:283
-msgid "Blue"
-msgstr "Sininen"
+#: functions/block-editor.php:104
+msgid "Primary"
+msgstr ""
 
-#: assets/dist/blocks.js:325
-msgid "Theme"
-msgstr "Teema"
+#: functions/block-editor.php:109
+msgid "Secondary"
+msgstr ""
 
-#: assets/dist/blocks.js:328
-msgid "Select color theme"
-msgstr "Valitse väriteema"
+#: functions/block-editor.php:114
+msgid "Tertiary"
+msgstr ""
 
-#: assets/dist/blocks.js:459
-msgid "Box"
-msgstr "Laatikko"
+#: functions/block-editor.php:133
+msgid "Title here"
+msgstr ""
 
-#: assets/dist/blocks.js:488
-msgid "Unset"
-msgstr "Ei asetettu"
+#: functions/block-editor.php:134
+msgid "Description here"
+msgstr ""
 
-#: assets/dist/blocks.js:495
-msgid "Appearance"
-msgstr "Ulkoasu"
+#: functions/meta.php:11
+msgid "Select fruit"
+msgstr "Valitse hedelmä"
 
-#: assets/dist/blocks.js:498
-msgid "Column width"
-msgstr "Palstan leveys"
+#: functions/meta.php:14
+msgid "Banana"
+msgstr "Banaani"
 
-#: assets/dist/blocks.js:540
-msgid "Boxes"
-msgstr "Laatikot"
+#: functions/meta.php:15
+msgid "Apple"
+msgstr "Omena"
 
-#: assets/dist/blocks.js:546
+#: functions/meta.php:16
+msgid "Mango"
+msgstr "Mango"
+
+#: functions/meta.php:24
+msgid "Example meta box"
+msgstr "Meta box-esimerkki"
+
+#: functions/meta.php:44
+msgid "Example column showing a fruit"
+msgstr ""
+
+#: functions/post-types-and-taxonomies.php:12
+#: functions/post-types-and-taxonomies.php:13
+msgid "Example post type"
+msgstr "Artikkelityyppiesimerkki"
+
+#: functions/post-types-and-taxonomies.php:24
+msgid "Example categories"
+msgstr "Esimerkkikategoria"
+
+#: functions/post-types-and-taxonomies.php:25
+msgid "Example category"
+msgstr "Esimerkkikategoria"
+
+#: functions/theme-settings.php:20
+msgid "Main menu"
+msgstr ""
+
+#: search.php:6 searchform.php:4
+msgid "Search"
+msgstr ""
+
+#: search.php:11
+msgid "%s result for"
+msgid_plural "%s results for"
+msgstr[0] "%s tulos haulle"
+msgstr[1] "%s tulosta haulle"
+
+#: searchform.php:3
+msgid "Enter search terms"
+msgstr "Kirjoita hakusanat"
+
+#: searchform.php:6
+msgid "Submit"
+msgstr ""
+
+#: widgets/example.php:7
+msgid "Custom widget"
+msgstr "Vimpainesimerkki"
+
+#: assets/dist/admin.js:77 assets/dist/admin.js:93
 msgid "Default"
 msgstr "Oletus"
 
-#: assets/dist/blocks.js:551
-msgid "Test style that doesn't do anything"
-msgstr "Testityyli"
+#: assets/dist/admin.js:82
+msgid "Test"
+msgstr ""
+
+#: assets/dist/admin.js:86
+msgid "Another test"
+msgstr ""
+
+#: assets/dist/admin.js:98
+msgid "Collapse"
+msgstr ""
+
+#: assets/dist/admin.js:120
+msgid "List posts"
+msgstr ""
+
+#: assets/dist/admin.js:209
+msgid "Sample block"
+msgstr "Esimerkkilohko"
+
+#: assets/dist/admin.js:249
+msgid "Example input control"
+msgstr ""
+
+#: assets/dist/admin.js:284
+msgid "This is a panel body"
+msgstr ""
+
+#: assets/dist/admin.js:370
+msgid "Loading"
+msgstr "Ladataan"
+
+#: assets/dist/admin.js:379
+msgid "Clear"
+msgstr "Poista"
+
+#: assets/dist/admin.js:421
+msgid "Background image"
+msgstr "Taustakuva"
+
+#: assets/dist/admin.js:527
+msgid "Color settings"
+msgstr "Väriasetukset"
+
+#: assets/dist/admin.js:530
+msgid "Background color"
+msgstr "Taustaväri"
+
+#: assets/dist/admin.js:535
+msgid "Text color"
+msgstr "Tekstin väri"
+
+#~ msgid "Welcome"
+#~ msgstr "Tervetuloa"
+
+#~ msgid "Green"
+#~ msgstr "Vihreä"
+
+#~ msgid "Blue"
+#~ msgstr "Sininen"
+
+#~ msgid "Theme"
+#~ msgstr "Teema"
+
+#~ msgid "Select color theme"
+#~ msgstr "Valitse väriteema"
+
+#~ msgid "Box"
+#~ msgstr "Laatikko"
+
+#~ msgid "Unset"
+#~ msgstr "Ei asetettu"
+
+#~ msgid "Appearance"
+#~ msgstr "Ulkoasu"
+
+#~ msgid "Boxes"
+#~ msgstr "Laatikot"
+
+#~ msgid "Test style that doesn't do anything"
+#~ msgstr "Testityyli"
