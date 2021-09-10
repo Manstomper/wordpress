@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Remove block library CSS
- */
-add_action('wp_print_styles', function () {
-    wp_dequeue_style('wp-block-library');
-}, 100);
-
-/**
  * Enqueue block editor JS and CSS
  */
 function rig_block_editor_assets()

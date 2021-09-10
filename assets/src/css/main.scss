@@ -1,0 +1,26 @@
+@charset 'UTF-8';
+
+// Theme core
+@import "variables";
+@import "global";
+
+// Theme components
+@import "components/header";
+@import "components/footer";
+@import "components/hero";
+
+// Theme blocks
+@import "blocks/sample";
+
+/*
+Example code. Not to be used as-is in production.
+*/
+
+#sample-image {
+  width: 200px;
+  height: 120px;
+  background-image: url("./../img/photo-sample.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}

@@ -1,13 +1,13 @@
 // Content dimensions
 
-$breakpoint-sm: map-get($grid-breakpoints, 'sm');
+/*$breakpoint-sm: map-get($grid-breakpoints, 'sm');
 $breakpoint-md: map-get($grid-breakpoints, 'md');
 $breakpoint-lg: map-get($grid-breakpoints, 'lg');
 $breakpoint-xl: map-get($grid-breakpoints, 'xl');
 
 $max-width: map-get($container-max-widths, 'xl');
 $gutter: $grid-gutter-width;
-$spacer: 1rem;
+$spacer: 1rem;*/
 
 // Fonts
 
@@ -23,11 +23,8 @@ $primary: #afbf98;
 $secondary: #675a4b;
 $tertiary: #a39db6;
 
-$body-bg: #51564F;
-$body-color: #D6D4B8;
-
-$link-color: red;
-$link-hover-color: blue;
+$link-color: blue;
+$link-hover-color: red;
 
 $theme-colors: (
   "white": $white,

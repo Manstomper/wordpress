@@ -24,8 +24,8 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // Only minify public assets, not admin, to preserve the __ function
-        // @TODO check if it's possible to not obfuscate certain function names
+        // Only minify public assets, not admin, to preserve the __ function name
+        // https://github.com/wp-cli/i18n-command/issues/174#issuecomment-514091683
         test: /app\.js/
       })
     ]
@@ -85,10 +85,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }),
-    // Demonstration, not used and should be deleted if the project is new
+    /* Demonstration only. Can be deleted if jQuery is not needed.
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
-    })
+    })*/
   ]
 };

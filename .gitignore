@@ -3,7 +3,6 @@ desktop.ini
 .netbeans.xml
 .sass_cache
 composer.lock
-package-lock.json
 assets/dist
 node_modules
 vendor
