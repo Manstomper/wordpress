@@ -1,23 +1,46 @@
 <template>
   <div class="product">
-    <h2>{{ product.title }}</h2>
-    <p>{{ product.description }}</p>
-    <div class="price">{{ product.price }}</div>
-    <button type="button">Add to cart</button>
+    <h3>Product: {{ product.title }}</h3>
+    <div class="price">Price: {{ product.price }}</div>
+    <button type="button" @click="addToCart">Add to cart</button>
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
-      product: {
-          id: 1,
-          title: "Sample product 1",
-          description: "Lorem ipsum.",
-          price: 35.0,
-      },
-    }
+      product: {},
+    };
   },
-}
+  methods: {
+    addToCart() {
+      this.$store.commit("addToCart");
+    },
+  },
+  mounted() {
+    const products = [
+      {
+        id: 1,
+        title: "Axe",
+        price: 35,
+      },
+      {
+        id: 2,
+        title: "Dagger",
+        price: 8.9,
+      },
+      {
+        id: 3,
+        title: "Staff",
+        price: 15,
+      },
+    ];
+    this.product = products
+      .filter((product) => {
+        return parseInt(product.id) === parseInt(this.$route.params.id);
+      })
+      .shift();
+  },
+};
 </script>

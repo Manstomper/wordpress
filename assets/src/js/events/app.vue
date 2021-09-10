@@ -7,13 +7,13 @@
         {{ event.name }}
       </li>
     </ul>
-    <input v-model="searchTerms" type="text" placeholder="Search events">
+    <input v-model="searchTerms" type="text" placeholder="Search events" />
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
       allEvents: [
         {
@@ -32,19 +32,21 @@ export default {
           time: "2022-04-02 09:00:00",
         },
       ],
-      searchTerms: '',
-    }
+      searchTerms: "",
+    };
   },
   computed: {
-    events: function () {
+    events() {
       if (this.searchTerms.length < 3) {
-        return this.allEvents
+        return this.allEvents;
       }
 
       return this.allEvents.filter((event) => {
-        return event.name.toLowerCase().includes(this.searchTerms.toLowerCase())
-      })
-    }
-  }
-}
+        return event.name
+          .toLowerCase()
+          .includes(this.searchTerms.toLowerCase());
+      });
+    },
+  },
+};
 </script>

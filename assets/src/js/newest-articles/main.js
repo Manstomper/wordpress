@@ -3,7 +3,7 @@ import axios from "axios"
 
 new Vue({
   el: '#newest-articles',
-  data: function () {
+  data() {
     return {
       articles: [],
       page: 1,
@@ -12,7 +12,7 @@ new Vue({
     }
   },
   methods: {
-    getArticles: function () {
+    getArticles() {
       this.isLoading = true
       axios
         .get("/wp-json/wp/v2/posts?per_page=2&page=" + this.page)
@@ -30,7 +30,7 @@ new Vue({
     },
   },
   computed: {
-    buttonText: function () {
+    buttonText() {
       if (!this.isLoading && this.hasMoreArticles) {
         return 'Load more articles'
       }
@@ -42,7 +42,7 @@ new Vue({
       return 'No more articles'
     },
   },
-  mounted: function () {
+  mounted() {
     this.getArticles()
   },
 })

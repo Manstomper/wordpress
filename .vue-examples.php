@@ -1,8 +1,8 @@
 <div style="max-width: 1000px; margin: 0 auto;">
 
-    <div id="events"></div>
-
     <div id="shop"></div>
+
+    <div id="events"></div>
 
     <div id="newest-articles">
         <h2>Newest articles</h2>

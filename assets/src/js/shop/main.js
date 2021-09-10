@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueX from 'vuex'
 import App from './app.vue'
 import Products from './components/products.vue'
 import Product from './components/product.vue'
@@ -15,8 +16,24 @@ const routes = [
 
 const router = new VueRouter({ routes })
 
-new Vue({
+Vue.use(VueX)
+
+const store = new VueX.Store({
+  state() {
+    return {
+      cartContents: []
+    }
+  },
+  mutations: {
+    addToCart() {
+      this.state.cartContents.push('testing')
+    }
+  }
+})
+
+const app = new Vue({
   el: '#shop',
   router,
+  store,
   render: h => h(App)
 })
