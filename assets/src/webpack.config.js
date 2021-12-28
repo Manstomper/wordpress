@@ -82,11 +82,8 @@ module.exports = {
   },
   devServer: {
     port: 9001,
-    proxy: {
-      '/': {
-        target: 'http://wp.local/',
-        changeOrigin: true
-      },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
     },
   },
   plugins: [

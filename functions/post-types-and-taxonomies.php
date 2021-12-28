@@ -3,8 +3,7 @@
 /**
  * Register custom post types and taxonomies
  */
-function rig_add_post_type()
-{
+add_action('init', function () {
     // Custom post type
     register_post_type('rig_post', [
         //'label' => '',
@@ -30,6 +29,4 @@ function rig_add_post_type()
 
     // Register taxonomy for post type
     register_taxonomy_for_object_type('rig_taxonomy', 'rig_post');
-};
-
-add_action('init', 'rig_add_post_type');
+});

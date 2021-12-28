@@ -10,7 +10,7 @@ new Vue({
   methods: {
     getPost: function () {
       const params = new URLSearchParams();
-      params.append('action', 'rigexample');
+      params.append('action', 'ajaxexample');
       axios.post('/wp-admin/admin-ajax.php', params)
         .then(response => {
           console.debug(response.data.html);

@@ -3,21 +3,17 @@
 /**
  * Enqueue block editor JS and CSS
  */
-function rig_block_editor_assets()
-{
-    wp_enqueue_style('rig-editor-css', get_stylesheet_directory_uri() . '/assets/dist/admin.css');
-    wp_enqueue_script('rig-editor-js', get_stylesheet_directory_uri() . '/assets/dist/admin.js', ['wp-editor', 'wp-blocks', 'wp-rich-text', 'wp-dom-ready', 'wp-edit-post']);
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_style('theme-editor', get_stylesheet_directory_uri() . '/assets/dist/admin.css');
+    wp_enqueue_script('theme-editor', get_stylesheet_directory_uri() . '/assets/dist/admin.js', ['wp-editor', 'wp-blocks', 'wp-rich-text', 'wp-dom-ready', 'wp-edit-post']);
 
-    wp_set_script_translations('rig-editor-js', 'rig', realpath(get_template_directory() . '/languages'));
-}
-
-add_action('enqueue_block_editor_assets', 'rig_block_editor_assets');
+    wp_set_script_translations('theme-editor', 'rig', realpath(get_template_directory() . '/languages'));
+});
 
 /**
  * Register custom blocks
  */
-function rig_blocks_init()
-{
+add_action('init', function () {
     $blocks = [
         'list-posts',
         'sample',
@@ -25,7 +21,7 @@ function rig_blocks_init()
 
     foreach ($blocks as $block) {
         register_block_type('rig/' . $block, [
-            'editor_script' => 'rig-editor-js',
+            'editor_script' => 'theme-editor-js',
             'render_callback' => function ($attributes, $content) use ($block) {
                 ob_start();
                 include get_template_directory() . '/templates/blocks/' . $block . '.php';
@@ -33,15 +29,12 @@ function rig_blocks_init()
             },
         ]);
     }
-}
-
-add_action('init', 'rig_blocks_init');
+});
 
 /**
  * Add custom block categories
  */
-function rig_block_categories($categories, $post)
-{
+add_filter('block_categories', function ($categories, $post) {
     $new = [
         [
             'slug' => 'media',
@@ -50,15 +43,12 @@ function rig_block_categories($categories, $post)
     ];
 
     return array_merge($categories, $new);
-}
-
-add_filter('block_categories', 'rig_block_categories', 10, 2);
+}, 10, 2);
 
 /**
  * Disable custom font sizes, then reduce number of available sizes
  */
-function rig_font_sizes()
-{
+add_action('after_setup_theme', function () {
     add_theme_support('disable-custom-font-sizes');
     add_theme_support('editor-font-sizes', [
         [
@@ -72,15 +62,12 @@ function rig_font_sizes()
             'slug' => 'large'
         ],
     ]);
-}
-
-add_action('after_setup_theme', 'rig_font_sizes');
+});
 
 /**
  * Disable custom colors, then add theme colors to picker
  */
-function rig_color_palette()
-{
+add_action('after_setup_theme', function () {
     add_theme_support('disable-custom-colors');
     add_theme_support('editor-color-palette', [
         [
@@ -109,15 +96,12 @@ function rig_color_palette()
             'color' => '#a39db6',
         ],
     ]);
-}
-
-add_action('after_setup_theme', 'rig_color_palette');
+});
 
 /**
  * Remove core block patterns, add custom patterns
  */
-function rig_block_patterns()
-{
+add_action('after_setup_theme', function () {
     remove_theme_support('core-block-patterns');
 
     register_block_pattern(
@@ -133,6 +117,4 @@ function rig_block_patterns()
                 . '<!-- /wp:list -->',
         ],
     );
-}
-
-add_action('after_setup_theme', 'rig_block_patterns');
+});

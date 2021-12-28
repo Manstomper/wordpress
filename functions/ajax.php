@@ -3,7 +3,7 @@
 /**
  * Admin AJAX example
  */
-function rig_ajax_example()
+function ajax_example()
 {
     $q = new \WP_Query([
         'post_type' => 'post',
@@ -32,5 +32,5 @@ function rig_ajax_example()
     die();
 }
 
-add_action('wp_ajax_rigexample', 'rig_ajax_example');
-add_action('wp_ajax_nopriv_rigexample', 'rig_ajax_example');
+add_action('wp_ajax_ajaxexample', 'ajax_example');
+add_action('wp_ajax_nopriv_ajaxexample', 'ajax_example');

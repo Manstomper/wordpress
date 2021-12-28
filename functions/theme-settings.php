@@ -9,8 +9,7 @@ remove_action('wp_head', 'feed_links_extra', 3);
 remove_action('wp_head', 'rest_output_link_wp_head');
 remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
-function rig_after_setup_theme()
-{
+add_action('after_setup_theme', function () {
     load_theme_textdomain('rig', get_template_directory() . '/languages');
 
     add_theme_support('post-thumbnails');
@@ -30,15 +29,12 @@ function rig_after_setup_theme()
             'after_title' => '</h2>',
         ]);
     });
-}
-
-add_action('after_setup_theme', 'rig_after_setup_theme');
+});
 
 /**
  * Remove support for emojis
  */
-function rig_remove_emojis()
-{
+add_action('init', function () {
     remove_action('wp_head', 'print_emoji_detection_script', 7);
     remove_action('admin_print_scripts', 'print_emoji_detection_script');
     remove_action('wp_print_styles', 'print_emoji_styles');
@@ -54,6 +50,4 @@ function rig_remove_emojis()
 
         return [];
     });
-}
-
-add_action('init', 'rig_remove_emojis');
+});

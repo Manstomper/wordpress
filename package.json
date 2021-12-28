@@ -5,7 +5,8 @@
   "author": "RG",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack-dev-server --mode development --config assets/src/webpack.config.js --hot",
+    "start": "webpack --mode development --config assets/src/webpack.config.js",
+    "serve": "webpack-dev-server --mode development --config assets/src/webpack.config.js --hot",
     "dev": "webpack --mode development --config assets/src/webpack.config.js --display-error-details",
     "build": "webpack --mode production --config assets/src/webpack.config.js",
     "make-pot": "wp i18n make-pot ./ ./languages/rig.pot --domain=\"rig\" --exclude=\"assets/src\"",

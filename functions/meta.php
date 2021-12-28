@@ -19,15 +19,11 @@ function rig_fruit_meta($post)
     </div>
 <?php }
 
-function rig_add_fruit_meta()
-{
+add_action('add_meta_boxes', function () {
     add_meta_box('rig_fruit', __('Example meta box', 'rig'), 'rig_fruit_meta', 'post', 'side');
-}
+});
 
-add_action('add_meta_boxes', 'rig_add_fruit_meta');
-
-function rig_save_fruit($postId)
-{
+add_action('save_post', function ($postId) {
     $fruit = $_POST['rig_fruit'] ?? null;
 
     if ($fruit) {
@@ -35,22 +31,14 @@ function rig_save_fruit($postId)
     } else {
         delete_post_meta($postId, 'fruit');
     }
-}
+});
 
-add_action('save_post', 'rig_save_fruit');
-
-function rig_post_columns($columns)
-{
+add_filter('manage_post_posts_columns', function ($columns) {
     return array_merge($columns, ['fruit-column' => __('Example column showing a fruit', 'rig')]);
-}
+}, 10, 1);
 
-add_filter('manage_post_posts_columns', 'rig_post_columns', 10, 1);
-
-function rig_post_custom_column($columnKey, $postId)
-{
+add_action('manage_post_posts_custom_column', function ($columnKey, $postId) {
     if ($columnKey === 'fruit-column') {
         echo get_post_meta($postId, 'fruit', true);
     }
-}
-
-add_action('manage_post_posts_custom_column', 'rig_post_custom_column', 10, 2);
+}, 10, 2);
