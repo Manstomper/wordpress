@@ -1,5 +1,5 @@
 <template>
-  <div id="shop">
+  <div class="shop">
     <h2>Shop</h2>
     <nav>
       <router-link to="/">All products</router-link>
@@ -7,7 +7,7 @@
         View cart ({{ $store.state.cartContents.length }})
       </router-link>
     </nav>
-    <router-view :products.sync="products"></router-view>
+    <router-view v-model="products"></router-view>
   </div>
 </template>
 

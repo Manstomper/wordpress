@@ -1,7 +1,4 @@
-import Vue from 'vue/dist/vue.min.js';
+import { createApp } from 'vue';
 import App from './app.vue';
 
-new Vue({
-  el: '#events',
-  render: h => h(App),
-});
+createApp(App).mount('#events');

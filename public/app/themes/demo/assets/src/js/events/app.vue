@@ -29,7 +29,7 @@ export default {
         {
           id: 3,
           name: "Cookies are served",
-          time: "2022-04-02 09:00:00",
+          time: "2022-04-02 09:40:00",
         },
       ],
       searchTerms: "",
@@ -40,7 +40,6 @@ export default {
       if (this.searchTerms.length < 3) {
         return this.allEvents;
       }
-
       return this.allEvents.filter((event) => {
         return event.name
           .toLowerCase()

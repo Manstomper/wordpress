@@ -1,22 +1,7 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueX from 'vuex';
+import { createApp } from 'vue';
+import { CreateStore } from 'vuex';
+import router from './router'
 import App from './app.vue';
-import Products from './components/products.vue';
-import Product from './components/product.vue';
-import Cart from './components/cart.vue';
-
-// Example of Vue router
-
-Vue.use(VueRouter);
-
-const routes = [
-  { path: '/', component: Products },
-  { path: '/product/:id', component: Product, name: 'product' },
-  { path: '/cart', component: Cart },
-];
-
-const router = new VueRouter({ routes });
 
 // Example of VueX
 
@@ -40,9 +25,4 @@ const store = new VueX.Store({
   },
 });
 
-const app = new Vue({
-  el: '#shop',
-  router,
-  store,
-  render: h => h(App),
-});
+createApp(App).use(router).mount('#shop');
