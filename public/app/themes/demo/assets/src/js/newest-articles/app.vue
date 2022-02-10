@@ -8,7 +8,13 @@
         </a>
       </li>
     </ul>
-    <button type="button" @click="getArticles()">{{ buttonText }}</button>
+    <button
+      type="button"
+      :disabled="isLoading || !hasMoreArticles"
+      @click="getArticles()"
+    >
+      {{ buttonText }}
+    </button>
   </div>
 </template>
 
@@ -30,7 +36,6 @@ export default {
       axios
         .get("/wp-json/wp/v2/posts?per_page=2&page=" + this.page)
         .then((response) => {
-          this.articles = [...this.articles, ...response.data];
           console.debug(this.articles);
           this.page++;
           this.isLoading = false;
