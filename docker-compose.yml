@@ -1,0 +1,54 @@
+# Docker Compose file format version
+version: "3.8"
+
+volumes:
+  # A named volume for the WordPress database (without it, a volume will be created but it is deleted along with containers)
+  wpdb:
+services:
+  nginx:
+    # The official nginx image from the Docker library: https://hub.docker.com/_/nginx
+    # When we need to change the version of any service, usually when an app requires a different version, this is the place
+    image: nginx:1.21.5-alpine
+    ports:
+      # Our app works from http://localhost on port 80 (8080 is set in custom config file copied to nginx image)
+      - "80:8080"
+    volumes:
+      # Makes app code visible to nginx by bind-mounting local directory onto container
+      - ./public:/public
+    # Making sure that certain services are running before starting this one
+    depends_on:
+      - php
+      - mysql
+    labels:
+      # Cue for Kompose. When converting to Kubernetes manifest files, a load balancer will be created and it is assigned a public IP
+      kompose.service.type: LoadBalancer
+  php:
+    # The official PHP-FPM image does not come with all of the extensions that we need, so we have built our own
+    image: php:8.0.14-fpm-alpine3.15-mysqli-gd-intl
+    environment:
+      - WP_ENV=development
+    volumes:
+      - ./public:/public
+  mysql:
+    image: mariadb:10.3.32
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - wpdb:/var/lib/mysql
+  composer:
+    image: composer:2.2.5-php8.0.14
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: composer install --no-interaction
+  node:
+    image: node:16.13.2-alpine3.15
+    ports:
+      # Exposing port because we use webpack-dev-server to automatically reload when Javascript or CSS changes
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src
+    # Directory in which the command on the next line is run
+    #working_dir: /usr/src
+    #command: sh -c "npm install && npm run dev"
