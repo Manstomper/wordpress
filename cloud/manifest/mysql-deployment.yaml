@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/mariadb:10.3.32
+          env:
+            - name: MYSQL_DATABASE
+              value: wordpress
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: wpdb
+              mountPath: /var/lib/mysql
+      restartPolicy: Always
+      volumes:
+        - name: wpdb
+          persistentVolumeClaim:
+            claimName: wpdb

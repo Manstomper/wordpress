@@ -1,0 +1,25 @@
+version: "3.8"
+
+volumes:
+  wpdb:
+services:
+  nginx:
+    image: $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:$NGINX_VERSION
+    ports:
+      - "80:8080"
+    volumes:
+      - ./../local/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    depends_on:
+      - php
+      - mysql
+  php:
+    image: $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:$PHP_VERSION
+    environment:
+      - WP_ENV=production
+  mysql:
+    image: mariadb:$MARIADB_VERSION
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - wpdb:/var/lib/mysql

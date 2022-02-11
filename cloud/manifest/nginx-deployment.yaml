@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/nginx:1.21.5
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nginx/conf.d/site.conf
+              subPath: site.conf
+          imagePullPolicy: Always
+      volumes:
+        - name: config
+          configMap:
+            name: nginx-config
+      restartPolicy: Always

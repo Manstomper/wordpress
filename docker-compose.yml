@@ -22,6 +22,7 @@ services:
     image: rig/php:$PHP_VERSION
     environment:
       - WP_ENV=development
+      - WP_HOME=$WP_HOME
       - LOCAL_NODE_PORT=$NODE_PORT
     volumes:
       - ./public:/public
