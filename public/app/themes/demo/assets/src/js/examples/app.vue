@@ -17,12 +17,11 @@
         <a href="#"><span class="icon-twitter"></span> Twitter</a>
       </li>
     </ul>
-
   </div>
 </template>
 
 <script>
-import logo from "./logo.png";
+import logo from './logo.png';
 
 export default {
   data() {

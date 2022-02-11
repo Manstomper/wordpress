@@ -8,7 +8,7 @@
  *
  * @return string Image URL
  */
-function rig_image($id, $size = 'thumbnail')
+/*function rig_image($id, $size = 'thumbnail')
 {
     $image = wp_get_attachment_image_src($id, $size);
 
@@ -17,7 +17,7 @@ function rig_image($id, $size = 'thumbnail')
     }
 
     return $image[0];
-}
+}*/
 
 /**
  * Change color slug to CSS class name (e.g. "green" to "has-green-background-color")
@@ -27,7 +27,7 @@ function rig_image($id, $size = 'thumbnail')
  *
  * @return string CSS class name
  */
-function rig_color_class($color, $type = 'color')
+/*function rig_color_class($color, $type = 'color')
 {
     if ($color) {
         return 'has-' . $color . '-' . $type;
@@ -36,4 +36,4 @@ function rig_color_class($color, $type = 'color')
     return '';
 }
 
-add_filter('rig_color_class', 'rig_color_class', 10, 2);
+add_filter('rig_color_class', 'rig_color_class', 10, 2);*/

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "settings": {
+    "appearanceTools": false,
+    "border": {
+      "color": false,
+      "radius": false,
+      "style": false,
+      "width": false
+    },
+    "color": {
+      "background": false,
+      "custom": false,
+      "customDuotone": false,
+      "customGradient": false,
+      "defaultGradients": false,
+      "defaultPalette": false,
+      "duotone": [],
+      "gradients": [],
+      "link": false,
+      "palette": [],
+      "text": false
+    },
+    "layout": {
+      "contentSize": "840px",
+      "wideSize": "1100px"
+    },
+    "spacing": {
+      "blockGap": null,
+      "margin": false,
+      "padding": false,
+      "units": []
+    },
+    "typography": {
+      "customFontSize": false,
+      "fontStyle": false,
+      "fontWeight": false,
+      "letterSpacing": false,
+      "lineHeight": false,
+      "textDecoration": false,
+      "textTransform": false,
+      "dropCap": false,
+      "fontSizes": [],
+      "fontFamilies": [
+        {
+          "fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
+          "slug": "theme-font",
+          "name": "Theme Font"
+        }
+      ]
+    },
+    "custom": {},
+    "blocks": {
+      "core/button": {
+        "border": {
+          "radius": false
+        }
+      },
+      "core/pullquote": {
+        "border": {
+          "width": false,
+          "radius": false,
+          "style": false
+        }
+      }
+    }
+  },
+  "styles": {
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--theme-font)"
+    }
+  },
+  "customTemplates": {},
+  "templateParts": {}
+}

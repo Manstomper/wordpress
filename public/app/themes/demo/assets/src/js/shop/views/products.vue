@@ -16,17 +16,17 @@ export default {
       products: [
         {
           id: 1,
-          title: "Axe",
+          title: 'Axe',
           price: 35,
         },
         {
           id: 2,
-          title: "Dagger",
+          title: 'Dagger',
           price: 8.9,
         },
         {
           id: 3,
-          title: "Staff",
+          title: 'Staff',
           price: 15,
         },
       ],

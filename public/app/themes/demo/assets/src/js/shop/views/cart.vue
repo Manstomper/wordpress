@@ -1,8 +1,8 @@
 <template>
   <div class="cart">
-    <h3>{{ $store.state.cartContents.length }} item(s) in cart</h3>
+    <h3>{{ store.state.cartContents.length }} item(s) in cart</h3>
     <ul>
-      <li v-for="item in $store.state.cartContents" :key="item.id">
+      <li v-for="item in store.state.cartContents" :key="item.id">
         {{ item.title }}, price: {{ item.price }}
         <button type="button" @click="removeFromCart(item.id)">
           Remove from cart
@@ -19,17 +19,17 @@ export default {
       products: [
         {
           id: 1,
-          title: "Axe",
+          title: 'Axe',
           price: 35,
         },
         {
           id: 2,
-          title: "Dagger",
+          title: 'Dagger',
           price: 8.9,
         },
         {
           id: 3,
-          title: "Staff",
+          title: 'Staff',
           price: 15,
         },
       ],
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     removeFromCart(id) {
-      this.$store.commit("removeFromCart", id);
+      this.store.commit('removeFromCart', id);
     },
   },
 };
