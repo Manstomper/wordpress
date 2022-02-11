@@ -1,8 +1,8 @@
 // JS
-//import './js/examples/main.js';
-//import './js/events/main.js';
+import './js/examples/main.js';
+import './js/events/main.js';
 import './js/newest-articles/main.js';
-//import './js/shop/main.js';
+import './js/shop/main.js';
 
 // CSS
 import './css/main.scss';

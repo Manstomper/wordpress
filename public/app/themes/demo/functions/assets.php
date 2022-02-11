@@ -5,9 +5,9 @@
  */
 add_action('wp_enqueue_scripts', function () {
     if (!defined('WP_ENV') || WP_ENV == "production") {
-        $path = get_stylesheet_directory_uri() . '/assets/';
+        $path = get_stylesheet_directory_uri() . '/assets/dist';
     } else {
-        $path = 'http://localhost:' . ($_ENV['LOCAL_NODE_PORT'] ?? '3000');
+        $path = 'http://localhost:3000';
     }
 
     wp_enqueue_style('app', $path . '/app.css');

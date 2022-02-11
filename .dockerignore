@@ -1,4 +1,8 @@
 node_modules
+/public/app/themes/*/assets/src
 /*.sh
+.env
 .gitkeep
 .dockerignore
+README.md
+README.cloud.md

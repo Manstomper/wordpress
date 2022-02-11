@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/nginx:1.21.5
+          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/nginx:1.21.5-wp
           ports:
             - containerPort: 80
           volumeMounts:

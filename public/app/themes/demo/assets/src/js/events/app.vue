@@ -8,6 +8,11 @@
       </li>
     </ul>
     <input v-model="searchTerms" type="text" placeholder="Search events" />
+    <div class="pagination" v-for="index in pages" :key="index">
+      <button type="button" :disabled="index == page" @click="page = index">
+        {{ index }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -15,6 +20,9 @@
 export default {
   data() {
     return {
+      perPage: 3,
+      page: 1,
+      pages: 0,
       allEvents: [
         {
           id: 1,
@@ -28,8 +36,48 @@ export default {
         },
         {
           id: 3,
+          name: "Skiing through a revolving door, lesson 1",
+          time: "2022-05-12 09:00:00",
+        },
+        {
+          id: 4,
+          name: "Skiing through a revolving door, lesson 2",
+          time: "2022-05-13 09:00:00",
+        },
+        {
+          id: 5,
+          name: "Skiing through a revolving door, lesson 3",
+          time: "2022-05-14 09:00:00",
+        },
+        {
+          id: 6,
+          name: "Skiing through a revolving door, lesson 4",
+          time: "2022-05-15 09:00:00",
+        },
+        {
+          id: 7,
+          name: "Skiing through a revolving door, lesson 5",
+          time: "2022-05-16 09:00:00",
+        },
+        {
+          id: 8,
+          name: "Skiing through a revolving door, lesson 6",
+          time: "2022-05-17 09:00:00",
+        },
+        {
+          id: 9,
+          name: "Skiing through a revolving door, lesson 7",
+          time: "2022-05-18 09:00:00",
+        },
+        {
+          id: 10,
+          name: "Skiing through a revolving door, lesson 8",
+          time: "2022-05-19 09:00:00",
+        },
+        {
+          id: 11,
           name: "Cookies are served",
-          time: "2022-04-02 09:40:00",
+          time: "2023-08-02 09:40:00",
         },
       ],
       searchTerms: "",
@@ -37,14 +85,21 @@ export default {
   },
   computed: {
     events() {
-      if (this.searchTerms.length < 3) {
-        return this.allEvents;
+      let filtered;
+      if (this.searchTerms.length > 2) {
+        this.page = 1;
+        filtered = this.allEvents.filter((element) => {
+          return element.name
+            .toLowerCase()
+            .includes(this.searchTerms.toLowerCase());
+        });
+      } else {
+        filtered = this.allEvents.slice(0);
       }
-      return this.allEvents.filter((event) => {
-        return event.name
-          .toLowerCase()
-          .includes(this.searchTerms.toLowerCase());
-      });
+      this.pages = Math.ceil(filtered.length / this.perPage);
+      let startIndex = (this.page - 1) * this.perPage;
+      let endIndex = startIndex + this.perPage;
+      return filtered.slice(startIndex, endIndex);
     },
   },
 };

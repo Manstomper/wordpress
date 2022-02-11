@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: php
-          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/php:8.0.14
+          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/php:8.0.14-wp
           ports:
             - containerPort: 9000
           env:

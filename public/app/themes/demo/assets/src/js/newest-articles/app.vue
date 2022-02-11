@@ -36,7 +36,7 @@ export default {
       axios
         .get("/wp-json/wp/v2/posts?per_page=2&page=" + this.page)
         .then((response) => {
-          console.debug(this.articles);
+          this.articles = [...response.data, ...this.articles]
           this.page++;
           this.isLoading = false;
         })

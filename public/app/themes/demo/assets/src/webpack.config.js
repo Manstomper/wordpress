@@ -11,7 +11,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '..'),
+    path: path.resolve(__dirname, '..', 'dist'),
   },
   module: {
     rules: [
@@ -64,10 +64,14 @@ module.exports = {
     ],
   },
   devServer: {
+    host: '0.0.0.0',
     port: 3000,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+  },
+  watchOptions: {
+    poll: 1000,
   },
   plugins: [
     new VueLoaderPlugin(),

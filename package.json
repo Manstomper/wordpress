@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "echo \"Error: nothing to start\" && exit 1",
     "dev": "webpack-dev-server --mode development --config ./public/app/themes/demo/assets/src/webpack.config.js",
-    "debug": "webpack --mode development --config assets/src/webpack.config.js --display-error-details",
-    "build": "webpack --mode production --config assets/src/webpack.config.js",
+    "debug": "webpack --mode development --config ./public/app/themes/demo/assets/src/webpack.config.js --display-error-details",
+    "build": "webpack --mode production --config ./public/app/themes/demo/assets/src/webpack.config.js",
     "make-pot": "wp i18n make-pot ./public/app/themes/demo ./public/app/themes/demo/languages/rig.pot --domain=\"rig\" --exclude=\"assets/src\"",
     "make-json": "wp i18n make-json ./languages --no-purge"
   },

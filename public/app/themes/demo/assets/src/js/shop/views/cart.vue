@@ -14,6 +14,27 @@
 
 <script>
 export default {
+  data() {
+    return {
+      products: [
+        {
+          id: 1,
+          title: "Axe",
+          price: 35,
+        },
+        {
+          id: 2,
+          title: "Dagger",
+          price: 8.9,
+        },
+        {
+          id: 3,
+          title: "Staff",
+          price: 15,
+        },
+      ],
+    };
+  },
   methods: {
     removeFromCart(id) {
       this.$store.commit("removeFromCart", id);

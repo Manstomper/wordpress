@@ -4,7 +4,7 @@ volumes:
   wpdb:
 services:
   nginx:
-    image: $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:$NGINX_VERSION
+    image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/nginx:1.21.5
     ports:
       - "80:8080"
     volumes:
@@ -13,11 +13,11 @@ services:
       - php
       - mysql
   php:
-    image: $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:$PHP_VERSION
+    image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/php:8.0.14
     environment:
       - WP_ENV=production
   mysql:
-    image: mariadb:$MARIADB_VERSION
+    image: mariadb:10.3.32
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=wordpress

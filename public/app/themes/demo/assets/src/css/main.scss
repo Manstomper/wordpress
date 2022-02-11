@@ -17,8 +17,10 @@ Example code. Not to be used as-is in production.
 #sample-image {
   width: 200px;
   height: 120px;
+  padding: 5px;
   background-image: url("./../img/photo-sample.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  outline: 1px dashed #999;
 }
