@@ -89,7 +89,6 @@ export default {
     events() {
       let filtered;
       if (this.searchTerms.length > 2) {
-        this.page = 1;
         filtered = this.allEvents.filter((element) => {
           return element.name
             .toLowerCase()
@@ -99,6 +98,9 @@ export default {
         filtered = this.allEvents.slice(0);
       }
       this.pages = Math.ceil(filtered.length / this.perPage);
+      if (this.page > this.pages) {
+        this.page = 1;
+      }
       let startIndex = (this.page - 1) * this.perPage;
       let endIndex = startIndex + this.perPage;
       return filtered.slice(startIndex, endIndex);

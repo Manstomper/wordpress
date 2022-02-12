@@ -1,21 +1,20 @@
 /**
  * Data store for using a custom REST API endpoint
  */
-(function() {
-
+(function () {
   const actions = {
-    getPosts: function(params) {
+    getPosts: function (params) {
       return {
         type: 'GET_POSTS',
-        params
-      }
+        params,
+      };
     },
-    setPosts: function(posts) {
+    setPosts: function (posts) {
       return {
         type: 'SET_POSTS',
-        posts
-      }
-    }
+        posts,
+      };
+    },
   };
 
   wp.data.registerStore('rig', {
@@ -23,30 +22,29 @@
       if (action.type === 'SET_POSTS') {
         return {
           ...state,
-          posts: action.posts
+          posts: action.posts,
         };
       }
       return state;
     },
     controls: {
-      GET_POSTS: function(action) {
+      GET_POSTS: function (action) {
         return wp.apiFetch({
-          path: wp.url.addQueryArgs('/rig/posts', action.params)
+          path: wp.url.addQueryArgs('/rig/posts', action.params),
         });
-      }
+      },
     },
     actions: actions,
     selectors: {
       getPosts(state) {
         return state.posts;
-      }
+      },
     },
     resolvers: {
-      * getPosts(params) {
+      *getPosts(params) {
         const posts = yield actions.getPosts(params);
         return actions.setPosts(posts);
-      }
-    }
+      },
+    },
   });
-
-}());
+})();

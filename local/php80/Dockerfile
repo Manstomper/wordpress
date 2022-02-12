@@ -19,3 +19,5 @@ RUN apk update \
     && rm -rf /usr/local/lib/php/test \
     && rm /usr/local/bin/phpdbg \
     && rm -rf /var/cache/*
+
+ADD ./local/php80/fpm.conf /usr/local/etc/php-fpm.d/zz-site.conf

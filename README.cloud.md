@@ -1,6 +1,6 @@
 # Deploy to Google Cloud Kubernetes
 
-This guide assumes that you have full access. If you are part of an organisation, there may be restrictions. If you run into any issues, ask your administrators for help.
+This guide assumes that you have full access. If you are part of an organisation, there may be restrictions.
 
 To get a better understanding of the environment, you may want to log into the [Google Cloud Console](https://console.cloud.google.com/) and look around. Most things that we do with the Cloud SDK can be done via the Console.
 
@@ -82,6 +82,7 @@ TODO: write about changing image names in deployments
 
 Now we just build assets for production, repeat the process of building and pushing images, and rollout the deployments.
 
+1. When pushing images for the first time, run `gcloud auth configure-docker $REPOSITORY_LOCATION-docker.pkg.dev`
 1. `docker compose run --rm -v "$(pwd):/usr/src" -w /usr/src node sh -c "npm run build"`
 1. `docker build . -f "$(pwd)/cloud/nginx/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-alpine`
 1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-alpine`

@@ -14,12 +14,6 @@
       exampleValue: {
         type: 'string'
       },
-      backgroundColor: {
-        type: 'string'
-      },
-      textColor: {
-        type: 'string'
-      },
       imageId: {
         type: 'number'
       }
@@ -58,7 +52,7 @@
     /*
     InnerBlocks
     */
-    const exampleBlocks = el(
+    const exampleInnerBlocks = el(
       InnerBlocks,
       {
         allowedBlocks: [
@@ -100,7 +94,7 @@
     return [
       exampleElement,
       exampleInputControl,
-      exampleBlocks,
+      exampleInnerBlocks,
       exampleInspectorControls
     ];
   }

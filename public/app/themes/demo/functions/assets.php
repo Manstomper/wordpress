@@ -12,6 +12,8 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_enqueue_style('app', $path . '/app.css');
     wp_enqueue_script('app',  $path . '/app.js', [], false, true);
+
+    wp_dequeue_style('global-styles');
 });
 
 /**

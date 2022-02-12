@@ -1,20 +1,27 @@
 // Content dimensions
 
-/*$breakpoint-sm: map-get($grid-breakpoints, 'sm');
-$breakpoint-md: map-get($grid-breakpoints, 'md');
-$breakpoint-lg: map-get($grid-breakpoints, 'lg');
-$breakpoint-xl: map-get($grid-breakpoints, 'xl');
+$breakpoint-small: 768px;
+$breakpoint-medium: 992px;
+$breakpoint-large: 1200px;
 
-$max-width: map-get($container-max-widths, 'xl');
-$gutter: $grid-gutter-width;
-$spacer: 1rem;*/
+$max-width: 900px;
+$gutter: 15px;
+$spacer: 30px;
 
 // Fonts
 
+@font-face {
+  font-family: 'fontello';
+  src: url('./../fonts/fontello/fontello.woff2') format('woff2'),
+    url('./../fonts/fontello/fontello.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // Colors
 
-$white: #fff;
-$black: #000;
+$light: #fff;
+$dark: #111;
 $grey20: #333;
 $grey40: #666;
 $grey60: #999;
@@ -23,41 +30,33 @@ $primary: #afbf98;
 $secondary: #675a4b;
 $tertiary: #a39db6;
 
-$link-color: blue;
-$link-hover-color: red;
-
 $theme-colors: (
-  "white": $white,
-  "black": $black,
-  "primary": $primary,
-  "secondary": $secondary,
-  "tertiary": $tertiary
+  'light': $light,
+  'dark': $dark,
+  'primary': $primary,
+  'secondary': $secondary,
+  'tertiary': $tertiary,
 );
 
 // Animations
 
-@keyframes fade-out {
-
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
+.shake {
+  animation: shake 0.3s;
+  transform: translate3d(0, 0, 0);
 }
 
 @keyframes shake {
-
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg);
   }
 
-  25%, 75% {
-    transform: rotate(3deg);
+  25%,
+  75% {
+    transform: rotate(5deg);
   }
 
   50% {
-    transform: rotate(-3deg);
+    transform: rotate(-5deg);
   }
 }

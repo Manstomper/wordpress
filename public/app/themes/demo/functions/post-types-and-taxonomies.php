@@ -4,12 +4,10 @@
  * Register custom post types and taxonomies
  */
 add_action('init', function () {
-    // Custom post type
-    register_post_type('rig_post', [
-        //'label' => '',
+    register_post_type('event', [
         'labels' => [
-            'name' => __('Example post type', 'rig'),
-            'singular_name' => __('Example post type', 'rig'),
+            'name' => __('Events', 'rig'),
+            'singular_name' => __('Event', 'rig'),
         ],
         'public' => true,
         'menu_position' => 4,
@@ -18,15 +16,12 @@ add_action('init', function () {
     ]);
 
     // Custom taxonomy
-    register_taxonomy('rig_taxonomy', 'rig_post', [
+    register_taxonomy('event-type', 'event', [
         'labels' => [
-            'name' => __('Example categories', 'rig'),
-            'singular_name' => __('Example category', 'rig'),
+            'name' => __('Types', 'rig'),
+            'singular_name' => __('Type', 'rig'),
         ],
         'hierarchical' => true,
         'show_in_rest' => true,
     ]);
-
-    // Register taxonomy for post type
-    register_taxonomy_for_object_type('rig_taxonomy', 'rig_post');
 });

@@ -2,7 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
-const themePublicPath = '/app/themes/demo/assets';
+const themePublicPath = '/app/themes/demo/assets/dist';
 
 module.exports = {
   entry: {
@@ -35,31 +35,8 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              fallback: 'file-loader',
-              publicPath: themePublicPath + '/img',
-              outputPath: 'img'
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              publicPath: themePublicPath + '/fonts',
-              outputPath: 'fonts',
-              name: '[name].[ext]'
-            },
-          },
-        ],
+        test: /\.(png|jpe?g|gif|svg|woff2?|ttf)$/,
+        type: 'asset',
       },
     ],
   },

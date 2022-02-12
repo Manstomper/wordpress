@@ -3,7 +3,7 @@
 /**
  * Sample meta box for adding an arbitrary value
  */
-function rig_fruit_meta($post)
+function fruit_meta($post)
 {
     $value = get_post_meta($post->ID, 'fruit', true); ?>
     <div class="components-base-control">
@@ -20,7 +20,7 @@ function rig_fruit_meta($post)
 <?php }
 
 add_action('add_meta_boxes', function () {
-    add_meta_box('rig_fruit', __('Example meta box', 'rig'), 'rig_fruit_meta', 'post', 'side');
+    add_meta_box('rig_fruit', __('Example meta box', 'rig'), 'fruit_meta', 'post', 'side');
 });
 
 add_action('save_post', function ($postId) {

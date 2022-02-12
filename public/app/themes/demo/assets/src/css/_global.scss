@@ -1,34 +1,18 @@
 // Typography and global styles
 
-/*@font-face {
-  font-family: OpenSans;
-  src: url('./../fonts/OpenSans/OpenSans-Regular.ttf');
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: "fontello";
-  src: url("./../fonts/fontello/font/fontello.woff2") format("woff2"),
-    url("./../fonts/fontello/font/fontello.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-[class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "fontello";
+[class^='icon-']:before,
+[class*=' icon-']:before {
+  font-family: 'fontello';
   font-style: normal;
   font-weight: normal;
-  speak: none;
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: .2em;
+  margin-right: 0.2em;
   text-align: center;
   font-variant: normal;
   text-transform: none;
-}*/
+}
 
 body {
   font-family: sans-serif;
@@ -49,16 +33,6 @@ input:active,
 button:focus,
 button:active {
   outline: 1px solid orange;
-}
-
-// Animations
-
-.anim-enter-active {
-  animation: shake 0.5s;
-}
-
-.anim-leave-active {
-  animation: fade-out 2s;
 }
 
 // Block Editor classes

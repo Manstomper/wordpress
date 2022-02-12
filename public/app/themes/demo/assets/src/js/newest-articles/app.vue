@@ -3,7 +3,7 @@
     <h2>Newest articles</h2>
     <ul>
       <li v-for="article in articles" :key="article.id">
-        <a href="{{ article.link }}">
+        <a :href="article.link">
           {{ article.title.rendered }}
         </a>
       </li>
@@ -37,6 +37,7 @@ export default {
         .get('/wp-json/wp/v2/posts?per_page=2&page=' + this.page)
         .then((response) => {
           this.articles = [...this.articles, ...response.data];
+          console.debug(this.articles);
           this.page++;
           this.isLoading = false;
         })
