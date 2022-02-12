@@ -54,12 +54,12 @@ You will be prompted to enable the necessary APIs.
 
 1. Stop the running node service with `docker compose stop node`
 1. Build assets for production with `docker compose run --rm -v "$(pwd):/usr/src" node npm run build`
-1. Build the nginx image with `docker build . -f "$(pwd)/cloud/nginx/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-wp`
-1. Push the nginx image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-wp`
-1. Delete the nginx image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-wp`
-1. Build the PHP image with `docker build . -f "$(pwd)/cloud/php80/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-wp`
-1. Push the php image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-wp`
-1. Delete the php image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-wp`
+1. Build the nginx image with `docker build . -f "$(pwd)/cloud/nginx/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. Push the nginx image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. Delete the nginx image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. Build the PHP image with `docker build . -f "$(pwd)/cloud/php80/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
+1. Push the php image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
+1. Delete the php image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
 1. Tag the MySQL image with `docker tag mariadb:10.3.32 europe-north1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/mariadb:10.3.32`
 1. Push the MySQL image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/mariadb:10.3.32`
 1. Untag the MySQL image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/mariadb:10.3.32`
@@ -84,12 +84,12 @@ Now we just build assets for production, repeat the process of building and push
 
 1. When pushing images for the first time, run `gcloud auth configure-docker $REPOSITORY_LOCATION-docker.pkg.dev`
 1. `docker compose run --rm -v "$(pwd):/usr/src" -w /usr/src node sh -c "npm run build"`
-1. `docker build . -f "$(pwd)/cloud/nginx/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-alpine`
-1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-alpine`
-1. `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5-alpine`
-1. `docker build . -f "$(pwd)/cloud/php/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-fpm-alpine3.15`
-1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-fpm-alpine3.15`
-1. `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-fpm-alpine3.15`
+1. `docker build . -f "$(pwd)/cloud/nginx/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. `docker build . -f "$(pwd)/cloud/php/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
+1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
+1. `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
 1. `kubectl rollout restart deployment nginx php`
 
 # Troubleshooting and known issues

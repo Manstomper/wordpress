@@ -37,7 +37,6 @@ export default {
         .get('/wp-json/wp/v2/posts?per_page=2&page=' + this.page)
         .then((response) => {
           this.articles = [...this.articles, ...response.data];
-          console.debug(this.articles);
           this.page++;
           this.isLoading = false;
         })
