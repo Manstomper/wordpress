@@ -92,6 +92,11 @@ Now we just build assets for production, repeat the process of building and push
 1. `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
 1. `kubectl rollout restart deployment nginx php`
 
+1. `docker tag rig/nginx:1.21.5 $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
+1. `docker tag rig/php:8.0.14-mysqli-gd-intl $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-mysqli-gd-intl`
+1. `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14-mysqli-gd-intl`
+
 # Troubleshooting and known issues
 
 1. On Window 11, composer appears to hang when running `docker compose up -d` when dependencies have already been installed. Delete composer.lock and dependencies, run `docker compose down` and `docker compose up -d`
