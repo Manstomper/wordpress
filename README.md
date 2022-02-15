@@ -11,9 +11,11 @@
 ## Now what?
 
 1. If you need to stop containers, e.g. to free up ports, run `./dev-stop.sh`
-1. If containers are stopped, run `./dev.sh`
+1. To continue working when containers are stopped, run `./dev.sh`
 1. To update composer packages, run `./dev-composer.update.sh`
 1. To update node packages, run `./dev-npm-update.sh`
+
+If you've cloned this repository, the project is most likely been set up in Google Cloud Kubernetes. To push changes to the cloud, run `./publish.sh`.
 
 ## Import and export a database dump
 

@@ -19,13 +19,5 @@ spec:
           image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/nginx:1.21.5
           ports:
             - containerPort: 80
-          volumeMounts:
-            - name: app
-              mountPath: /public
-              readOnly: true
           imagePullPolicy: Always
       restartPolicy: Always
-      volumes:
-        - name: app
-          persistentVolumeClaim:
-            claimName: app

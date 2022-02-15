@@ -19,10 +19,6 @@ spec:
           image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/php:8.0.14
           ports:
             - containerPort: 9000
-          volumeMounts:
-            - name: app
-              mountPath: /public
-              readOnly: true
           env:
             - name: WP_ENV
               value: production
@@ -30,7 +26,3 @@ spec:
               value: "http://foo.bar"
           imagePullPolicy: Always
       restartPolicy: Always
-      volumes:
-        - name: app
-          persistentVolumeClaim:
-            claimName: app

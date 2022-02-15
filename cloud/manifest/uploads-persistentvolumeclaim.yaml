@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: app
+  name: wp-uploads
 spec:
   storageClassName: csi-gcs
-  volumeName: app
+  volumeName: wp-uploads
   accessModes:
   - ReadOnlyMany
   resources:

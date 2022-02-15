@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: app
+  name: wp-uploads
 spec:
   storageClassName: csi-gcs
   accessModes:
@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   csi:
     driver: gcs.csi.ofek.dev
-    volumeHandle: app
+    volumeHandle: wp-uploads
     nodePublishSecretRef:
       name: csi-gcs
       namespace: default
