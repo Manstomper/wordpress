@@ -3,45 +3,57 @@
 /**
  * Custom REST API endpoint for querying multiple post types
  */
-function rig_rest_posts($data)
+function rig_rest_posts(\WP_REST_Request $request)
 {
     $args = [
-        'post_type' => ['page', 'post', 'rig_post'],
         'post_status' => 'publish',
-        'posts_per_page' => 30,
         'ignore_sticky_posts' => true,
+        'post_type' => ['page', 'post', 'rig_post'],
+        'posts_per_page' => $request->get_param('perPage') ?? 9,
+        'orderby' => $request->get_param('orderBy') ?? 'date',
+        'order' => $request->get_param('order') ?? 'DESC',
     ];
 
-    if (isset($data['include'])) {
-        $args['post__in'] = $data['include'];
-        $args['orderby'] = 'post__in';
+    $page = $request->get_param('page');
+    $postTypes = $request->get_param('postTypes');
+    $taxQuery = $request->get_param('taxQuery');
+    $metaQuery = $request->get_param('metaQuery');
+
+    if ($page) {
+        $args['offset'] = $args['posts_per_page'] * ($page - 1);
     }
 
-    if (isset($data['search'])) {
-        if (strpos($data['search'], get_site_url()) === 0) {
-            // Search string is a post URL, determine ID
-            $args['post__in'] = [url_to_postid($data['search'])];
-            $args['posts_per_page'] = 1;
-        } else {
-            $args['s'] = $data['search'];
-        }
+    if ($postTypes) {
+        $args['post_type'] = $postTypes;
+    }
+
+    if ($taxQuery) {
+        $args['tax_query'] = [[
+            'taxonomy' => $taxQuery['taxonomy'],
+            'field' => $taxQuery['field'],
+            'terms' => $taxQuery['terms'],
+        ]];
+    }
+
+    if ($metaQuery) {
+        $args['meta_key'] = $metaQuery['metaKey'];
+        $args['meta_value'] = $metaQuery['metaValue'];
     }
 
     $q = new \WP_Query($args);
 
-    $results = [];
+    $results = [
+        'foundPosts' => $q->found_posts,
+        'posts' => [],
+    ];
 
     while ($q->have_posts()) {
         $q->the_post();
 
-        $results[] = [
+        $results['posts'][] = [
             'id' => get_the_ID(),
-            'title' => [
-                'rendered' => get_the_title(),
-            ],
-            'content' => [
-                'rendered' => get_the_content(),
-            ],
+            'title' => get_the_title(),
+            'excerpt' => has_excerpt() ? get_the_excerpt() : '',
             'link' => get_the_permalink(),
         ];
     }
@@ -53,20 +65,7 @@ function rig_rest_posts($data)
 
 add_action('rest_api_init', function () {
     register_rest_route('rig', '/posts', [
-        'methods' => 'GET',
-        'args' => [
-            'search' => [
-                'description' => '',
-                'type' => 'string',
-            ],
-            'include' => [
-                'description' => '',
-                'type' => 'array',
-                'items' => [
-                    'type' => 'integer',
-                ],
-            ],
-        ],
+        'methods' => 'POST',
         'callback' => 'rig_rest_posts',
         'permission_callback' => '__return_true',
     ]);

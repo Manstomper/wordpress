@@ -1,20 +1,34 @@
 <template>
-  <div class="newest-articles">
-    <h2>Newest articles</h2>
+  <div class="posts">
+    <div v-if="isLoading" class="loading">Loading...</div>
+    <h2>Posts</h2>
+    <select @change="initPosts(1)" v-model="selectedTerm">
+      <option :value="{ id: null, name: null }">All</option>
+      <template v-for="term in terms" :key="term.id">
+        <option :value="term" :selected="term == selectedTerm">
+          {{ term.name }}
+        </option>
+      </template>
+    </select>
     <ul>
-      <li v-for="article in articles" :key="article.id">
-        <a :href="article.link">
-          {{ article.title.rendered }}
+      <li v-for="post in posts" :key="post.id">
+        <a :href="post.link">
+          {{ post.title }}
         </a>
       </li>
     </ul>
-    <button
-      type="button"
-      :disabled="isLoading || !hasMoreArticles"
-      @click="getArticles()"
-    >
-      {{ buttonText }}
-    </button>
+    <div v-if="this.pages > 1">
+      <template v-for="item in pageNav" :key="item">
+        <button
+          type="button"
+          :class="{ 'is-active': item.page == page }"
+          :disabled="item.isDisabled"
+          @click="initPosts(item.page)"
+        >
+          {{ item.label }}
+        </button>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -24,43 +38,128 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      articles: [],
+      posts: [],
+      perPage: 2,
       page: 1,
-      hasMoreArticles: true,
+      pages: 0,
+      terms: [],
+      selectedTerm: { id: null, name: null },
       isLoading: false,
     };
   },
   methods: {
-    getArticles() {
+    initPosts(page) {
+      this.page = page;
+      this.getPosts();
+    },
+    getPosts() {
       this.isLoading = true;
       axios
-        .get('/wp-json/wp/v2/posts?per_page=2&page=' + this.page)
+        .post('/wp-json/rig/posts', this.getRequestParams())
         .then((response) => {
-          this.articles = [...this.articles, ...response.data];
-          this.page++;
           this.isLoading = false;
+          if (response.data) {
+            this.pages = Math.ceil(response.data.foundPosts / this.perPage);
+            this.posts = response.data.posts;
+          }
         })
         .catch((error) => {
-          if (error.message.indexOf('code 400') !== -1) {
-            this.isLoading = false;
-            this.hasMoreArticles = false;
-          }
+          this.isLoading = false;
+          console.debug(error);
         });
+    },
+    getRequestParams() {
+      const params = {
+        perPage: this.perPage,
+        page: this.page,
+        taxonomy: 'category',
+        taxQuery: null,
+        metaQuery: null,
+      };
+      if (this.selectedTerm.id) {
+        params.taxQuery = {
+          taxonomy: 'category',
+          field: 'id',
+          terms: this.selectedTerm.id,
+        };
+      }
+      return params;
+    },
+    getTerms() {
+      axios
+        .get('/wp-json/wp/v2/categories')
+        .then((response) => {
+          this.isLoading = false;
+          if (response.data) {
+            response.data.forEach((term) => {
+              this.terms.push({
+                id: term.id,
+                name: term.name,
+              });
+            });
+          }
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.debug(error);
+        });
+    },
+    setPage(page) {
+      this.page = page;
+      this.getPosts();
     },
   },
   computed: {
-    buttonText() {
-      if (this.isLoading) {
-        return 'Loading...';
+    pageNav() {
+      const midpoint = this.page;
+      var start = midpoint - 2;
+      var end = midpoint + 2;
+      if (end > this.pages) {
+        start = this.pages - 4;
+        end = this.pages;
       }
-      if (this.hasMoreArticles) {
-        return 'Load more articles';
+      if (start < 1) {
+        start = 1;
+        end = Math.min(5, this.pages);
       }
-      return 'No more articles';
+      const nav = [];
+      nav.push({
+        page: this.page - 1,
+        label: 'Previous',
+        isDisabled: this.page - 1 < 1,
+      });
+      if (this.page > 3 && this.pages > 5) {
+        nav.push({
+          page: 1,
+          label: 'First page',
+          isDisabled: false,
+        });
+      }
+      for (let i = start; i <= end; i++) {
+        nav.push({
+          page: i,
+          label: i,
+          isDisabled: this.page == i,
+        });
+      }
+      if (this.pages > 5 && this.pages - this.page > 2) {
+        nav.push({
+          page: this.pages,
+          label: 'Last page',
+          isDisabled: false,
+        });
+      }
+      nav.push({
+        page: this.page + 1,
+        label: 'Next',
+        isDisabled: this.page + 1 > this.pages,
+      });
+      return nav;
     },
   },
   mounted() {
-    this.getArticles();
+    this.getTerms();
+    this.getPosts();
   },
 };
 </script>
