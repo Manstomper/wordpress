@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <div v-if="isLoading" class="loading">Loading...</div>
+    <div v-if="isLoading" class="loading">Loading&hellip;</div>
     <h2>Posts</h2>
     <select @change="initPosts(1)" v-model="selectedTerm">
       <option :value="{ id: null, name: null }">All</option>

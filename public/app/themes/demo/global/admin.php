@@ -48,5 +48,39 @@ add_filter('block_categories_all', function ($categories) {
         ],
     ];
 
-    return array_merge($categories, $new);
+    return array_merge($new, $categories);
 }, 10, 2);
+
+/**
+ * Restrict available blocks for built-in post types
+ */
+add_filter('allowed_block_types_all', function ($allowedTypes, $editorContext) {
+    $allowForAll = [
+        'core/block',
+        'core/columns',
+        'core/column',
+        'core/heading',
+        'core/paragraph',
+        'core/list',
+        'core/table',
+        'core/quote',
+        'core/buttons',
+        'core/button',
+        'core/image',
+        'core/gallery',
+        'acf/accordion',
+    ];
+
+    if ($editorContext->post->post_type === 'post') {
+        return $allowForAll;
+    }
+
+    if ($editorContext->post->post_type === 'page') {
+        return array_merge($allowForAll, [
+            'acf/banner',
+            'acf/posts',
+        ]);
+    }
+
+    return $allowedTypes;
+}, 11, 2);

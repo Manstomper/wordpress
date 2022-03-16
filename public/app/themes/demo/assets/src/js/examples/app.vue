@@ -4,12 +4,7 @@
 
     <h3>Image imported in vue</h3>
     <p>Click on it to shake.</p>
-    <img
-      alt="Logo"
-      :src="logo"
-      :class="{ shake: isShaking }"
-      @click="demoAnimation"
-    />
+    <img alt="Logo" :src="logo" :class="{ shake: isShaking }" @click="demoAnimation" />
 
     <h3>Image set in CSS</h3>
     <div id="sample-image"></div>

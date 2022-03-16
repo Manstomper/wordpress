@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register custom post types and taxonomies
+ * Register custom post type and taxonomies
  */
 add_action('init', function () {
     register_post_type('event', [
@@ -10,12 +10,12 @@ add_action('init', function () {
             'singular_name' => __('Event', 'rig'),
         ],
         'public' => true,
-        'menu_position' => 4,
+        'delete_with_user' => false,
+        'has_archive' => true,
         'show_in_rest' => true,
-        'supports' => ['editor', 'title', 'thumbnail', 'excerpt', 'comments', 'custom-fields', 'revisions'],
+        'supports' => ['editor', 'title', 'excerpt', 'custom-fields', 'revisions'],
     ]);
 
-    // Custom taxonomy
     register_taxonomy('event-type', 'event', [
         'labels' => [
             'name' => __('Types', 'rig'),

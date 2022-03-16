@@ -2,9 +2,7 @@
   <div class="product">
     <h3>Product: {{ product.title }}</h3>
     <p>Price: {{ product.price }}</p>
-    <button type="button" :disabled="inCart" @click="addToCart">
-      Add to cart
-    </button>
+    <button type="button" :disabled="inCart" @click="addToCart">Add to cart</button>
   </div>
 </template>
 

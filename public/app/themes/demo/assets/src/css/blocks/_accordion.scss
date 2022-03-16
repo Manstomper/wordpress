@@ -1,0 +1,32 @@
+.block-accordion {
+
+  > button {
+    display: flex;
+
+    &::before {
+      content: "";
+      background-image: url('./../img/chevron.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 24px;
+      height: 16px;
+      transform: rotate(90deg);
+    }
+
+    &[aria-expanded="true"]::before {
+      transform: rotate(-90deg);
+    }
+  }
+
+  > div {
+    display: none;
+
+    &.is-open {
+      display: block;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

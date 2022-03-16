@@ -1,7 +1,7 @@
-<form action="<?= get_site_url('/'); ?>" method="get">
+<form class="search" action="<?= get_site_url('/'); ?>" method="get">
     <label>
-        <?= __('Enter search terms', 'rig'); ?>
-        <input type="text" name="s" placeholder="<?= __('Search', 'rig'); ?>&hellip;">
+        <?= rig_translate('Enter search terms'); ?>
+        <input type="text" name="s" placeholder="<?= rig_translate('Search'); ?>&hellip;">
     </label>
-    <button type="submit"><?= __('Submit', 'rig'); ?></button>
+    <button type="submit"><?= rig_translate('Submit'); ?></button>
 </form>

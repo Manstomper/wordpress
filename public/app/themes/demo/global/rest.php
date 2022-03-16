@@ -47,14 +47,28 @@ function rig_rest_posts(\WP_REST_Request $request)
         'posts' => [],
     ];
 
+    $taxonomy = $request->get_param('taxonomy') ?? 'category';
+
     while ($q->have_posts()) {
         $q->the_post();
+
+        $terms = get_the_terms(get_the_ID(), $taxonomy);
+
+        if ($terms && !is_wp_error($terms)) {
+            foreach ($terms as &$term) {
+                $term = $term->name;
+            }
+        } else {
+            $terms = [];
+        }
 
         $results['posts'][] = [
             'id' => get_the_ID(),
             'title' => get_the_title(),
+            'date' => get_the_date(),
             'excerpt' => has_excerpt() ? get_the_excerpt() : '',
             'link' => get_the_permalink(),
+            'terms' => $terms,
         ];
     }
 

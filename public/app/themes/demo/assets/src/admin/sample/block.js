@@ -1,5 +1,4 @@
-(function() {
-
+(function () {
   const { __ } = wp.i18n;
   const { registerBlockType } = wp.blocks;
   const { InspectorControls, InnerBlocks } = wp.editor;
@@ -12,25 +11,24 @@
     category: 'layout',
     attributes: {
       exampleValue: {
-        type: 'string'
+        type: 'string',
       },
       imageId: {
-        type: 'number'
-      }
+        type: 'number',
+      },
     },
     edit: onEdit,
-    save: onSave
+    save: onSave,
   });
 
   function onEdit(props) {
-
     /*
     HTML element
     */
     const exampleElement = el(
       'p',
       {
-        style: { color: 'blue' }
+        style: { color: 'blue' },
       },
       'This is a basic paragraph. You cannot edit its content, nor will it be saved to database.'
     );
@@ -38,35 +36,21 @@
     /*
     Input element
     */
-    const exampleInputControl = el(
-      TextControl,
-      {
-        label: __('Example input control', 'rig'),
-        value: props.attributes.exampleValue,
-        onChange: function(val) {
-          props.setAttributes({exampleValue: val});
-        }
+    const exampleInputControl = el(TextControl, {
+      label: __('Example input control', 'rig'),
+      value: props.attributes.exampleValue,
+      onChange: function (val) {
+        props.setAttributes({ exampleValue: val });
       },
-    );
+    });
 
     /*
     InnerBlocks
     */
-    const exampleInnerBlocks = el(
-      InnerBlocks,
-      {
-        allowedBlocks: [
-          'core/heading',
-          'core/paragraph',
-          'core/list',
-          'core/image'
-        ],
-        template: [
-          ['core/heading'],
-          ['core/paragraph']
-        ]
-      }
-    );
+    const exampleInnerBlocks = el(InnerBlocks, {
+      allowedBlocks: ['core/heading', 'core/paragraph', 'core/list', 'core/image'],
+      template: [['core/heading'], ['core/paragraph']],
+    });
 
     /*
     InspectorControls (lefthand sidebar)
@@ -75,32 +59,19 @@
       InspectorControls,
       null,
       el(
-        PanelBody, {
+        PanelBody,
+        {
           title: __('This is a panel body', 'rig'),
-          initialOpen: true
+          initialOpen: true,
         },
-        el(
-          PanelRow,
-          null,
-          el(
-            'p',
-            null,
-            'This is a paragraph in a panel row'
-          )
-        )
+        el(PanelRow, null, el('p', null, 'This is a paragraph in a panel row'))
       )
     );
 
-    return [
-      exampleElement,
-      exampleInputControl,
-      exampleInnerBlocks,
-      exampleInspectorControls
-    ];
+    return [exampleElement, exampleInputControl, exampleInnerBlocks, exampleInspectorControls];
   }
 
   function onSave(props) {
     return el(InnerBlocks.Content);
   }
-
-}());
+})();

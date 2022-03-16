@@ -90,9 +90,7 @@ export default {
       let filtered;
       if (this.searchTerms.length > 2) {
         filtered = this.allEvents.filter((element) => {
-          return element.name
-            .toLowerCase()
-            .includes(this.searchTerms.toLowerCase());
+          return element.name.toLowerCase().includes(this.searchTerms.toLowerCase());
         });
       } else {
         filtered = this.allEvents.slice(0);

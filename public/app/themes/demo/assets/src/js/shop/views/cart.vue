@@ -4,9 +4,7 @@
     <ul>
       <li v-for="item in $store.state.cartContents" :key="item.id">
         {{ item.title }}, price: {{ item.price }}
-        <button type="button" @click="removeFromCart(item.id)">
-          Remove from cart
-        </button>
+        <button type="button" @click="removeFromCart(item.id)">Remove from cart</button>
       </li>
     </ul>
   </div>
