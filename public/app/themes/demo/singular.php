@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 <?php get_template_part('global/templates/app-header'); ?>
 
+<mark><?= $tmpTemplateName ?? 'singular.php'; ?></mark>
+
 <main>
     <?php the_post(); ?>
     <article>
@@ -9,7 +11,7 @@
         <?php comments_template(); ?>
         <?php comment_form(); ?>
     </article>
-    <?php get_sidebar(); ?>
+    <?php get_sidebar('singular'); ?>
 </main>
 
 <?php get_template_part('global/templates/app-footer'); ?>

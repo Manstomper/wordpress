@@ -18,8 +18,8 @@ add_action('init', function () {
 
     register_taxonomy('event-type', 'event', [
         'labels' => [
-            'name' => __('Types', 'rig'),
-            'singular_name' => __('Type', 'rig'),
+            'name' => __('Event types', 'rig'),
+            'singular_name' => __('Event type', 'rig'),
         ],
         'hierarchical' => true,
         'show_in_rest' => true,

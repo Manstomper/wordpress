@@ -18,12 +18,17 @@ add_action('after_setup_theme', function () {
     // Sidebars
     add_action('widgets_init', function () {
         register_sidebar([
-            'name' => __('Sidebar', 'rig'),
-            'id' => 'rig_sidebar',
-            'before_widget' => '<aside>',
-            'after_widget' => '</aside>',
-            'before_title' => '<h2>',
-            'after_title' => '</h2>',
+            'name' => __('Front page header', 'rig'),
+            'id' => 'sidebar_home',
+            'before_widget' => '',
+            'after_widget' => '',
+        ]);
+
+        register_sidebar([
+            'name' => __('Content page sidebar', 'rig'),
+            'id' => 'sidebar_singular',
+            'before_widget' => '',
+            'after_widget' => '',
         ]);
     });
 });
