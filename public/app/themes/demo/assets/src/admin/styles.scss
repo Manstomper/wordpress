@@ -1,0 +1,10 @@
+.has-placeholder {
+  padding: 15px;
+  background-color: #eee;
+  border: 1px dashed #666;
+  text-align: center;
+
+  &::before {
+    content: "This is a placeholder block.";
+  }
+}

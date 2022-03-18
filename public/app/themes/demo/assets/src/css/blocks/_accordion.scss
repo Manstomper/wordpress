@@ -1,16 +1,20 @@
 .block-accordion {
-
   > button {
     display: flex;
+    align-items: center;
 
     &::before {
       content: "";
-      background-image: url('./../img/chevron.svg');
-      background-repeat: no-repeat;
-      background-position: center;
+      position: relative;
       width: 24px;
       height: 16px;
+      left: -2px;
+      margin-left: -10px;
+      background-image: url("./../img/chevron.svg");
+      background-repeat: no-repeat;
+      background-position: center;
       transform: rotate(90deg);
+      filter: invert(100%);
     }
 
     &[aria-expanded="true"]::before {
@@ -25,8 +29,6 @@
       display: block;
     }
 
-    > *:last-child {
-      margin-bottom: 0;
-    }
+    @include no-top-bottom-margin;
   }
 }

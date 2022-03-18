@@ -1,0 +1,7 @@
+.wp-block-image {
+  @include block-spacing;
+
+  figcaption {
+    margin: 0;
+  }
+}

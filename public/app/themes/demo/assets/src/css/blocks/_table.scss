@@ -1,0 +1,11 @@
+.wp-block-table {
+  @include block-spacing;
+
+  th,
+  td {
+    padding: 3px 5px 2px 0;
+  }
+  th {
+    text-align: left;
+  }
+}

@@ -1,10 +1,21 @@
+<?php
+$firstName = get_field('first_name');
+$lastName = get_field('last_name');
+$businessTitle = get_field('business_title');
+$email = get_field('email');
+$phone = get_field('phone');
+$role = get_field('role');
+?>
+
 <section class="block-person">
-    <?= get_field('first_name'); ?> <?= get_field('last_name'); ?><br>
-    <?= get_field('business_title'); ?>
-    <?php if (get_field('email')) { ?>
-        <br><a href="mailto:<?= get_field('email'); ?>"><?= get_field('email'); ?></a>
+    <?= $firstName . ' ' . $lastName . ($businessTitle ? ', ' . $businessTitle : ''); ?>
+    <?php if ($role) { ?>
+        <br><?= $role['label']; ?>
     <?php } ?>
-    <?php if (get_field('phone')) { ?>
-        <br><a href="tel:<?= str_replace(' ', '', get_field('phone')); ?>"><?= get_field('phone'); ?></a>
+    <?php if ($email) { ?>
+        <br><a href="mailto:<?= $email; ?>"><?= $email; ?></a>
+    <?php } ?>
+    <?php if ($phone) { ?>
+        <br><a href="tel:<?= str_replace(' ', '', $phone); ?>"><?= $phone; ?></a>
     <?php } ?>
 </section>

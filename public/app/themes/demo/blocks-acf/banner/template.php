@@ -12,15 +12,16 @@ $template = [
     ['core/button'],
 ];
 
-$imageId = get_field('image');
-$images = [
-    'medium' => wp_get_attachment_image_url($imageId, 'medium'),
-    'large' => wp_get_attachment_image_url($imageId, 'large'),
-];
+$imageId = get_field('image_id');
+$image = $imageId ? wp_get_attachment_image($imageId, 'large') : null;
 ?>
 
 <section class="block-banner">
-    <div class="image"></div>
+    <?php if ($image) { ?>
+        <div>
+            <?= $image; ?>
+        </div>
+    <?php } ?>
     <div>
         <InnerBlocks allowedBlocks="<?= esc_attr(wp_json_encode($allowedBlocks)); ?>" template="<?= esc_attr(wp_json_encode($template)); ?>" />
     </div>

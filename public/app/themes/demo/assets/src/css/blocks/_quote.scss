@@ -1,0 +1,12 @@
+.wp-block-quote {
+  > p:first-child::before {
+    content: '"';
+  }
+
+  > p:last-child::after,
+  > p:nth-last-child(2)::after {
+    content: '"';
+  }
+
+  @include no-top-bottom-margin;
+}

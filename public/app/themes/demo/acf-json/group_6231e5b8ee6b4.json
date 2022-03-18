@@ -95,6 +95,33 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_6234b2161ce9d",
+            "label": "Role",
+            "name": "role",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "administration": "Administration",
+                "sales": "Sales",
+                "designer": "Designer",
+                "developer": "Developer"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "array",
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -115,5 +142,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647438277
+    "modified": 1647620834
 }

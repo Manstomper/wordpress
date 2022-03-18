@@ -4,10 +4,16 @@
 <mark><?= $tmpTemplateName ?? 'archive-event.php'; ?></mark>
 
 <main>
+    <h1><?= rig_translate('Events'); ?></h1>
+
     <?php $terms = get_terms(['taxonomy' => 'event-type']); ?>
-    <?php foreach ($terms as $term) { ?>
-        <a href="<?= get_term_link($term->term_id, $term->taxonomy); ?>"><?= $term->name; ?></a>
-    <?php } ?>
+    <ul>
+        <?php foreach ($terms as $term) { ?>
+            <li>
+                <a href="<?= get_term_link($term->term_id, $term->taxonomy); ?>"><?= $term->name; ?></a>
+            </li>
+        <?php } ?>
+    </ul>
 
     <?php while (have_posts()) { ?>
         <?php the_post(); ?>

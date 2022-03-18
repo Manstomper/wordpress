@@ -13,7 +13,7 @@ add_action('init', function () {
         'delete_with_user' => false,
         'show_in_rest' => true,
         'exclude_from_search' => true,
-        'supports' => ['editor', 'thumbnail', 'custom-fields', 'revisions'],
+        'supports' => ['editor', 'title', 'custom-fields', 'revisions'],
         'template' => [
             ['acf/person'],
         ],

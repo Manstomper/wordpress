@@ -17,7 +17,7 @@ function rig_translate($string)
  */
 function rig_current_language()
 {
-    return function_exists('pll_current_language') ? pll_current_language() : frc_default_language();
+    return function_exists('pll_current_language') ? pll_current_language() : 'fi';
 }
 
 /**
@@ -29,11 +29,11 @@ function rig_get_blocks($postId)
     $postContent = get_post_field('post_content', $postId);
     $blocks = parse_blocks($postContent);
 
-    if (is_array($blocks)) {
-        return $blocks;
+    if (!is_array($blocks)) {
+        return [];
     }
 
-    return [];
+    return $blocks;
 }
 
 /**

@@ -1,27 +1,103 @@
 // Typography and global styles
 
-[class^='icon-']:before,
-[class*=' icon-']:before {
-  font-family: 'fontello';
-  font-style: normal;
-  font-weight: normal;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: 0.2em;
-  text-align: center;
-  font-variant: normal;
-  text-transform: none;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: $color-light;
+  color: $color-dark;
+  font-family: $font-main;
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@each $heading, $size in (h1: 30px, h2: 22px, h3: 20px, h4: 18px, h5: 16px, h6: 14px) {
+  #{$heading} {
+    margin: 0;
+    font-family: $font-side;
+    font-size: $size;
+    font-weight: 400;
+
+    @media screen and (min-width: $bp-medium) {
+      font-size: $size + 2px;
+    }
+  }
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
 }
 
 img {
   display: inline-block;
   max-width: 100%;
   height: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+figure {
+  margin: 0;
+}
+
+table {
+  margin: 0;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+pre {
+  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+button,
+input[type="submit"] {
+  @include button;
+}
+
+form {
+  margin: 0;
+}
+
+input,
+select,
+optgroup,
+textarea {
+  margin: 0;
+}
+
+// Layout
+
+main > article > * {
+  max-width: $max-width;
+  @include block-spacing;
+  outline: 1px dashed red;
+
+  &.alignwide {
+    max-width: $max-width-wide;
+  }
+
+  &.alignfull {
+    max-width: 100%;
+  }
 }
 
 // Focus indicators
@@ -33,28 +109,4 @@ input:active,
 button:focus,
 button:active {
   outline: 1px solid orange;
-}
-
-// Block Editor classes
-
-@each $align in (left, center, right) {
-  .has-text-align-#{$align} {
-    text-align: $align;
-  }
-}
-
-@each $slug, $size in (small: 16px, large: 36px) {
-  .has-#{$slug}-font-size {
-    font-size: $size;
-  }
-}
-
-@each $slug, $color in $theme-colors {
-  .has-#{$slug}-background-color {
-    background-color: $color;
-  }
-
-  .has-#{$slug}-color {
-    color: $color;
-  }
 }

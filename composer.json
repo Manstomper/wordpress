@@ -55,7 +55,8 @@
       "composer/installers": true,
       "johnpbloch/wordpress-core": true,
       "johnpbloch/wordpress-core-installer": true,
-      "ffraenz/private-composer-installer": true
+      "ffraenz/private-composer-installer": true,
+      "koodimonni/composer-dropin-installer": true
     }
   },
   "extra": {

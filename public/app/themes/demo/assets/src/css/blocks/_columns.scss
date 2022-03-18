@@ -1,0 +1,27 @@
+.wp-block-columns {
+  @include block-spacing;
+  @include no-top-bottom-margin;
+
+  &.is-style-collapse {
+    max-width: $max-width;
+
+    .wp-block-column {
+      padding: 0;
+
+      > * {
+        padding: {
+          right: $gutter;
+          left: $gutter;
+        }
+      }
+
+      > *:first-child {
+        padding-top: $gutter;
+      }
+
+      > *:last-child {
+        padding-bottom: $gutter;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.block-banner {
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  > div {
+    width: 50%;
+    flex-grow: 1;
+  }
+}

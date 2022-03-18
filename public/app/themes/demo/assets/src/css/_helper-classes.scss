@@ -1,0 +1,61 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+//
+// Animations
+//
+
+.shake {
+  animation: shake 0.3s;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25%,
+  75% {
+    transform: rotate(5deg);
+  }
+
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+//
+// Block Editor classes
+//
+
+@each $align in (left, center, right) {
+  .has-text-align-#{$align} {
+    text-align: $align;
+  }
+}
+
+@each $slug, $size in (small: 16px, large: 36px) {
+  .has-#{$slug}-font-size {
+    font-size: $size;
+  }
+}
+
+@each $slug, $color in $theme-colors {
+  .has-#{$slug}-background-color {
+    background-color: $color;
+  }
+
+  .has-#{$slug}-color {
+    color: $color;
+  }
+}

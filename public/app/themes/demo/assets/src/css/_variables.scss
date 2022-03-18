@@ -1,62 +1,75 @@
-// Content dimensions
+// Breakpoints
+$bp-small: 768px;
+$bp-medium: 992px;
+$bp-large: 1200px;
 
-$breakpoint-small: 768px;
-$breakpoint-medium: 992px;
-$breakpoint-large: 1200px;
+// Maximun width of content blocks
+$max-width: 840px;
+$max-width-wide: 1100px;
 
-$max-width: 900px;
-$gutter: 15px;
+// Left and right padding
+$gutter: 16px;
+
+// Space between content blocks
 $spacer: 30px;
 
 // Fonts
-
-@font-face {
-  font-family: 'fontello';
-  src: url('./../fonts/fontello/fontello.woff2') format('woff2'),
-    url('./../fonts/fontello/fontello.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+$font-main: "Open Sans", sans-serif;
+$font-side: "Lora", sans-serif;
 
 // Colors
-
-$light: #fff;
-$dark: #111;
-$grey20: #333;
-$grey40: #666;
-$grey60: #999;
-$grey80: #ccc;
-$primary: #afbf98;
-$secondary: #675a4b;
-$tertiary: #a39db6;
+$color-light: #fff;
+$color-dark: #111;
+$color-grey20: #333;
+$color-grey40: #666;
+$color-grey60: #999;
+$color-grey80: #ccc;
+$color-primary: #afbf98;
+$color-secondary: #675a4b;
+$color-tertiary: #a39db6;
 
 $theme-colors: (
-  'light': $light,
-  'dark': $dark,
-  'primary': $primary,
-  'secondary': $secondary,
-  'tertiary': $tertiary,
+  "light": $color-light,
+  "dark": $color-dark,
+  "primary": $color-primary,
+  "secondary": $color-secondary,
+  "tertiary": $color-tertiary,
 );
 
-// Animations
+//
+// Mixins
+//
 
-.shake {
-  animation: shake 0.3s;
-  transform: translate3d(0, 0, 0);
+@mixin button {
+  display: inline-block;
+  padding: 14px 26px;
+  background-color: $color-dark;
+  color: $color-light;
+  border: none;
+  border-radius: 0px;
+  font-size: inherit;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-light;
+    background-color: lighten(desaturate($color-dark, 10%), 15%);
+  }
 }
 
-@keyframes shake {
-  0%,
-  100% {
-    transform: rotate(0deg);
+@mixin block-spacing {
+  margin: 0 auto;
+}
+
+@mixin no-top-bottom-margin {
+  > *:first-child {
+    margin-top: 0;
   }
 
-  25%,
-  75% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
+  > *:last-child {
+    margin-bottom: 0;
   }
 }
