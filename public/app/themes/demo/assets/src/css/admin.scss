@@ -1,3 +1,13 @@
+@charset "UTF-8";
+
+// Theme core
+@import "variables";
+
+// Blocks
+@import "blocks/banner";
+@import "blocks/boxes";
+@import "blocks/cover";
+
 .has-placeholder {
   padding: 15px;
   background-color: #eee;

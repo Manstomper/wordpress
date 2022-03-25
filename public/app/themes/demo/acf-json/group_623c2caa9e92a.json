@@ -1,12 +1,12 @@
 {
-    "key": "group_6231f55844ff4",
-    "title": "Title",
+    "key": "group_623c2caa9e92a",
+    "title": "Flip order",
     "fields": [
         {
-            "key": "field_6231f55d887c0",
-            "label": "Title",
-            "name": "title",
-            "type": "text",
+            "key": "field_623c2cb7f2b61",
+            "label": "Flip order",
+            "name": "flip_order",
+            "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,11 +15,11 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Title...",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -27,12 +27,12 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/accordion"
+                "value": "acf\/banner"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "side",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -40,5 +40,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1648114323
+    "modified": 1648110921
 }

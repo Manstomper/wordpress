@@ -3,8 +3,17 @@
   align-items: center;
   text-align: center;
 
-  > div {
+  .image,
+  .text {
     width: 50%;
     flex-grow: 1;
+  }
+
+  .is-flipped {
+    order: 1;
+  }
+
+  .wp-block-button {
+    width: 100%;
   }
 }

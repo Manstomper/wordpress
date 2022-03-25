@@ -6,11 +6,11 @@ add_action('acf/init', function () {
     }
 
     acf_register_block([
-        'name' => 'banner',
-        'title' => __('Banner', 'rig'),
+        'name' => 'boxes',
+        'title' => __('Boxes', 'rig'),
         'description' => '',
         'category' => 'custom',
-        'icon' => 'slides',
+        'icon' => 'screenoptions',
         'mode' => 'preview',
         'supports' => [
             'mode' => false,

@@ -1,4 +1,10 @@
-<?php $persons = get_field('persons'); ?>
+<?php
+$persons = get_field('persons');
+
+if (!$persons || !is_array($persons)) {
+    return;
+}
+?>
 
 <section class="block-persons">
     <h2><?= rig_translate('Contact persons'); ?></h2>

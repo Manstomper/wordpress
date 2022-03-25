@@ -1,29 +1,29 @@
 <?php
 
-require_once __DIR__ . '/global/helpers.php';
-require_once __DIR__ . '/global/theme-settings.php';
-require_once __DIR__ . '/global/rest.php';
-require_once __DIR__ . '/global/polylang.php';
-require_once __DIR__ . '/global/admin.php';
+require_once __DIR__ . '/inc/helpers.php';
+require_once __DIR__ . '/inc/theme-settings.php';
+require_once __DIR__ . '/inc/rest.php';
+require_once __DIR__ . '/inc/polylang.php';
+require_once __DIR__ . '/inc/admin.php';
 
 /**
- * Event content type
+ * Content type: Event
  */
 require_once __DIR__ . '/content-types/event/setup.php';
 require_once __DIR__ . '/content-types/event/meta.php';
 
 /**
- * Person content type
+ * Content type: Person
  */
 require_once __DIR__ . '/content-types/person/setup.php';
 
 /**
- * ACF blocks
+ * Blocks
  */
-$blocksDir = opendir(__DIR__ . '/blocks-acf');
+$blockDir = opendir(__DIR__ . '/blocks');
 
-while (($dir = readdir($blocksDir)) !== false) {
+while (($dir = readdir($blockDir)) !== false) {
     if ($dir !== '.' && $dir !== '..') {
-        require_once __DIR__ . '/blocks-acf/' . $dir . '/config.php';
+        require_once __DIR__ . '/blocks/' . $dir . '/config.php';
     }
 }

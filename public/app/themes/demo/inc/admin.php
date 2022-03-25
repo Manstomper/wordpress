@@ -17,27 +17,6 @@ add_action('enqueue_block_editor_assets', function () {
 });
 
 /**
- * Register custom blocks
- */
-add_action('init', function () {
-    $blocks = [
-        'sample',
-    ];
-    $path = get_template_directory() . '/templates/blocks/';
-
-    foreach ($blocks as $blockName) {
-        register_block_type('rig/' . $blockName, [
-            'editor_script' => 'theme-editor-js',
-            'render_callback' => function ($attributes, $content) use ($path, $blockName) {
-                ob_start();
-                include $path . $blockName . '.php';
-                return ob_get_clean();
-            },
-        ]);
-    }
-});
-
-/**
  * Add custom block categories
  */
 add_filter('block_categories_all', function ($categories) {
@@ -55,7 +34,7 @@ add_filter('block_categories_all', function ($categories) {
  * Restrict available blocks for built-in post types
  */
 add_filter('allowed_block_types_all', function ($allowedTypes, $editorContext) {
-    $allowForAll = [
+    $allowedForAll = [
         'core/block',
         'core/columns',
         'core/column',
@@ -71,16 +50,48 @@ add_filter('allowed_block_types_all', function ($allowedTypes, $editorContext) {
         'acf/accordion',
     ];
 
-    if ($editorContext->post->post_type === 'post') {
-        return $allowForAll;
-    }
-
     if ($editorContext->post->post_type === 'page') {
-        return array_merge($allowForAll, [
+        return array_merge($allowedForAll, [
             'acf/banner',
-            'acf/posts',
+            'core/cover',
+            'acf/boxes',
         ]);
     }
 
+    // Keeping all blocks in demo theme in order to track potentially useful additions
     return $allowedTypes;
+    //return $allowedForAll;
 }, 11, 2);
+
+/**
+ * Default color palette
+ */
+add_action('after_setup_theme', function () {
+    add_theme_support('editor-color-palette', [
+        [
+            'name' => 'Dark',
+            'slug' => 'dark',
+            'color' => '#272932',
+        ],
+        [
+            'name' => 'Light',
+            'slug' => 'light',
+            'color' => '#fff',
+        ],
+        [
+            'name' => 'Primary',
+            'slug' => 'primary',
+            'color' => '#0f7173',
+        ],
+        [
+            'name' => 'Secondary',
+            'slug' => 'secondary',
+            'color' => '#f05d5e',
+        ],
+        [
+            'name' => 'Tertiary',
+            'slug' => 'Tertiary',
+            'color' => '#d8a47f',
+        ],
+    ]);
+});

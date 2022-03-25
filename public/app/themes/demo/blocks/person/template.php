@@ -8,7 +8,7 @@ $role = get_field('role');
 ?>
 
 <section class="block-person">
-    <?= $firstName . ' ' . $lastName . ($businessTitle ? ', ' . $businessTitle : ''); ?>
+    <?= $firstName; ?> <?= $lastName; ?><?= $businessTitle ? ', ' . $businessTitle : ''; ?>
     <?php if ($role) { ?>
         <br><?= $role['label']; ?>
     <?php } ?>

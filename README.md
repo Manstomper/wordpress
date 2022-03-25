@@ -3,10 +3,9 @@
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop)
 1. Clone this repository
 1. Open a terminal and cd into its directory
-1. Run `docker build . -f "$(pwd)/local/nginx/Dockerfile" -t rig/nginx:1.21.5 && docker build . -f "$(pwd)/local/php80/Dockerfile" -t rig/php:8.0.14-mysqli-gd-intl && docker build . -f "$(pwd)/local/php80/composer/Dockerfile" -t rig/composer:2.2.5-php8.0.14` (note that this is a one-time operation, and in the future these images will be served from a repository)
 1. Run `dev-init.sh`
 1. Prepare for a waiting game. Switch to the Docker Desktop app, click on the arrow next to the container and wait until composer is done (icon turns from green to grey) and npm install is done (log entry "webpack compiled successfully"). Hopefully we'll get a progress indication soon.
-1. Open http://localhost
+1. Open http://localhost:8100
 
 ## Now what?
 
@@ -14,8 +13,6 @@
 1. To continue working when containers are stopped, run `./dev.sh`
 1. To update composer packages, run `./dev-composer.update.sh`
 1. To update node packages, run `./dev-npm-update.sh`
-
-If you've cloned this repository, the project is most likely been set up in Google Cloud Kubernetes. To push changes to the cloud, run `./publish.sh`.
 
 ## Import and export a database dump
 
