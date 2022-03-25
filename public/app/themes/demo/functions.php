@@ -1,21 +1,23 @@
 <?php
 
+/**
+ * Global functions
+ */
 require_once __DIR__ . '/inc/helpers.php';
-require_once __DIR__ . '/inc/theme-settings.php';
+require_once __DIR__ . '/inc/settings.php';
 require_once __DIR__ . '/inc/rest.php';
-require_once __DIR__ . '/inc/polylang.php';
 require_once __DIR__ . '/inc/admin.php';
+require_once __DIR__ . '/inc/plugins/polylang.php';
 
 /**
  * Content type: Event
  */
-require_once __DIR__ . '/content-types/event/setup.php';
-require_once __DIR__ . '/content-types/event/meta.php';
+require_once __DIR__ . '/content-types/event/settings.php';
 
 /**
  * Content type: Person
  */
-require_once __DIR__ . '/content-types/person/setup.php';
+require_once __DIR__ . '/content-types/person/settings.php';
 
 /**
  * Blocks

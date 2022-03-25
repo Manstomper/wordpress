@@ -20,4 +20,8 @@ RUN apk update \
     && rm /usr/local/bin/phpdbg \
     && rm -rf /var/cache/*
 
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
 ADD ./local/php80/fpm.conf /usr/local/etc/php-fpm.d/zz-site.conf

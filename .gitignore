@@ -13,6 +13,7 @@ assets/dist
 public/vendor
 public/wp
 public/.htaccess
+public/app/languages
 public/app/plugins/*
 !public/app/plugins/.gitkeep
 public/app/mu-plugins/*/

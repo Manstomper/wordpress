@@ -1,7 +1,7 @@
 <?php
 $persons = get_field('persons');
 
-if (!$persons || !is_array($persons)) {
+if (!$persons) {
     return;
 }
 ?>

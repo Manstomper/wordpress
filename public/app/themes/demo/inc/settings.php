@@ -14,31 +14,22 @@ add_action('after_setup_theme', function () {
     register_nav_menus([
         'main' => __('Main menu', 'rig'),
     ]);
-
-    // Sidebars
-    add_action('widgets_init', function () {
-        register_sidebar([
-            'name' => __('Front page header', 'rig'),
-            'id' => 'sidebar_home',
-            'before_widget' => '',
-            'after_widget' => '',
-        ]);
-
-        register_sidebar([
-            'name' => __('Content page sidebar', 'rig'),
-            'id' => 'sidebar_singular',
-            'before_widget' => '',
-            'after_widget' => '',
-        ]);
-    });
 });
 
 /**
  * Add or remove features
  */
 add_action('init', function () {
+    // @FIXME doesn't work
     remove_post_type_support('post', 'comments');
     remove_post_type_support('page', 'comments');
+
+    // Remove all but the default image sizes
+    foreach (get_intermediate_image_sizes() as $size) {
+        if (!in_array($size, ['thumbnail', 'medium', 'large'])) {
+            remove_image_size($size);
+        }
+    }
 });
 
 /**

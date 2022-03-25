@@ -13,7 +13,7 @@ add_action('enqueue_block_editor_assets', function () {
     wp_enqueue_style('theme-editor', $path . '/admin.css');
     wp_enqueue_script('theme-editor', $path . '/admin.js', ['wp-editor', 'wp-blocks', 'wp-rich-text', 'wp-dom-ready', 'wp-edit-post']);
 
-    //wp_set_script_translations('theme-editor', 'rig', realpath(get_template_directory() . '/languages'));
+    wp_set_script_translations('theme-editor', 'rig', get_template_directory() . '/languages');
 });
 
 /**

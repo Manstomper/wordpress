@@ -39,7 +39,7 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
-    command: composer install --no-interaction
+    command: sh -c "composer install --no-interaction"
   node:
     image: node:$NODE_VERSION
     ports:

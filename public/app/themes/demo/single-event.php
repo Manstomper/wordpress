@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php get_template_part('global/templates/app-header'); ?>
 
-<mark><?= $tmpTemplateName ?? 'singular.php'; ?></mark>
+<mark><?= $tmpTemplateName ?? 'single-event.php'; ?></mark>
 
 <main>
     <?php the_post(); ?>
@@ -11,6 +11,7 @@
         <?php comments_template(); ?>
         <?php comment_form(); ?>
     </article>
+    <?php get_sidebar('event-footer'); ?>
 </main>
 
 <?php get_template_part('global/templates/app-footer'); ?>

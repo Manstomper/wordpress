@@ -25,3 +25,15 @@ add_action('init', function () {
         'show_in_rest' => true,
     ]);
 });
+
+/**
+ * Sidebars (formerly known as widget areas)
+ */
+add_action('widgets_init', function () {
+    register_sidebar([
+        'name' => __('Event footer', 'rig'),
+        'id' => 'event_footer',
+        'before_widget' => '',
+        'after_widget' => '',
+    ]);
+});

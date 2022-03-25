@@ -1,14 +1,13 @@
 <?php get_header(); ?>
 <?php get_template_part('templates/app-header'); ?>
 
+<?php global $wp_query; ?>
+
 <main>
-
-    <h1><?= __('Search', 'rig'); ?></h1>
-
-    <?php global $wp_query; ?>
+    <h1><?= rig_translate('Search'); ?></h1>
 
     <p>
-        <?= sprintf(_n('%s result for', '%s results for', $wp_query->found_posts, 'rig'), $wp_query->found_posts); ?>
+        <?= sprintf(rig_translate('%s result(s) for'), $wp_query->found_posts); ?>
         &quot;<?= get_search_query(); ?>&quot;.
     </p>
 
@@ -24,7 +23,6 @@
     <?php } ?>
 
     <?php get_search_form(); ?>
-
 </main>
 
 <?php get_template_part('templates/app-footer'); ?>

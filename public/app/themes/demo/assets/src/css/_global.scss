@@ -82,11 +82,14 @@ select,
 optgroup,
 textarea {
   margin: 0;
+  font-family: $font-main;
+  font-size: 16px;
 }
 
 // Layout
 
 main > article > * {
+  display: block;
   max-width: $max-width;
   @include block-spacing;
   outline: 1px dashed red;

@@ -18,8 +18,10 @@
     <?php while (have_posts()) { ?>
         <?php the_post(); ?>
         <article>
-            <h2><?php the_title(); ?></h2>
-            <time datetime="<?= get_the_date('Y-m-d H:i'); ?>"><?php the_date(); ?></time>
+            <header>
+                <h2><?php the_title(); ?></h2>
+                <time datetime="<?= get_the_date('Y-m-d H:i'); ?>"><?php the_date(); ?></time>
+            </header>
             <p>Event type: <?= implode(', ', wp_list_pluck(get_the_terms(null, 'event-type'), 'name')); ?></p>
             <?php the_excerpt(); ?>
             <a href="<?php the_permalink(); ?>"><?= rig_translate('Read more'); ?></a>

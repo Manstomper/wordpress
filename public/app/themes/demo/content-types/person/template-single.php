@@ -1,15 +1,12 @@
 <?php get_header(); ?>
 <?php get_template_part('global/templates/app-header'); ?>
 
-<mark><?= $tmpTemplateName ?? 'singular.php'; ?></mark>
+<mark><?= $tmpTemplateName ?? 'content-types/person/template-single.php'; ?></mark>
 
 <main>
     <?php the_post(); ?>
     <article>
-        <h1><?php the_title(); ?></h1>
         <?php the_content(); ?>
-        <?php comments_template(); ?>
-        <?php comment_form(); ?>
     </article>
 </main>
 

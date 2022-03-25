@@ -30,14 +30,14 @@
       {
         style: { color: 'blue' },
       },
-      'This is a basic paragraph. You cannot edit its content, nor will it be saved to database.'
+      'This is a static paragraph. You cannot edit its content, nor will it be saved to database.'
     );
 
     /*
     Input element
     */
     const exampleInputControl = el(TextControl, {
-      label: __('Example input control', 'rig'),
+      label: __('Sample block', 'rig'),
       value: props.attributes.exampleValue,
       onChange: function (val) {
         props.setAttributes({ exampleValue: val });
@@ -61,7 +61,7 @@
       el(
         PanelBody,
         {
-          title: __('This is a panel body', 'rig'),
+          title: 'This is a panel body',
           initialOpen: true,
         },
         el(PanelRow, null, el('p', null, 'This is a paragraph in a panel row'))

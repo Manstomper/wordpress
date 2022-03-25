@@ -68,7 +68,7 @@ add_filter('wp_kses_allowed_html', function ($tags) {
  * Widget for the admin dashboard
  */
 add_action('wp_dashboard_setup', function () {
-    wp_add_dashboard_widget('rig_dashboard', __('Hello', 'rig'), function () {
+    wp_add_dashboard_widget('rig_dashboard', 'Hello', function () {
         ob_start();
         echo '<p>I\'m a dashboard widget.</p>';
         echo ob_get_clean();
@@ -86,15 +86,4 @@ add_filter('single_template', function ($template) {
     }
 
     return $template;
-});
-
-/**
- * Add SVG to allowed file types in plupload (a client-side check is done before any server requests are sent)
- */
-add_filter('plupload_default_settings', function ($defaults) {
-    if (isset($defaults['filters']['mime_types'][0]['extensions'])) {
-        $defaults['filters']['mime_types'][0]['extensions'] .= ',svg';
-    }
-
-    return $defaults;
 });
