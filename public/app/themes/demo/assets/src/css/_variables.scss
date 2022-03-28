@@ -1,9 +1,7 @@
-// Breakpoints
 $bp-small: 768px;
 $bp-medium: 992px;
 $bp-large: 1200px;
 
-// Maximun width of content blocks
 $max-width: 840px;
 $max-width-wide: 1100px;
 
@@ -13,11 +11,9 @@ $gutter: 16px;
 // Space between content blocks
 $spacer: 30px;
 
-// Fonts
 $font-main: "Open Sans", sans-serif;
 $font-side: "Lora", sans-serif;
 
-// Colors
 $color-light: #fff;
 $color-dark: #272932;
 $color-grey20: #333;
@@ -61,15 +57,9 @@ $theme-colors: (
 }
 
 @mixin block-spacing {
-  margin: 0 auto;
-}
+  margin: 0 auto $spacer;
 
-@mixin no-top-bottom-margin {
-  > *:first-child {
-    margin-top: 0;
-  }
-
-  > *:last-child {
+  &:last-child {
     margin-bottom: 0;
   }
 }

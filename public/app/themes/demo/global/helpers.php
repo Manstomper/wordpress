@@ -21,28 +21,21 @@ function rig_current_language()
 }
 
 /**
- * Gets and parses blocks from post_content outside of a Loop
+ * Gets a named field outside the Block loop
  * There is no standard way of achieving this, so there's a theoretical possibility that something changes
  */
-function rig_get_blocks($postId)
+function rig_get_field($fieldName, $postId = null)
 {
     $postContent = get_post_field('post_content', $postId);
     $blocks = parse_blocks($postContent);
 
-    if (!is_array($blocks)) {
-        return [];
+    if (empty($blocks) || !is_array($blocks)) {
+        return '';
     }
 
-    return $blocks;
-}
-
-/**
- * Gets a named field from a parsed block
- * There is no standard way of achieving this, so there's a theoretical possibility that something changes
- */
-function rig_get_field($fieldName, $block)
-{
-    if (isset($block['attrs']['data'][$fieldName])) {
-        return $block['attrs']['data'][$fieldName];
+    for ($i = 0; $i < count($blocks); $i++) {
+        if (isset($blocks[$i]['attrs']['data'][$fieldName])) {
+            return $blocks[$i]['attrs']['data'][$fieldName];
+        }
     }
 }

@@ -25,12 +25,12 @@ function style_guide_str($amount = null)
 <article>
     <h1>Heading 1 <?= style_guide_str(); ?></h1>
 
-    <p>Paragraph: Lorem ipsum dolor <a href="#">sit amet consectetur adipiscing elit</a> duis dignissim <strong>massa vitae lacus</strong> hendrerit at aliquet elit <em>donec felis odio mollis</em> at mi at feugiat suscipit nisl suspendisse volutpat efficitur nisl ut condimentum est feugiat eu vivamus at diam aliquet sodales velit eu vulputate augue.</p>
+    <p><strong>Paragraph.</strong> Lorem ipsum dolor <a href="#">sit amet consectetur adipiscing elit</a> duis dignissim <strong>massa vitae lacus</strong> hendrerit at aliquet elit <em>donec felis odio mollis</em> at mi at feugiat suscipit nisl suspendisse volutpat efficitur nisl ut condimentum est feugiat eu vivamus at diam aliquet sodales velit eu vulputate augue.</p>
 
     <h2>Heading 2 <?= style_guide_str(); ?></h2>
 
     <ul>
-        <li>List, unordered</li>
+        <li><strong>List, unordered</strong></li>
         <?php for ($i = 1; $i <= 4; $i++) { ?>
             <li><?= style_guide_str('range'); ?></li>
         <?php } ?>
@@ -39,21 +39,13 @@ function style_guide_str($amount = null)
     <h3>Heading 3 <?= style_guide_str(); ?></h3>
 
     <ol>
-        <li>List, ordered</li>
+        <li><strong>List, ordered</strong></li>
         <?php for ($i = 1; $i <= 4; $i++) { ?>
             <li><?= style_guide_str('range'); ?></li>
         <?php } ?>
     </ol>
 
     <h4>Heading 4 <?= style_guide_str(); ?></h4>
-
-    <blockquote class="wp-block-quote">
-        <p>Quote <?= style_guide_str('short'); ?>.</p>
-        <p><?= style_guide_str(); ?>.</p>
-        <cite>Firstname Lastname</cite>
-    </blockquote>
-
-    <h5>Heading 5 <?= style_guide_str(); ?></h5>
 
     <figure class="wp-block-table">
         <table>
@@ -81,6 +73,22 @@ function style_guide_str($amount = null)
                 </tr>
             </tfoot>
         </table>
+    </figure>
+
+    <h5>Heading 5 <?= style_guide_str(); ?></h5>
+
+    <blockquote class="wp-block-quote">
+        <p><strong>Quote.</strong> <?= style_guide_str('short'); ?>.</p>
+        <p><?= style_guide_str(); ?>.</p>
+        <cite>Firstname Lastname</cite>
+    </blockquote>
+
+    <figure class="wp-block-pullquote">
+        <blockquote>
+            <p><strong>Pullquote.</strong> <?= style_guide_str('short'); ?>.</p>
+            <p><?= style_guide_str(); ?>.</p>
+            <cite>Firstname Lastname</cite>
+        </blockquote>
     </figure>
 
     <h6>Heading 6 <?= style_guide_str(); ?></h6>

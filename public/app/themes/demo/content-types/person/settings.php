@@ -20,16 +20,3 @@ add_action('init', function () {
         'template_lock' => 'all',
     ]);
 });
-
-/**
- * Use a custom template
- */
-add_filter('single_template', function ($template) {
-    global $post;
-
-    if ($post->post_type === 'person') {
-        $template = __DIR__ . '/template-single.php';
-    }
-
-    return $template;
-});

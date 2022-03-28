@@ -9,7 +9,16 @@
     flex-grow: 1;
   }
 
-  .is-flipped {
+  &.is-style-image-above {
+    display: block;
+
+    .image,
+    .text {
+      width: 100%;
+    }
+  }
+
+  &.is-style-image-right .image {
     order: 1;
   }
 

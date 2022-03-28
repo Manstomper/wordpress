@@ -26,18 +26,26 @@ body {
     font-weight: 400;
 
     @media screen and (min-width: $bp-medium) {
-      font-size: $size + 2px;
+      font-size: $size + 4px;
     }
   }
 }
 
 p {
   margin: 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 ul,
 ol {
   margin: 0;
+
+  li:not(:last-child) {
+    margin-bottom: calc($spacer / 2);
+  }
 }
 
 img {
@@ -47,6 +55,7 @@ img {
   margin: 0;
   padding: 0;
   border: none;
+  vertical-align: middle;
 }
 
 figure {
@@ -58,7 +67,7 @@ table {
 }
 
 blockquote {
-  margin: 0;
+  @include block-spacing;
   padding: 0;
 }
 
@@ -84,15 +93,20 @@ textarea {
   margin: 0;
   font-family: $font-main;
   font-size: 16px;
+  line-height: 1.4;
 }
 
 // Layout
 
+main > header,
+main > footer,
+main > aside,
+main > nav,
 main > article > * {
   display: block;
   max-width: $max-width;
   @include block-spacing;
-  outline: 1px dashed red;
+  outline: 1px dashed #999;
 
   &.alignwide {
     max-width: $max-width-wide;

@@ -1,8 +1,6 @@
 <?php get_header(); ?>
 <?php get_template_part('global/templates/app-header'); ?>
 
-<mark><?= $tmpTemplateName ?? 'singular.php'; ?></mark>
-
 <main>
     <?php the_post(); ?>
     <article>

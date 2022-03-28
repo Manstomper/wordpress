@@ -1,7 +1,8 @@
-node_modules
+/public/app/themes/*/assets/node_modules
 /public/app/themes/*/assets/src
 /*.sh
 .env
+.env.local
 .gitkeep
 .dockerignore
 README.md

@@ -13,7 +13,7 @@ services:
       - "$NGINX_PORT:8080"
     volumes:
       # Makes app code visible to nginx by bind-mounting local directory onto container
-      - ./public:/public
+      - ./:/app-mount
     # Making sure that certain services are running before starting this one
     depends_on:
       - php
@@ -23,8 +23,9 @@ services:
     environment:
       - WP_ENV=development
       - WP_HOME=$WP_HOME
+      - ACF_PRO_LICENSE_KEY=$ACF_PRO_LICENSE_KEY
     volumes:
-      - ./public:/public
+      - ./:/app-mount
   mysql:
     image: mariadb:$MARIADB_VERSION
     environment:
@@ -32,14 +33,6 @@ services:
       - MYSQL_DATABASE=wordpress
     volumes:
       - wpdb:/var/lib/mysql
-  composer:
-    image: rig/composer:$COMPOSER_VERSION
-    environment:
-      - ACF_KEY=$ACF_PRO_LICENSE_KEY
-    volumes:
-      - ./:/app
-    working_dir: /app
-    command: sh -c "composer install --no-interaction"
   node:
     image: node:$NODE_VERSION
     ports:

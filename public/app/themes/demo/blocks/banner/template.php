@@ -12,16 +12,20 @@ $template = [
 ];
 
 $image = get_field('image_id') ? wp_get_attachment_image(get_field('image_id'), 'large') : null;
-$imageClasses = ['image'];
+$classes = ['block-banner'];
 
-if (get_field('flip_order')) {
-    $imageClasses[] = 'is-flipped';
+if (!empty($attributes['align'])) {
+    $classes[] = 'align' . $attributes['align'];
+}
+
+if (!empty($attributes['className'])) {
+    $classes[] = $attributes['className'];
 }
 ?>
 
-<section class="block-banner">
+<section class="<?= implode(' ', $classes); ?>">
     <?php if ($image) { ?>
-        <div class="<?= implode(' ', $imageClasses); ?>">
+        <div class="image">
             <?= $image; ?>
         </div>
     <?php } ?>

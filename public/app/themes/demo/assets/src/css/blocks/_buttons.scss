@@ -1,3 +1,7 @@
-.wp-block-button__link {
-  @include button;
+.wp-block-button {
+  @include block-spacing;
+
+  &__link {
+    @include button;
+  }
 }

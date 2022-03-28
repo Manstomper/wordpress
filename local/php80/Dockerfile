@@ -20,8 +20,13 @@ RUN apk update \
     && rm /usr/local/bin/phpdbg \
     && rm -rf /var/cache/*
 
+# Composer
+COPY --from=composer:2.2.5 /usr/bin/composer /usr/local/bin/composer
+
+# WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
 
+# Config
 ADD ./local/php80/fpm.conf /usr/local/etc/php-fpm.d/zz-site.conf

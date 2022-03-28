@@ -47,3 +47,19 @@
     color: $color;
   }
 }
+
+.dev-notice {
+  position: fixed;
+  z-index: 99;
+  top: 100px;
+  left: 0;
+  padding: 10px;
+  background-color: #eee;
+  border: 1px dashed #999;
+  font-size: 14px;
+  line-height: 20px;
+
+  &:hover {
+    opacity: .5;
+  }
+}

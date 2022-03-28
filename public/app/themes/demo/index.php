@@ -1,8 +1,6 @@
 <?php get_header(); ?>
 <?php get_template_part('global/templates/app-header'); ?>
 
-<mark><?= $tmpTemplateName ?? 'index.php'; ?></mark>
-
 <main>
     <?php while (have_posts()) { ?>
         <?php the_post(); ?>

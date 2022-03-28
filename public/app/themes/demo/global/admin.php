@@ -95,3 +95,32 @@ add_action('after_setup_theme', function () {
         ],
     ]);
 });
+
+/**
+ * Remove dashboard meta boxes
+ */
+add_action('wp_dashboard_setup', function () {
+    remove_action('welcome_panel', 'wp_welcome_panel');
+    remove_meta_box('dashboard_site_health', 'dashboard', 'normal');
+    remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
+    remove_meta_box('dashboard_activity', 'dashboard', 'normal');
+    remove_meta_box('dashboard_primary', 'dashboard', 'side');
+    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+});
+
+/**
+ * Messages in development mode
+ */
+add_action('wp_print_footer_scripts', function() {
+    $messages = [];
+
+    if (defined('WP_ENV') && WP_ENV === 'development') {
+        $messages[] = 'Development site';
+    }
+
+    $messages = apply_filters('rig_dev_notice', $messages);
+
+    if (!empty($messages)) {
+        echo '<div class="dev-notice"><p>' . implode('</p></p>', $messages) . '</p></div>';
+    }
+});

@@ -1,20 +1,6 @@
 <?php
 
 /**
- * Main query modifications
- */
-add_action('pre_get_posts', function ($q) {
-    if (is_admin() || !$q->is_main_query()) {
-        return;
-    }
-
-    // Show only 2 posts on search page to demonstrate pagination
-    if ($q->is_search()) {
-        $q->set('posts_per_page', 2);
-    }
-});
-
-/**
  * Remove id attribute to prevent duplicates when the same menu is printed twice
  */
 add_filter('wp_nav_menu_items', function ($items) {

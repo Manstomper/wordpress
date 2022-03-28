@@ -1,6 +1,5 @@
 .wp-block-columns {
   @include block-spacing;
-  @include no-top-bottom-margin;
 
   &.is-style-collapse {
     max-width: $max-width;
