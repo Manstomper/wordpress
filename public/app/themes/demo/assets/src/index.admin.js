@@ -1,10 +1,7 @@
-function importAll(r) {
-  r.keys().forEach(r);
-}
-
 // Editor JS and CSS
-importAll(require.context('./js/admin/', false, /\.js/));
+import './js/admin/unregister.js';
+import './js/admin/formats-styles.js';
 import './css/admin.scss';
 
 // Blocks
-importAll(require.context('./js/admin/blocks/', true, /\.js/));
+import './js/admin/blocks/sample.js';

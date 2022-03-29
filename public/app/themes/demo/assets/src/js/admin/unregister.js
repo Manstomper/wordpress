@@ -1,8 +1,11 @@
+/* global wp */
+
 /**
  * Unregister blocks, formats and styles
  */
 wp.domReady(function () {
-  const { unregisterBlockType, getBlockTypes, unregisterBlockStyle } = wp.blocks;
+  //const { unregisterBlockType, getBlockTypes, unregisterBlockStyle } = wp.blocks;
+  const { unregisterBlockStyle } = wp.blocks;
   const richText = wp.richText;
 
   /*const allowedBlocks = [

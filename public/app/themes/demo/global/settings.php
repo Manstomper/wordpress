@@ -9,6 +9,7 @@ add_action('after_setup_theme', function () {
     add_theme_support('post-thumbnails');
     add_theme_support('align-wide');
     remove_theme_support('core-block-patterns');
+    remove_theme_support('block-templates');
 
     // Navigation menus
     register_nav_menus([
@@ -21,8 +22,8 @@ add_action('after_setup_theme', function () {
  */
 add_action('init', function () {
     // @FIXME doesn't work
-    remove_post_type_support('post', 'comments');
-    remove_post_type_support('page', 'comments');
+    //remove_post_type_support('post', 'comments');
+    //remove_post_type_support('page', 'comments');
 
     // Remove all but the default image sizes
     foreach (get_intermediate_image_sizes() as $size) {

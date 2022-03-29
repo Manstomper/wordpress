@@ -1,4 +1,6 @@
+//
 // Typography and global styles
+//
 
 *,
 *::before,
@@ -96,7 +98,18 @@ textarea {
   line-height: 1.4;
 }
 
+a:focus,
+a:active,
+input:focus,
+input:active,
+button:focus,
+button:active {
+  outline: 1px solid orange;
+}
+
+//
 // Layout
+//
 
 main > header,
 main > footer,
@@ -115,15 +128,4 @@ main > article > * {
   &.alignfull {
     max-width: 100%;
   }
-}
-
-// Focus indicators
-
-a:focus,
-a:active,
-input:focus,
-input:active,
-button:focus,
-button:active {
-  outline: 1px solid orange;
 }

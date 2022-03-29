@@ -1,3 +1,5 @@
+/* global wp */
+
 /**
  * Custom styles and formats
  */

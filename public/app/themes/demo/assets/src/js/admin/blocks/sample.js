@@ -1,3 +1,5 @@
+/* global wp */
+
 (function () {
   const { __ } = wp.i18n;
   const { registerBlockType } = wp.blocks;
@@ -71,7 +73,7 @@
     return [exampleElement, exampleInputControl, exampleInnerBlocks, exampleInspectorControls];
   }
 
-  function onSave(props) {
+  function onSave() {
     return el(InnerBlocks.Content);
   }
 })();
