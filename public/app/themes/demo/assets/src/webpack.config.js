@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
@@ -61,6 +62,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new ESLintPlugin(),
+    new StylelintPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),

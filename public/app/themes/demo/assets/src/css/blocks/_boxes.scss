@@ -7,19 +7,11 @@
     h2 {
       text-align: inherit;
     }
-
-    /*> :first-child:not(.wp-block-cover) {
-      padding-top: 30px;
-    }
-
-    > :last-child:not(.wp-block-cover) {
-      padding-bottom: 30px;
-    }*/
   }
 
   .wp-block-cover {
     height: 100%;
     min-height: 30px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgb(0 0 0 / 20%);
   }
 }

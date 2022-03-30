@@ -1,6 +1,4 @@
-//
 // Typography and global styles
-//
 
 *,
 *::before,
@@ -70,6 +68,7 @@ table {
 
 blockquote {
   @include block-spacing;
+
   padding: 0;
 }
 
@@ -107,18 +106,17 @@ button:active {
   outline: 1px solid orange;
 }
 
-//
 // Layout
-//
 
 main > header,
 main > footer,
 main > aside,
 main > nav,
 main > article > * {
+  @include block-spacing;
+
   display: block;
   max-width: $max-width;
-  @include block-spacing;
   outline: 1px dashed #999;
 
   &.alignwide {
