@@ -71,7 +71,7 @@ add_action('after_setup_theme', function () {
         [
             'name' => 'Dark',
             'slug' => 'dark',
-            'color' => '#272932',
+            'color' => '#222',
         ],
         [
             'name' => 'Light',
@@ -81,17 +81,17 @@ add_action('after_setup_theme', function () {
         [
             'name' => 'Primary',
             'slug' => 'primary',
-            'color' => '#0f7173',
+            'color' => '#dee0e6',
         ],
         [
             'name' => 'Secondary',
             'slug' => 'secondary',
-            'color' => '#f05d5e',
+            'color' => '#ff6150',
         ],
         [
             'name' => 'Tertiary',
             'slug' => 'Tertiary',
-            'color' => '#d8a47f',
+            'color' => '#134e6f',
         ],
     ]);
 });

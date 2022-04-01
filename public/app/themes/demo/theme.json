@@ -19,7 +19,6 @@
       "duotone": [],
       "gradients": [],
       "link": false,
-      "palette": [],
       "text": false
     },
     "layout": {
@@ -27,7 +26,7 @@
       "wideSize": "1100px"
     },
     "spacing": {
-      "blockGap": true,
+      "blockGap": false,
       "margin": false,
       "padding": false,
       "units": []
@@ -46,6 +45,21 @@
     },
     "custom": {},
     "blocks": {
+      "core/group": {
+        "color": {
+          "background": true
+        }
+      },
+      "core/columns": {
+        "color": {
+          "background": true
+        }
+      },
+      "core/column": {
+        "color": {
+          "background": true
+        }
+      },
       "core/button": {
         "border": {
           "radius": false
@@ -58,32 +72,17 @@
           "style": false
         }
       },
-      "core/column": {
-        "color": {
-          "background": true,
-          "custom": false,
-          "customDuotone": false,
-          "customGradient": false,
-          "defaultGradients": false,
-          "defaultPalette": true,
-          "duotone": [],
-          "gradients": [],
-          "link": false,
-          "palette": [],
-          "text": false
-        }
-      },
       "core/cover": {
         "color": {
           "palette": [
             {
-              "name": "Dark",
-              "slug": "dark",
-              "color": "#272932"
+              "name": "Black",
+              "slug": "black",
+              "color": "#000"
             },
             {
-              "name": "Light",
-              "slug": "light",
+              "name": "White",
+              "slug": "white",
               "color": "#fff"
             }
           ]

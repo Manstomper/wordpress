@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -9,7 +11,9 @@
   overflow: hidden;
 }
 
-// Animations
+/*
+Animations
+*/
 
 .shake {
   animation: shake 0.3s;
@@ -32,14 +36,17 @@
   }
 }
 
-// Block Editor classes
+/*
+Block Editor classes
+*/
 
 @each $slug, $color in $theme-colors {
   .has-#{$slug}-background-color {
-    background-color: $color;
+    background-color: map.get($color, "background");
+    color: map.get($color, "text");
   }
 
   .has-#{$slug}-color {
-    color: $color;
+    color: map.get($color, "text");
   }
 }

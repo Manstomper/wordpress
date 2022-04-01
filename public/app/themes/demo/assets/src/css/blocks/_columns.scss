@@ -2,24 +2,11 @@
   @include block-spacing;
 
   &.is-style-collapse {
-    max-width: $max-width;
-
-    .wp-block-column {
-      padding: 0;
+    > .wp-block-column[style*="flex-basis"] {
+      margin-left: 0;
 
       > * {
-        padding: {
-          right: $gutter;
-          left: $gutter;
-        }
-      }
-
-      > *:first-child {
-        padding-top: $gutter;
-      }
-
-      > *:last-child {
-        padding-bottom: $gutter;
+        padding: $gutter;
       }
     }
   }

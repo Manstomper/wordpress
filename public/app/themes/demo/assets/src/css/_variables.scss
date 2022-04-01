@@ -21,20 +21,35 @@ $font-side: "Lora", sans-serif;
 
 // Colors
 $color-light: #fff;
-$color-dark: #272932;
+$color-dark: #222;
+$color-primary: #dee0e6;
+$color-secondary: #ff6150;
+$color-tertiary: #134e6f;
 $color-grey20: #333;
 $color-grey40: #666;
 $color-grey60: #999;
 $color-grey80: #ccc;
-$color-primary: #0f7173;
-$color-secondary: #f05d5e;
-$color-tertiary: #d8a47f;
 $theme-colors: (
-  "light": $color-light,
-  "dark": $color-dark,
-  "primary": $color-primary,
-  "secondary": $color-secondary,
-  "tertiary": $color-tertiary,
+  "light": (
+    "background": $color-light,
+    "text": $color-dark,
+  ),
+  "dark": (
+    "background": $color-dark,
+    "text": $color-light,
+  ),
+  "primary": (
+    "background": $color-primary,
+    "text": $color-dark,
+  ),
+  "secondary": (
+    "background": $color-secondary,
+    "text": $color-light,
+  ),
+  "tertiary": (
+    "background": $color-tertiary,
+    "text": $color-light,
+  ),
 );
 
 // Mixins
