@@ -37,7 +37,7 @@ add_action('init', function () {
  * Enqueue scripts and styles
  */
 add_action('wp_enqueue_scripts', function () {
-    if (!defined('WP_ENV') || WP_ENV == "production") {
+    if (!defined('WP_ENV') || WP_ENV !== 'development') {
         $uri = get_stylesheet_directory_uri() . '/assets/dist';
     } else {
         $uri = 'http://localhost:3000';
@@ -123,3 +123,11 @@ add_action('init', function () {
         return $urls;
     }, 10, 2);
 });
+
+add_filter('wp_get_attachment_image', function($html) {
+    if (!$html) {
+        return '<img src="' . get_stylesheet_directory_uri() . '/img/placeholder.png' . '" alt="Placeholder">';
+    }
+
+    return $html;
+}, 11, 5);

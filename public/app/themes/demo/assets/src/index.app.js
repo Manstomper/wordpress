@@ -1,4 +1,5 @@
 // JS
+import './js/admin/dev-notice';
 import './js/examples/main.js';
 import './js/events/main.js';
 import './js/newest-articles/main.js';

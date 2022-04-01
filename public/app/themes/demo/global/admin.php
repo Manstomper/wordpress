@@ -121,6 +121,6 @@ add_action('wp_print_footer_scripts', function() {
     $messages = apply_filters('rig_dev_notice', $messages);
 
     if (!empty($messages)) {
-        echo '<div class="dev-notice"><p>' . implode('</p></p>', $messages) . '</p></div>';
+        echo '<div id="rig-dev-notice" class="dev-notice"><p>' . implode('</p></p>', $messages) . '</p></div>';
     }
 });
