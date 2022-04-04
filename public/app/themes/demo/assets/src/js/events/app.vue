@@ -28,36 +28,37 @@ export default {
     return {
       perPage: 5,
       page: 1,
-      pages: 0,
       allEvents: [],
       searchTerms: '',
     };
   },
   computed: {
-    events() {
-      let filtered;
-      if (this.searchTerms.length > 2) {
-        filtered = this.allEvents.filter((element) => {
+    filteredEvents() {
+      if (this.searchTerms.length < 3) {
+        return this.allEvents.slice(0);
+      } else {
+        return this.allEvents.filter((element) => {
           return element.title
             .toLowerCase()
             .includes(this.searchTerms.toLowerCase());
         });
-      } else {
-        filtered = this.allEvents.slice(0);
       }
-      /*this.pages = Math.ceil(filtered.length / this.perPage);
-      if (this.page > this.pages) {
-        this.page = 1;
-      }*/
-      let pages = Math.ceil(filtered.length / this.perPage);
-      let page = this.page;
-      if (this.page > pages) {
-        page = 1;
-      }
-      let startIndex = (page - 1) * this.perPage;
-      let endIndex = startIndex + this.perPage;
-      return filtered.slice(startIndex, endIndex);
     },
+    events() {
+      let startIndex = (this.page - 1) * this.perPage;
+      let endIndex = startIndex + this.perPage;
+      return this.filteredEvents.slice(startIndex, endIndex);
+    },
+    pages() {
+      return Math.ceil(this.filteredEvents.length / this.perPage);
+    },
+  },
+  watch: {
+    searchTerms(value) {
+      if (value.length >= 3 && this.page > this.pages) {
+        this.page = 1;
+      }
+    }
   },
   mounted() {
     this.getEvents();
