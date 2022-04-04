@@ -7,7 +7,7 @@ new Swiper('.block-posts .swiper', {
   modules: [Navigation],
   createElements: true,
   navigation: true,
-  slidesPerView: 1,
+  slidesPerView: 3,
   spaceBetween: 16,
   breakpoints: {
     768: {

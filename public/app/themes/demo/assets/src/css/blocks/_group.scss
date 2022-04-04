@@ -1,0 +1,11 @@
+.wp-block-group {
+  &.is-style-centered {
+    > * {
+      text-align: center;
+    }
+
+    .wp-block-buttons {
+      justify-content: center;
+    }
+  }
+}

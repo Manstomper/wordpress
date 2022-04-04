@@ -1,12 +1,12 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import Products from './views/products.vue';
-import Product from './views/product.vue';
-import Cart from './views/cart.vue';
+import ShopProducts from './views/shop-products.vue';
+import ShopProduct from './views/shop-product.vue';
+import ShopCart from './views/shop-cart.vue';
 
 const routes = [
-  { path: '/', component: Products, props: true },
-  { path: '/product/:id', component: Product, name: 'product' },
-  { path: '/cart', component: Cart },
+  { path: '/', component: ShopProducts, props: true },
+  { path: '/product/:id', component: ShopProduct, name: 'product' },
+  { path: '/cart', component: ShopCart },
 ];
 
 const router = createRouter({

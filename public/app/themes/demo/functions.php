@@ -13,6 +13,7 @@ require_once __DIR__ . '/global/plugins/polylang.php';
  * Content type: Event
  */
 require_once __DIR__ . '/content-types/event/settings.php';
+require_once __DIR__ . '/content-types/event/rest.php';
 
 /**
  * Content type: Person

@@ -1,6 +1,4 @@
 {
-  "extends": "eslint:recommended",
-  "rules": {},
   "parserOptions": {
     "ecmaVersion": 2015,
     "sourceType": "module",
@@ -9,5 +7,12 @@
   "env": {
     "es6": true,
     "browser": true
+  },
+  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended"],
+  "plugins": ["vue"],
+  "rules": {
+    "vue/html-self-closing": 0,
+    "vue/max-attributes-per-line": 0,
+    "vue/singleline-html-element-content-newline": 0
   }
 }

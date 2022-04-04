@@ -50,7 +50,12 @@
     InnerBlocks
     */
     const exampleInnerBlocks = el(InnerBlocks, {
-      allowedBlocks: ['core/heading', 'core/paragraph', 'core/list', 'core/image'],
+      allowedBlocks: [
+        'core/heading',
+        'core/paragraph',
+        'core/list',
+        'core/image',
+      ],
       template: [['core/heading'], ['core/paragraph']],
     });
 
@@ -70,7 +75,12 @@
       )
     );
 
-    return [exampleElement, exampleInputControl, exampleInnerBlocks, exampleInspectorControls];
+    return [
+      exampleElement,
+      exampleInputControl,
+      exampleInnerBlocks,
+      exampleInspectorControls,
+    ];
   }
 
   function onSave() {

@@ -15,7 +15,7 @@ $q = new \WP_Query([
 
 <section class="block-posts">
     <h2><?= get_field('title'); ?></h2>
-    <div class="swiper">
+    <div id="<?= $attributes['id']; ?>" class="swiper">
         <div class="swiper-wrapper">
             <?php while ($q->have_posts()) { ?>
                 <?php $q->the_post(); ?>

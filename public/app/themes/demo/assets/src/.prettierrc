@@ -1,6 +1,6 @@
 {
-  "maxWidth": 100,
-  "printWidth": 100,
+  "maxWidth": 80,
+  "printWidth": 80,
   "proseWrap": "preserve",
   "singleQuote": false,
   "tabWidth": 2,

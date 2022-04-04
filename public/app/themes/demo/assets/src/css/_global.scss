@@ -20,8 +20,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@each $heading, $size in (h1: 30px, h2: 22px, h3: 20px, h4: 18px, h5: 16px, h6: 14px) {
-  #{$heading} {
+$headings: (
+  "h1": 30px,
+  "h2": 22px,
+  "h3": 20px,
+  "h4": 18px,
+  "h5": 16px,
+  "h6": 14px,
+);
+
+@each $tag, $size in $headings {
+  #{$tag} {
     margin: 0;
     font-family: $font-side;
     font-size: $size;
@@ -31,6 +40,11 @@ body {
       font-size: $size + 4px;
     }
   }
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
 }
 
 p {
@@ -121,7 +135,6 @@ main > article > * {
 
   display: block;
   max-width: $max-width;
-  outline: 1px dashed #999;
 
   &.alignwide {
     max-width: $max-width-wide;

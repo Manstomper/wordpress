@@ -98,7 +98,7 @@ function style_guide_str($amount = null)
         <div class="wp-block-button"><a class="wp-block-button__link" href="#">Lorem ipsum</a></div>
     </div>
 
-    <?php $image = '<figure class="wp-block-image size-large"><a href="http://localhost:8100/app/uploads/2022/03/bird.jpg"><img loading="lazy" width="1024" height="682" data-id="102" src="http://localhost:8100/app/uploads/2022/03/bird-1024x682.jpg" alt="" /></a><figcaption>Image with caption</figcaption></figure>'; ?>
+    <?php $image = '<figure class="wp-block-image size-large"><a href="/app/themes/demo/img/placeholder.png"><img loading="lazy" width="1024" height="682" data-id="102" src="/app/themes/demo/img/placeholder.png" /></a><figcaption>Image with caption</figcaption></figure>'; ?>
 
     <h2>Image</h2>
     <?= $image; ?>
@@ -137,7 +137,7 @@ function style_guide_str($amount = null)
 
     <section class="block-banner">
         <div class="image">
-            <img src="http://localhost:8100/app/uploads/2022/03/flowers-1024x683.jpg" alt="Flowers" />
+            <img src="/app/themes/demo/img/placeholder.png" alt="Placeholder" />
         </div>
         <div class="text">
             <h2>Banner with image</h2>
@@ -145,5 +145,27 @@ function style_guide_str($amount = null)
             <div class="wp-block-button"><a class="wp-block-button__link" href="#">asdf</a></div>
         </div>
     </section>
+
+    <div class="wp-block-group has-background has-primary-background-color is-style-centered">
+        <h2>Posts</h2>
+        <p><?= style_guide_str(); ?></p>
+        <section class="block-posts">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <?php for ($i = 1; $i <= 10; $i++) { ?>
+                        <a class="swiper-slide" href="http://localhost:8100/sample-page/">
+                            <article>
+                                <div class="image"><img src="/app/themes/demo/img/placeholder.png" alt="Placeholder"></div>
+                                <p><?= style_guide_str('short'); ?></p>
+                            </article>
+                        </a>
+                    <?php } ?>
+                </div>
+            </div>
+        </section>
+        <div class="wp-block-buttons">
+            <div class="wp-block-button has-custom-width wp-block-button__width-50"><a class="wp-block-button__link" href="#">All posts</a></div>
+        </div>
+    </div>
 
 </article>

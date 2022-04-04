@@ -14,5 +14,10 @@ module.exports = merge(prodConfig, {
   watchOptions: {
     poll: 1000,
   },
-  plugins: [new ESLintPlugin(), new StylelintPlugin()],
+  plugins: [
+    new ESLintPlugin({
+      extensions: ['js', 'vue'],
+    }),
+    new StylelintPlugin(),
+  ],
 });

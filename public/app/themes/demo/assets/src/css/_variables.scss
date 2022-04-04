@@ -1,5 +1,9 @@
 @use "sass:color" as color;
 
+/*
+Variables
+*/
+
 // Breakpoints
 $bp-small: 768px;
 $bp-medium: 992px;
@@ -22,37 +26,43 @@ $font-side: "Lora", sans-serif;
 // Colors
 $color-light: #fff;
 $color-dark: #222;
-$color-primary: #dee0e6;
-$color-secondary: #ff6150;
-$color-tertiary: #134e6f;
-$color-grey20: #333;
-$color-grey40: #666;
-$color-grey60: #999;
-$color-grey80: #ccc;
+$color-primary: #ddd;
+$color-secondary: #bbb;
+$color-tertiary: #444;
+$color-link: #1f65de;
+$color-link-light: color.adjust($color-link, $lightness: 35%);
 $theme-colors: (
   "light": (
     "background": $color-light,
     "text": $color-dark,
+    "link": $color-link,
   ),
   "dark": (
     "background": $color-dark,
     "text": $color-light,
+    "link": $color-link-light,
   ),
   "primary": (
     "background": $color-primary,
     "text": $color-dark,
+    "link": $color-link,
   ),
   "secondary": (
     "background": $color-secondary,
-    "text": $color-light,
+    "text": $color-dark,
+    "link": $color-link,
   ),
   "tertiary": (
     "background": $color-tertiary,
     "text": $color-light,
+    "link": $color-link-light,
   ),
 );
 
-// Mixins
+/*
+Mixins
+*/
+
 @mixin button {
   display: inline-block;
   padding: 14px 26px;
@@ -69,7 +79,11 @@ $theme-colors: (
   &:focus,
   &:active {
     color: $color-light;
-    background-color: color.adjust(color.adjust($color-dark, $saturation: -10%), $lightness: 15%);
+    background-color: color.adjust($color-dark, $saturation: -10%, $lightness: 15%);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
   }
 }
 

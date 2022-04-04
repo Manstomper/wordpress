@@ -8,8 +8,8 @@ function rig_rest_posts(\WP_REST_Request $request)
     $args = [
         'post_status' => 'publish',
         'ignore_sticky_posts' => true,
-        'post_type' => ['page', 'post', 'rig_post'],
-        'posts_per_page' => $request->get_param('perPage') ?? 9,
+        'post_type' => $request->get_param('postType') ?? 'post',
+        'posts_per_page' => $request->get_param('perPage') ?? 6,
         'orderby' => $request->get_param('orderBy') ?? 'date',
         'order' => $request->get_param('order') ?? 'DESC',
     ];
@@ -47,19 +47,21 @@ function rig_rest_posts(\WP_REST_Request $request)
         'posts' => [],
     ];
 
-    $taxonomy = $request->get_param('taxonomy') ?? 'category';
+    $taxonomy = $request->get_param('taxonomy');
 
     while ($q->have_posts()) {
         $q->the_post();
 
-        $terms = get_the_terms(get_the_ID(), $taxonomy);
+        if ($taxonomy) {
+            $terms = get_the_terms(get_the_ID(), $taxonomy);
 
-        if ($terms && !is_wp_error($terms)) {
-            foreach ($terms as &$term) {
-                $term = $term->name;
+            if ($terms && !is_wp_error($terms)) {
+                foreach ($terms as &$term) {
+                    $term = $term->name;
+                }
+            } else {
+                $terms = [];
             }
-        } else {
-            $terms = [];
         }
 
         $results['posts'][] = [
@@ -68,7 +70,7 @@ function rig_rest_posts(\WP_REST_Request $request)
             'date' => get_the_date(),
             'excerpt' => has_excerpt() ? get_the_excerpt() : '',
             'link' => get_the_permalink(),
-            'terms' => $terms,
+            'terms' => $terms ?? [],
         ];
     }
 

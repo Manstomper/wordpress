@@ -44,6 +44,10 @@ Block Editor classes
   .has-#{$slug}-background-color {
     background-color: map.get($color, "background");
     color: map.get($color, "text");
+
+    a:not(.wp-block-button__link) {
+      color: map.get($color, "link");
+    }
   }
 
   .has-#{$slug}-color {

@@ -2,7 +2,7 @@
 import './js/admin/dev-notice';
 import './js/examples/main.js';
 import './js/events/main.js';
-import './js/newest-articles/main.js';
+import './js/posts/main.js';
 import './js/shop/main.js';
 import './js/toggle.js';
 import './js/swiper.js';

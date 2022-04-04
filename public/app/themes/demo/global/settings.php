@@ -4,10 +4,11 @@
  * Add or remove features
  */
 add_action('after_setup_theme', function () {
+    // Localization
     load_theme_textdomain('rig', get_template_directory() . '/languages');
 
+    // Add and remove features
     add_theme_support('post-thumbnails');
-    add_theme_support('align-wide');
     remove_theme_support('core-block-patterns');
     remove_theme_support('block-templates');
 
@@ -18,14 +19,9 @@ add_action('after_setup_theme', function () {
 });
 
 /**
- * Add or remove features
+ * Remove all but the default image sizes
  */
 add_action('init', function () {
-    // @FIXME doesn't work
-    //remove_post_type_support('post', 'comments');
-    //remove_post_type_support('page', 'comments');
-
-    // Remove all but the default image sizes
     foreach (get_intermediate_image_sizes() as $size) {
         if (!in_array($size, ['thumbnail', 'medium', 'large'])) {
             remove_image_size($size);

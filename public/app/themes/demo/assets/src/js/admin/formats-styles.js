@@ -19,6 +19,18 @@ wp.domReady(function () {
     },
   ]);
 
+  registerBlockStyle('core/group', [
+    {
+      name: 'default',
+      label: __('Default', 'rig'),
+      isDefault: true,
+    },
+    {
+      name: 'centered',
+      label: __('Center', 'rig'),
+    },
+  ]);
+
   registerBlockStyle('acf/banner', [
     {
       name: 'image-left',
