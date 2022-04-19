@@ -15,49 +15,42 @@ body {
   color: $color-dark;
   font-family: $font-main;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 22px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 $headings: (
   "h1": 30px,
-  "h2": 22px,
+  "h2": 24px,
   "h3": 20px,
-  "h4": 18px,
-  "h5": 16px,
-  "h6": 14px,
+  "h4": 17px,
+  "h5": 15px,
+  "h6": 12px,
 );
 
 @each $tag, $size in $headings {
   #{$tag} {
-    margin: 0;
+    @include element-spacing;
     font-family: $font-side;
     font-size: $size;
+    line-height: calc($size + 6px);
     font-weight: 400;
 
     @media screen and (min-width: $bp-medium) {
       font-size: $size + 4px;
+      line-height: calc($size + 10px);
     }
   }
 }
 
-a {
-  color: $color-link;
-  text-decoration: none;
-}
-
 p {
-  margin: 0;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  @include element-spacing;
 }
 
 ul,
 ol {
-  margin: 0;
+  @include element-spacing;
 
   li:not(:last-child) {
     margin-bottom: calc($spacer / 2);
@@ -84,12 +77,14 @@ table {
 }
 
 blockquote {
-  @include block-spacing;
+  @include element-spacing;
 
   padding: 0;
 }
 
 pre {
+  @include element-spacing;
+
   font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
   font-size: 12px;
   line-height: 18px;
@@ -101,17 +96,23 @@ input[type="submit"] {
 }
 
 form {
-  margin: 0;
+  @include element-spacing;
 }
 
 input,
 select,
 optgroup,
 textarea {
-  margin: 0;
+  @include element-spacing;
+
   font-family: $font-main;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 22px;
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
 }
 
 a:focus,
@@ -131,7 +132,7 @@ main > footer,
 main > aside,
 main > nav,
 main > article > * {
-  @include block-spacing;
+  @include component-spacing;
 
   display: block;
   max-width: $max-width;

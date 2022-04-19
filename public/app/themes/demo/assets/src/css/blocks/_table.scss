@@ -1,9 +1,10 @@
 .wp-block-table {
-  @include block-spacing;
+  @include component-spacing;
 
   th,
   td {
-    padding: 3px 5px 2px 0;
+    padding: 6px;
+    border: 1px solid #ccc;
   }
 
   th {

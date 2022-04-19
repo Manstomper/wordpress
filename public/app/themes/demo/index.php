@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<?php get_template_part('global/templates/app-header'); ?>
+<?php get_template_part('templates/app-header'); ?>
 
 <main>
     <?php while (have_posts()) { ?>
@@ -13,5 +13,5 @@
     <?php the_posts_pagination(); ?>
 </main>
 
-<?php get_template_part('global/templates/app-footer'); ?>
+<?php get_template_part('templates/app-footer'); ?>
 <?php get_footer(); ?>

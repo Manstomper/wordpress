@@ -1,5 +1,5 @@
 .wp-block-button {
-  @include block-spacing;
+  @include component-spacing;
 
   &__link {
     @include button;

@@ -1,11 +1,10 @@
 // JS
-import './js/admin/dev-notice';
-import './js/examples/main.js';
+import './admin/dev-notice.js';
 import './js/events/main.js';
+import './js/examples/main.js';
 import './js/posts/main.js';
-import './js/shop/main.js';
-import './js/toggle.js';
 import './js/swiper.js';
+import './js/toggle.js';
 
 // CSS
 import './css/main.scss';

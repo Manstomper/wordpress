@@ -1,7 +1,7 @@
 // Editor JS and CSS
-import './js/admin/unregister.js';
-import './js/admin/formats-styles.js';
-import './css/admin.scss';
+import './admin/unregister.js';
+import './admin/formats-styles.js';
+import './admin/editor.scss';
 
 // Blocks
-import './js/admin/blocks/sample.js';
+import './admin/blocks/sample.js';

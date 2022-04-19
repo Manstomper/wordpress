@@ -1,7 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -11,14 +10,6 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '..', 'dist'),
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        test: /app\.js/,
-      }),
-    ],
   },
   module: {
     rules: [

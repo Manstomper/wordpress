@@ -1,5 +1,5 @@
 .wp-block-image {
-  @include block-spacing;
+  @include component-spacing;
 
   figcaption {
     margin: 0;

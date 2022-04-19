@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-@import "variables";
-@import "blocks/banner";
-@import "blocks/boxes";
-@import "blocks/cover";
+@import "./../css/variables";
+@import "./../css/blocks/banner";
+@import "./../css/blocks/boxes";
+@import "./../css/blocks/cover";
 
 .block-editor-block-styles {
   &__item {

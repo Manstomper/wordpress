@@ -1,5 +1,5 @@
 .wp-block-columns {
-  @include block-spacing;
+  @include component-spacing;
 
   &.is-style-collapse {
     > .wp-block-column[style*="flex-basis"] {

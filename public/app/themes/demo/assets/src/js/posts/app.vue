@@ -1,23 +1,27 @@
 <template>
-  <div class="posts">
-    <div v-if="isLoading" class="loading">Loading&hellip;</div>
-    <h2>Posts</h2>
-    <p>This is an example vue3 app that gets latest posts.</p>
-    <PostCategories @set-category="(id) => setCategory(id)" />
-    <ul>
-      <li v-for="post in posts" :key="post.id">
-        <a :href="post.link">
-          {{ post.title }}
-        </a>
-      </li>
-    </ul>
-    <PageNav
-      :per-page="perPage"
-      :page="page"
-      :pages="pages"
-      @set-age="(page) => getPosts(page)"
-    />
-  </div>
+  <h2 ref="anchor">Vue3 example</h2>
+  <p>This app gets the latest posts. It fetches 5 posts at a time.</p>
+
+  <div v-if="isLoading" class="loading">Loading&hellip;</div>
+
+  <PostCategories @set-category="(id) => setCategory(id)" />
+
+  <ul v-if="posts.length">
+    <li v-for="post in posts" :key="post.id">
+      <a :href="post.link">
+        {{ post.title }}
+      </a>
+    </li>
+  </ul>
+
+  <p v-if="!posts.length && !isLoading">No results</p>
+
+  <PageNav
+    :per-page="perPage"
+    :page="page"
+    :pages="pages"
+    @set-page="(pg) => setPage(pg)"
+  />
 </template>
 
 <script>
@@ -34,20 +38,27 @@ export default {
       page: 1,
       pages: 0,
       selectedCategoryId: null,
+      observer: false,
+      anchorInView: false,
       isLoading: false,
     };
   },
   mounted() {
     this.getPosts();
+    this.observer = new IntersectionObserver((entry) => {
+      this.anchorInView = entry[0].isIntersecting;
+    }).observe(this.$refs.anchor);
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
   },
   methods: {
     setCategory(id) {
       this.selectedCategoryId = id;
       this.getPosts();
     },
-    getPosts(page = 1) {
+    getPosts() {
       this.isLoading = true;
-      this.page = page;
       axios
         .post('/wp-json/rig/posts', this.getRequestParams())
         .then((response) => {
@@ -76,6 +87,12 @@ export default {
         };
       }
       return params;
+    },
+    setPage(pg) {
+      this.page = pg;
+      if (!this.anchorInView) {
+        this.$refs.anchor.scrollIntoView();
+      }
     },
   },
 };

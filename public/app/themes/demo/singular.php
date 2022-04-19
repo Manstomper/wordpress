@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<?php get_template_part('global/templates/app-header'); ?>
+<?php get_template_part('templates/app-header'); ?>
 
 <main>
     <?php the_post(); ?>
@@ -11,5 +11,5 @@
     </article>
 </main>
 
-<?php get_template_part('global/templates/app-footer'); ?>
+<?php get_template_part('templates/app-footer'); ?>
 <?php get_footer(); ?>

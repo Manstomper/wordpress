@@ -59,8 +59,8 @@ add_filter('allowed_block_types_all', function ($allowedTypes, $editorContext) {
     }
 
     // Keeping all blocks in demo theme in order to track potentially useful additions
+    // return $allowedForAll;
     return $allowedTypes;
-    //return $allowedForAll;
 }, 11, 2);
 
 /**
@@ -106,21 +106,4 @@ add_action('wp_dashboard_setup', function () {
     remove_meta_box('dashboard_activity', 'dashboard', 'normal');
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-});
-
-/**
- * Messages in development mode
- */
-add_action('wp_print_footer_scripts', function() {
-    $messages = [];
-
-    if (defined('WP_ENV') && WP_ENV === 'development') {
-        $messages[] = 'Development site';
-    }
-
-    $messages = apply_filters('rig_dev_notice', $messages);
-
-    if (!empty($messages)) {
-        echo '<div id="rig-dev-notice" class="dev-notice"><p>' . implode('</p></p>', $messages) . '</p></div>';
-    }
 });
