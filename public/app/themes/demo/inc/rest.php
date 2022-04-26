@@ -5,11 +5,17 @@
  */
 function rig_rest_posts(\WP_REST_Request $request)
 {
+    $perPage = (int) $request->get_param('perPage');
+
+    if ($perPage < 1 || $perPage > 100) {
+        $perPage = 6;
+    }
+
     $args = [
         'post_status' => 'publish',
         'ignore_sticky_posts' => true,
         'post_type' => $request->get_param('postType') ?? 'post',
-        'posts_per_page' => $request->get_param('perPage') ?? 6,
+        'posts_per_page' => $perPage,
         'orderby' => $request->get_param('orderBy') ?? 'date',
         'order' => $request->get_param('order') ?? 'DESC',
     ];

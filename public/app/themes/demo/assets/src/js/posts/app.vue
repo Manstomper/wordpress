@@ -1,12 +1,42 @@
+<script setup>
+import { ref } from 'vue';
+import { usePostQuery } from './../vue-use/query';
+import { useObserver } from './../vue-use/observer';
+import PageNav from './../vue-components/page-nav.vue';
+import PostCategories from './components/post-categories.vue';
+
+const data = ref({
+  perPage: 3,
+  page: 1,
+  taxonomy: 'category',
+  taxonomyTerm: null,
+});
+
+const { posts, foundPosts } = usePostQuery('/wp-json/rig/posts', data);
+
+const anchor = ref({});
+const anchorInView = useObserver(anchor);
+
+function setPage(pg) {
+  data.value.page = pg;
+  if (!anchorInView.value) {
+    anchor.value.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function setTaxonomyTerm(term) {
+  data.value.taxonomyTerm = term;
+  data.value.page = 1;
+}
+</script>
+
 <template>
-  <h2 ref="anchor">Vue3 example</h2>
-  <p>This app gets the latest posts. It fetches 5 posts at a time.</p>
+  <h2 ref="anchor">Vue3: Posts</h2>
 
-  <div v-if="isLoading" class="loading">Loading&hellip;</div>
+  <PostCategories @set-category="(term) => setTaxonomyTerm(term)" />
 
-  <PostCategories @set-category="(id) => setCategory(id)" />
-
-  <ul v-if="posts.length">
+  <p v-if="!foundPosts">No results</p>
+  <ul v-else>
     <li v-for="post in posts" :key="post.id">
       <a :href="post.link">
         {{ post.title }}
@@ -14,86 +44,10 @@
     </li>
   </ul>
 
-  <p v-if="!posts.length && !isLoading">No results</p>
-
   <PageNav
-    :per-page="perPage"
-    :page="page"
-    :pages="pages"
+    :per-page="data.perPage"
+    :page="data.page"
+    :item-count="foundPosts"
     @set-page="(pg) => setPage(pg)"
-  />
+  ></PageNav>
 </template>
-
-<script>
-import PostCategories from './components/post-categories.vue';
-import PageNav from './../vue-components/page-nav.vue';
-import axios from 'axios';
-
-export default {
-  components: { PostCategories, PageNav },
-  data() {
-    return {
-      posts: [],
-      perPage: 5,
-      page: 1,
-      pages: 0,
-      selectedCategoryId: null,
-      observer: false,
-      anchorInView: false,
-      isLoading: false,
-    };
-  },
-  mounted() {
-    this.getPosts();
-    this.observer = new IntersectionObserver((entry) => {
-      this.anchorInView = entry[0].isIntersecting;
-    }).observe(this.$refs.anchor);
-  },
-  beforeUnmount() {
-    this.observer.disconnect();
-  },
-  methods: {
-    setCategory(id) {
-      this.selectedCategoryId = id;
-      this.getPosts();
-    },
-    getPosts() {
-      this.isLoading = true;
-      axios
-        .post('/wp-json/rig/posts', this.getRequestParams())
-        .then((response) => {
-          this.isLoading = false;
-          if (response.data) {
-            this.pages = Math.ceil(response.data.foundPosts / this.perPage);
-            this.posts = response.data.posts;
-          }
-        })
-        .catch((error) => {
-          this.isLoading = false;
-          console.debug(error);
-        });
-    },
-    getRequestParams() {
-      const params = {
-        perPage: this.perPage,
-        page: this.page,
-        taxonomy: 'category',
-      };
-      if (this.selectedCategoryId) {
-        params.taxQuery = {
-          taxonomy: 'category',
-          field: 'id',
-          terms: this.selectedCategoryId,
-        };
-      }
-      return params;
-    },
-    setPage(pg) {
-      this.page = pg;
-      if (!this.anchorInView) {
-        this.$refs.anchor.scrollIntoView();
-      }
-    },
-  },
-};
-</script>

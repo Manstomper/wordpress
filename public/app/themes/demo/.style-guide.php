@@ -6,7 +6,7 @@
         font-size: 16px;
     }
 
-    article>*:hover {
+    article > *:hover {
         outline: 1px dashed #666;
     }
 </style>
@@ -32,7 +32,6 @@ function style_guide_str($amount = null)
 <article>
     <div data-app="events" class="events"></div>
     <div data-app="posts" class="posts"></div>
-    <div data-app="examples"></div>
 
     <h1>Heading 1 <?= style_guide_str('short'); ?></h1>
 
