@@ -5,10 +5,6 @@
         background-color: #eee;
         font-size: 16px;
     }
-
-    article > *:hover {
-        outline: 1px dashed #666;
-    }
 </style>
 
 <?php
@@ -30,6 +26,7 @@ function style_guide_str($amount = null)
 }
 ?>
 <article>
+
     <div data-app="events" class="events"></div>
     <div data-app="posts" class="posts"></div>
 
@@ -103,7 +100,6 @@ function style_guide_str($amount = null)
         </blockquote>
     </figure>
 
-    <h2 class="rig-style-guide">Buttons</h2>
     <div class="wp-block-buttons">
         <div class="wp-block-button"><a class="wp-block-button__link" href="#">Buttons</a></div>
         <div class="wp-block-button"><a class="wp-block-button__link" href="#">Lorem ipsum</a></div>
@@ -111,23 +107,20 @@ function style_guide_str($amount = null)
 
     <?php $image = '<figure class="wp-block-image size-large"><a href="/app/themes/demo/img/placeholder.png"><img loading="lazy" width="1024" height="682" data-id="102" src="/app/themes/demo/img/placeholder.png" /></a><figcaption>Image caption</figcaption></figure>'; ?>
 
-    <h2 class="rig-style-guide">Image</h2>
     <?= $image; ?>
 
-    <h2 class="rig-style-guide">Gallery</h2>
     <figure class="wp-block-gallery has-nested-images columns-default is-cropped">
         <?= $image . $image . $image . $image . $image; ?>
         <figcaption class="blocks-gallery-caption">Gallery caption</figcaption>
     </figure>
 
-    <h2 class="rig-style-guide">Columns</h2>
     <div class="wp-block-columns">
         <div class="wp-block-column" style="flex-basis:33.33%">
-            <h2>Heading</h2>
+            <h2>Columns</h2>
             <p><?= style_guide_str(); ?></p>
         </div>
         <div class="wp-block-column" style="flex-basis:66.66%">
-            <h3>Heading</h3>
+            <h2>Heading</h2>
             <p><?= style_guide_str(); ?></p>
         </div>
     </div>
@@ -162,7 +155,7 @@ function style_guide_str($amount = null)
     </section>
 
     <h2 class="rig-style-guide">Posts</h2>
-    <div class="wp-block-group has-background has-primary-background-color is-style-centered">
+    <div class="wp-block-group is-style-centered">
         <h2>Heading</h2>
         <p><?= style_guide_str(); ?></p>
         <section class="block-posts">
@@ -183,5 +176,33 @@ function style_guide_str($amount = null)
             <div class="wp-block-button has-custom-width wp-block-button__width-50"><a class="wp-block-button__link" href="#">Button</a></div>
         </div>
     </div>
+
+    <h2 class="rig-style-guide">Boxes</h2>
+    <section class="block-boxes">
+        <h2>Heading</h2>
+        <div class="wp-block-columns">
+            <div class="wp-block-column has-primary-background-color has-background">
+                <h3>Heading</h3>
+                <p><?= style_guide_str('short'); ?>.</p>
+                <div class="wp-container-626a81bc9d97e wp-block-buttons">
+                    <div class="wp-block-button"><a class="wp-block-button__link" href="#">Button</a></div>
+                </div>
+            </div>
+            <div class="wp-block-column has-secondary-background-color has-background">
+                <h3>Heading</h3>
+                <p><?= style_guide_str('short'); ?>.</p>
+                <div class="wp-container-626a81bc9d97e wp-block-buttons">
+                    <div class="wp-block-button"><a class="wp-block-button__link" href="#">Button</a></div>
+                </div>
+            </div>
+            <div class="wp-block-column has-tertiary-background-color has-background">
+                <h3>Heading</h3>
+                <p><?= style_guide_str('short'); ?>.</p>
+                <div class="wp-container-626a81bc9d97e wp-block-buttons">
+                    <div class="wp-block-button"><a class="wp-block-button__link" href="#">Button</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </article>

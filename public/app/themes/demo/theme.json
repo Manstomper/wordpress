@@ -87,6 +87,11 @@
             }
           ]
         }
+      },
+      "acf/banner": {
+        "color": {
+          "background": true
+        }
       }
     }
   },

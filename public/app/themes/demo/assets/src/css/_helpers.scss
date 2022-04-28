@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:color";
 
 .sr-only {
   position: absolute;
@@ -47,6 +48,18 @@ Block Editor classes
 
     a:not(.wp-block-button__link) {
       color: map.get($color, "link");
+    }
+
+    .wp-block-button__link {
+      background-color: map.get($color, "button");
+      color: map.get($color, "text");
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: color.adjust(map.get($color, "button"), $lightness: -10%);
+        color: map.get($color, "text");
+      }
     }
   }
 

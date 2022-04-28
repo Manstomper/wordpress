@@ -5,8 +5,12 @@
 
   .image,
   .text {
-    width: 50%;
     flex-grow: 1;
+    width: 50%;
+  }
+
+  .text {
+    padding: $gutter;
   }
 
   &.is-style-image-above {
@@ -20,9 +24,5 @@
 
   &.is-style-image-right .image {
     order: 1;
-  }
-
-  .wp-block-button {
-    width: 100%;
   }
 }

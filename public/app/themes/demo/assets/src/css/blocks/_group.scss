@@ -1,4 +1,8 @@
 .wp-block-group {
+  > * {
+    @include element-spacing;
+  }
+
   &.is-style-centered {
     > * {
       text-align: center;

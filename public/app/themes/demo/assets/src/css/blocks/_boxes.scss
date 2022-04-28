@@ -1,9 +1,11 @@
 .block-boxes {
-  h2 {
+  > h2 {
     text-align: center;
   }
 
   .wp-block-column {
+    padding: 15px;
+
     h2 {
       text-align: inherit;
     }

@@ -14,7 +14,8 @@ window.addEventListener('load', function load() {
       ' .dev-notice::before { content: "\\00D7"; position: absolute; top: 10px; left: 12px; font-family: sans-serif; font-size: 16px; line-height: 1; }' +
       ' .dev-notice.is-collapsed { width: 34px; height: 34px; padding: 0; }' +
       ' .dev-notice.is-collapsed > * { display: none; }' +
-      ' .dev-notice.is-collapsed::before { content: "+"; }'
+      ' .dev-notice.is-collapsed::before { content: "+"; }' +
+      ' .dev-notice p { margin: 0; }'
   );
   el.appendChild(css);
 

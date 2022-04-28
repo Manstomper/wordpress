@@ -90,7 +90,7 @@ add_action('after_setup_theme', function () {
         ],
         [
             'name' => 'Tertiary',
-            'slug' => 'Tertiary',
+            'slug' => 'tertiary',
             'color' => '#134e6f',
         ],
     ]);

@@ -1,5 +1,11 @@
 .wp-block-columns {
-  @include component-spacing;
+  .wp-block-column > * {
+    @include element-spacing;
+  }
+
+  &:not(.is-not-stacked-on-mobile) > .wp-block-column:not(:first-child) {
+    margin-left: $gutter;
+  }
 
   &.is-style-collapse {
     > .wp-block-column[style*="flex-basis"] {

@@ -26,9 +26,9 @@ $font-side: "Lora", sans-serif;
 // Colors
 $color-light: #fff;
 $color-dark: #222;
-$color-primary: #ddd;
-$color-secondary: #bbb;
-$color-tertiary: #444;
+$color-primary: #E7D7C1;
+$color-secondary: #735751;
+$color-tertiary: #BF4342;
 $color-link: #1f65de;
 $color-link-light: color.adjust($color-link, $lightness: 35%);
 $theme-colors: (
@@ -36,26 +36,31 @@ $theme-colors: (
     "background": $color-light,
     "text": $color-dark,
     "link": $color-link,
+    "button": $color-dark,
   ),
   "dark": (
     "background": $color-dark,
     "text": $color-light,
     "link": $color-link-light,
+    "button": $color-light,
   ),
   "primary": (
     "background": $color-primary,
     "text": $color-dark,
     "link": $color-link,
+    "button": color.adjust($color-primary, $lightness: -15%),
   ),
   "secondary": (
     "background": $color-secondary,
-    "text": $color-dark,
-    "link": $color-link,
+    "text": $color-light,
+    "link": $color-link-light,
+    "button": color.adjust($color-secondary, $lightness: -15%),
   ),
   "tertiary": (
     "background": $color-tertiary,
     "text": $color-light,
     "link": $color-link-light,
+    "button": color.adjust($color-tertiary, $lightness: -15%),
   ),
 );
 
@@ -65,6 +70,7 @@ Mixins
 
 @mixin button {
   display: inline-block;
+  margin: 0;
   padding: 14px 26px;
   background-color: $color-dark;
   color: $color-light;
@@ -87,27 +93,14 @@ Mixins
   }
 }
 
-@mixin component-spacing {
-  margin: 0 auto calc($spacer / 1.5);
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  @media screen and (min-width: $bp-medium) {
-    margin-bottom: $spacer;
-  }
-}
-
 @mixin element-spacing {
-  margin: 0 0 calc($spacer / 2);
-  margin: 0;
+  margin: 0 0 calc($spacer / 4);
 
   &:last-child {
     margin-bottom: 0;
   }
 
   @media screen and (min-width: $bp-medium) {
-    margin-bottom: calc($spacer / 1.5);
+    margin-bottom: calc($spacer / 2);
   }
 }

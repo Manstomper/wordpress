@@ -24,6 +24,7 @@
 
   > div {
     display: none;
+    padding: $gutter;
 
     &.is-open {
       display: block;

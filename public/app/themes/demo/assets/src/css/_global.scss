@@ -23,15 +23,16 @@ body {
 $headings: (
   "h1": 30px,
   "h2": 24px,
-  "h3": 20px,
-  "h4": 17px,
-  "h5": 15px,
+  "h3": 18px,
+  "h4": 16px,
+  "h5": 14px,
   "h6": 12px,
 );
 
 @each $tag, $size in $headings {
   #{$tag} {
     @include element-spacing;
+
     font-family: $font-side;
     font-size: $size;
     line-height: calc($size + 6px);
@@ -53,7 +54,7 @@ ol {
   @include element-spacing;
 
   li:not(:last-child) {
-    margin-bottom: calc($spacer / 2);
+    margin-bottom: 8px;
   }
 }
 
@@ -113,6 +114,11 @@ textarea {
 a {
   color: $color-link;
   text-decoration: none;
+  transition: background-color 0.1s, color 0.1s;
+
+  &:hover {
+    color: $color-dark;
+  }
 }
 
 a:focus,
@@ -131,11 +137,22 @@ main > header,
 main > footer,
 main > aside,
 main > nav,
-main > article > * {
-  @include component-spacing;
-
-  display: block;
+main > article > *,
+main > article > .wp-block-table,
+main > article > .wp-block-pullquote,
+main > article > .wp-block-image,
+main > article > .wp-block-gallery,
+main > article > .wp-block-columns {
   max-width: $max-width;
+  margin: 0 auto calc($spacer / 1.5);
+
+  @media screen and (min-width: $bp-medium) {
+    margin-bottom: $spacer;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   &.alignwide {
     max-width: $max-width-wide;

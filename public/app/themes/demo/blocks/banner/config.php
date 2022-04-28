@@ -14,6 +14,7 @@ add_action('acf/init', function () {
         'mode' => 'preview',
         'supports' => [
             'mode' => false,
+            'color' => true,
             'jsx' => true,
         ],
         'render_template' => __DIR__ . '/template.php',

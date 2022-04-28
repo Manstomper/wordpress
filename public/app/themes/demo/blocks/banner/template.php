@@ -21,6 +21,10 @@ if (!empty($attributes['align'])) {
 if (!empty($attributes['className'])) {
     $classes[] = $attributes['className'];
 }
+
+if (!empty($attributes['backgroundColor'])) {
+    $classes[] = 'has-' . $attributes['backgroundColor'] . '-background-color';
+}
 ?>
 
 <section class="<?= implode(' ', $classes); ?>">
