@@ -13,7 +13,7 @@ $q = new \WP_Query([
 ]);
 ?>
 
-<section class="block-posts">
+<section class="<?= rig_get_block_classes($attributes); ?>">
     <h2><?= get_field('title'); ?></h2>
     <div id="<?= $attributes['id']; ?>" class="swiper">
         <div class="swiper-wrapper">

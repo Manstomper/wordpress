@@ -35,8 +35,7 @@ function setTaxonomyTerm(term) {
 
   <PostCategories @set-category="(term) => setTaxonomyTerm(term)" />
 
-  <p v-if="!foundPosts">No results</p>
-  <ul v-else>
+  <ul>
     <li v-for="post in posts" :key="post.id">
       <a :href="post.link">
         {{ post.title }}

@@ -21,35 +21,55 @@ function rig_current_language()
 }
 
 /**
- * Gets a named field outside a Block
- * Note that this will always return the value. For fields with another Return Format, use rig_get_field_object()
+ * Gets a named field outside a Block.
+ * Recurses into InnerBlocks. However, if multiple fields with the same name are found, a warning will be triggered.
+ * Always returns the value. For fields with another Return Format, use rig_get_field_object().
  */
-function rig_get_field($fieldName, $post = null)
+function rig_get_field($fieldName, $p = null)
 {
-    $postContent = get_post_field('post_content', $post);
+    $postContent = get_post_field('post_content', $p);
     $blocks = parse_blocks($postContent);
 
-    if (!empty($blocks) && is_array($blocks)) {
+    if (empty($blocks[0])) {
+        return;
+    }
+
+    $values = [];
+
+    $find = function ($blocks, &$values) use (&$find, $fieldName) {
         foreach ($blocks as $b) {
+            if (!empty($b['innerBlocks'])) {
+                $find($b['innerBlocks'], $values);
+            }
             if (isset($b['attrs']['data'][$fieldName])) {
-                return $b['attrs']['data'][$fieldName];
+                $values[] = $b['attrs']['data'][$fieldName];
             }
         }
+    };
+
+    $find($blocks, $values);
+
+    if (count($values) !== 1) {
+        trigger_error('Found multiple fields named "' . $fieldName . '".', E_USER_WARNING);
+
+        return;
     }
+
+    return $values[0];
 }
 
 /**
  * Gets a named field outside a Block, checks Return Format
  * Supports types "select", "image", "post_object", "taxonomy" and "relationship"
  */
-function rig_get_field_object($fieldKey, $post = null)
+function rig_get_field_object($fieldKey, $p = null)
 {
     if (!function_exists('get_field_object') || !function_exists('acf_get_attachment')) {
         return;
     }
 
-    $obj = get_field_object($fieldKey, $post);
-    $value = rig_get_field($obj['name'], $post);
+    $obj = get_field_object($fieldKey, $p);
+    $value = rig_get_field($obj['name'], $p);
     $format = $obj['return_format'];
 
     if (!$value) {
@@ -101,32 +121,30 @@ function rig_get_field_object($fieldKey, $post = null)
 }
 
 /**
- * Gets and parses blocks from post_content outside of the block
+ * Find and return CSS class names for custom blocks
  */
-function rig_get_blocks($postId = null, $blockName = null)
+function rig_get_block_classes($attributes)
 {
-    $postContent = get_post_field('post_content', $postId);
-    $allBlocks = parse_blocks($postContent);
+    $name = substr($attributes['name'], (strpos($attributes['name'], '/') + 1));
+    $classes = ['block-' . $name];
 
-    if (empty($allBlocks) || !is_array($allBlocks)) {
-        return [];
+    if (!empty($attributes['align'])) {
+        $classes[] = 'align' . $attributes['align'];
     }
 
-    if ($blockName) {
-        $findByName = function ($blocks, &$filteredBlocks) use (&$findByName, $blockName) {
-            foreach ($blocks as $b) {
-                if (!empty($b['innerBlocks'])) {
-                    $findByName($b['innerBlocks'], $filteredBlocks);
-                }
-                if ($b['blockName'] === $blockName) {
-                    $filteredBlocks[] = $b;
-                }
-            }
-        };
-
-        $filteredBlocks = [];
-        $findByName($allBlocks, $filteredBlocks);
+    if (!empty($attributes['align_content'])) {
+        $positions = array_unique(explode(' ', $attributes['align_content']));
+        $classes[] = 'vertical-align-' . implode('-', $positions);
     }
 
-    return $filteredBlocks ?? $allBlocks;
+    if (!empty($attributes['className'])) {
+        $classes[] = $attributes['className'];
+    }
+
+    if (!empty($attributes['backgroundColor'])) {
+        $classes[] = 'has-background';
+        $classes[] = 'has-' . $attributes['backgroundColor'] . '-background-color';
+    }
+
+    return implode(' ', $classes);
 }

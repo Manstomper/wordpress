@@ -1,7 +1,16 @@
 .block-banner {
-  display: flex;
-  align-items: center;
-  text-align: center;
+  &.has-background {
+    padding-top: $gutter;
+    padding-bottom: $gutter;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    max-width: $max-width;
+    margin: 0 auto;
+  }
 
   .image,
   .text {
@@ -11,15 +20,6 @@
 
   .text {
     padding: $gutter;
-  }
-
-  &.is-style-image-above {
-    display: block;
-
-    .image,
-    .text {
-      width: 100%;
-    }
   }
 
   &.is-style-image-right .image {

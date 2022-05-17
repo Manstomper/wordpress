@@ -20,46 +20,49 @@ add_action('enqueue_block_editor_assets', function () {
  * Add custom block categories
  */
 add_filter('block_categories_all', function ($categories) {
-    $new = [
+    $top = [
         [
             'slug' => 'custom',
             'title' => __('Theme', 'rig'),
         ],
     ];
 
-    return array_merge($new, $categories);
+    $bottom = [
+        [
+            'slug' => 'restricted',
+            'title' => __('Restricted', 'rig'),
+        ],
+    ];
+
+    return array_merge($top, $categories, $bottom);
 }, 10, 2);
 
 /**
  * Restrict available blocks for built-in post types
  */
 add_filter('allowed_block_types_all', function ($allowedTypes, $editorContext) {
-    $allowedForAll = [
-        'core/block',
-        'core/columns',
-        'core/column',
-        'core/heading',
-        'core/paragraph',
-        'core/list',
-        'core/table',
-        'core/quote',
-        'core/buttons',
-        'core/button',
-        'core/image',
-        'core/gallery',
-        'acf/accordion',
-    ];
-
     if ($editorContext->post->post_type === 'page') {
-        return array_merge($allowedForAll, [
+        return [
+            'acf/accordion',
             'acf/banner',
-            'core/cover',
             'acf/boxes',
-        ]);
+            'acf/box',
+            'acf/posts',
+            'core/block',
+            'core/button',
+            'core/buttons',
+            'core/column',
+            'core/columns',
+            'core/gallery',
+            'core/heading',
+            'core/image',
+            'core/list',
+            'core/paragraph',
+            'core/quote',
+            'core/table',
+        ];
     }
 
-    // Keeping all blocks in demo theme in order to track potentially useful additions
-    // return $allowedForAll;
     return $allowedTypes;
 }, 11, 2);
 
@@ -81,19 +84,29 @@ add_action('after_setup_theme', function () {
         [
             'name' => 'Primary',
             'slug' => 'primary',
-            'color' => '#dee0e6',
+            'color' => '#e7d7c1',
         ],
         [
             'name' => 'Secondary',
             'slug' => 'secondary',
-            'color' => '#ff6150',
+            'color' => '#735751',
         ],
         [
             'name' => 'Tertiary',
             'slug' => 'tertiary',
-            'color' => '#134e6f',
+            'color' => '#bf4342',
         ],
     ]);
+});
+
+add_filter('admin_body_class', function ($classes) {
+    $screen = get_current_screen();
+
+    if ($screen->is_block_editor() && $screen->post_type) {
+        $classes .= ' single-' . $screen->post_type;
+    }
+
+    return $classes;
 });
 
 /**

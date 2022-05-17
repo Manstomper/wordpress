@@ -24,11 +24,16 @@ $font-main: "Open Sans", sans-serif;
 $font-side: "Lora", sans-serif;
 
 // Colors
+$color-gray20: #333;
+$color-gray40: #666;
+$color-gray60: #999;
+$color-gray80: #ccc;
+$color-gray90: #e6e6e6;
 $color-light: #fff;
 $color-dark: #222;
-$color-primary: #E7D7C1;
+$color-primary: #e7d7c1;
 $color-secondary: #735751;
-$color-tertiary: #BF4342;
+$color-tertiary: #bf4342;
 $color-link: #1f65de;
 $color-link-light: color.adjust($color-link, $lightness: 35%);
 $theme-colors: (

@@ -45,7 +45,8 @@
     "advanced-custom-fields/advanced-custom-fields-pro": "^5",
     "wpackagist-plugin/wordpress-seo": "^17",
     "wpackagist-plugin/safe-svg": "^1.9.10",
-    "wpackagist-plugin/polylang": "^3.1.4"
+    "wpackagist-plugin/polylang": "^3.1.4",
+    "wpackagist-plugin/lock-reusable-blocks": "^0.3.0"
   },
   "require-dev": {
     "wpackagist-plugin/fakerpress": "^0.5.2"

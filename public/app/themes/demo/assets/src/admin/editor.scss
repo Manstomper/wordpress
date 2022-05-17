@@ -2,31 +2,71 @@
 
 @import "./../css/variables";
 @import "./../css/blocks/banner";
-@import "./../css/blocks/boxes";
 @import "./../css/blocks/cover";
 
-.block-editor-block-styles {
-  &__item {
-    background-color: rgb(0 0 0 / 3%);
-    box-shadow: 0px 0px 1px 1px rgb(0 0 0 / 20%);
+.single-event .block-editor .editor-styles-wrapper {
+  background-color: #eee;
 
-    &-preview {
+  .event-main,
+  .event-footer {
+    padding: 15px;
+    box-shadow: 0px 0px 10px #ccc;
+    background-color: #fff;
+  }
+}
+
+.block-editor {
+  &-block-styles {
+    &__item {
+      background-color: rgb(0 0 0 / 3%);
+      box-shadow: 0px 0px 1px 1px rgb(0 0 0 / 20%);
+
+      &-preview {
+        display: none;
+      }
+    }
+
+    + .components-base-control {
       display: none;
     }
   }
 
-  + .components-base-control {
-    display: none;
+  .has-placeholder {
+    padding: 15px;
+    background-color: #eee;
+    border: 1px dashed #666;
+    text-align: center;
+
+    &::before {
+      content: "This is a placeholder block.";
+    }
   }
-}
 
-.has-placeholder {
-  padding: 15px;
-  background-color: #eee;
-  border: 1px dashed #666;
-  text-align: center;
+  .block-banner {
+    .wp-block-button {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
 
-  &::before {
-    content: "This is a placeholder block.";
+  .block-boxes {
+    > .block-editor-inner-blocks > .block-editor-block-list {
+      &__layout {
+        display: flex;
+        gap: $gutter;
+
+        .wp-block-acf-box {
+          flex-basis: 0;
+          flex-grow: 1;
+
+          .block-box {
+            padding: $gutter;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+    }
   }
 }

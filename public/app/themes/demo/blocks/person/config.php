@@ -14,6 +14,8 @@ add_action('acf/init', function () {
         'mode' => 'edit',
         'supports' => [
             'mode' => false,
+            'align' => false,
+            'multiple' => false,
         ],
         'render_template' => __DIR__ . '/template.php',
     ]);

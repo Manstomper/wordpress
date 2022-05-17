@@ -5,9 +5,13 @@
     <?php the_post(); ?>
     <article>
         <h1><?php the_title(); ?></h1>
-        <?php the_content(); ?>
-        <?php comments_template(); ?>
-        <?php comment_form(); ?>
+        <?php if (post_password_required()) { ?>
+            <?= get_the_password_form(); ?>
+        <?php } else { ?>
+            <?php the_content(); ?>
+            <?php comments_template(); ?>
+            <?php comment_form(); ?>
+        <?php } ?>
     </article>
 </main>
 

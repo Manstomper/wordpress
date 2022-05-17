@@ -7,7 +7,7 @@ wp.domReady(function () {
   const { __ } = wp.i18n;
   const { registerBlockStyle } = wp.blocks;
 
-  registerBlockStyle('core/columns', [
+  registerBlockStyle('acf/boxes', [
     {
       name: 'default',
       label: __('Default', 'rig'),
@@ -16,18 +16,6 @@ wp.domReady(function () {
     {
       name: 'collapse',
       label: __('Collapse', 'rig'),
-    },
-  ]);
-
-  registerBlockStyle('core/group', [
-    {
-      name: 'default',
-      label: __('Default', 'rig'),
-      isDefault: true,
-    },
-    {
-      name: 'centered',
-      label: __('Center', 'rig'),
     },
   ]);
 
@@ -40,10 +28,6 @@ wp.domReady(function () {
     {
       name: 'image-right',
       label: __('Image on right', 'rig'),
-    },
-    {
-      name: 'image-above',
-      label: __('Image above', 'rig'),
     },
   ]);
 });

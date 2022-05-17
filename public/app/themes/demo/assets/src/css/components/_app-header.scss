@@ -1,3 +1,8 @@
 body > header {
-  outline: 1px dashed #999;
+  background-color: $color-gray90;
+  margin-bottom: calc($spacer / 1.5);
+
+  @media screen and (min-width: $bp-medium) {
+    margin-bottom: $spacer;
+  }
 }

@@ -144,14 +144,14 @@ main > article > .wp-block-image,
 main > article > .wp-block-gallery,
 main > article > .wp-block-columns {
   max-width: $max-width;
-  margin: 0 auto calc($spacer / 1.5);
+  margin: calc($spacer / 1.5) auto 0;
 
   @media screen and (min-width: $bp-medium) {
-    margin-bottom: $spacer;
+    margin-top: $spacer;
   }
 
-  &:last-child {
-    margin-bottom: 0;
+  &:first-child {
+    margin-top: 0;
   }
 
   &.alignwide {

@@ -7,7 +7,7 @@ $phone = get_field('phone');
 $role = get_field('role');
 ?>
 
-<section class="block-person">
+<section class="<?= rig_get_block_classes($attributes); ?>">
     <?= $firstName; ?> <?= $lastName; ?><?= $businessTitle ? ', ' . $businessTitle : ''; ?>
     <?php if ($role) { ?>
         <br><?= $role['label']; ?>

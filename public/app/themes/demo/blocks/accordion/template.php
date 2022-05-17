@@ -6,7 +6,7 @@ $allowedBlocks = [
 ];
 ?>
 
-<section class="block-accordion">
+<section class="<?= rig_get_block_classes($attributes); ?>">
     <button type="button" aria-controls="<?= $block['id']; ?>" aria-expanded="false" data-toggle="<?= $block['id']; ?>">
         <?= get_field('title'); ?>
     </button>

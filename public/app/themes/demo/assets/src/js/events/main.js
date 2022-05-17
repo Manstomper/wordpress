@@ -1,4 +1,10 @@
 import { createApp } from 'vue';
-import app from './app.vue';
+import App from './app.vue';
 
-createApp(app).mount('[data-app="events"]');
+const app = createApp(App);
+
+app.config.errorHandler = (err) => {
+  console.error(err);
+};
+
+app.mount('[data-app="events"]');

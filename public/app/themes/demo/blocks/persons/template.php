@@ -1,4 +1,9 @@
 <?php
+$foo = rig_get_field('first_name', 130);
+var_dump($foo);
+?>
+
+<?php
 $persons = get_field('persons');
 
 if (!$persons) {
@@ -6,27 +11,22 @@ if (!$persons) {
 }
 ?>
 
-<section class="block-persons">
+<section class="<?= rig_get_block_classes($attributes); ?>">
     <h2><?= rig_translate('Contact persons'); ?></h2>
     <ul>
         <?php foreach ($persons as $postId) { ?>
             <li>
                 <?php
-                $blocks = rig_get_blocks($postId);
-                $block = $blocks[0] ?? null;
-                if (!$block) {
-                    continue;
-                }
-                $firstName = rig_get_field('first_name', $block);
-                $lastName = rig_get_field('last_name', $block);
-                $email = rig_get_field('email', $block);
-                $phone = rig_get_field('phone', $block);
+                $email = rig_get_field('email', $postId);
+                $phone = rig_get_field('phone', $postId);
                 ?>
 
-                <?= $firstName; ?> <?= $lastName; ?>
+                <?= rig_get_field('first_name', $postId); ?> <?= rig_get_field('last_name', $postId); ?>
+
                 <?php if ($email) { ?>
                     <br><a href="mailto:<?= $email; ?>"><?= $email; ?></a>
                 <?php } ?>
+
                 <?php if ($phone) { ?>
                     <br><a href="tel:<?= str_replace(' ', '', $phone); ?>"><?= $phone; ?></a>
                 <?php } ?>

@@ -14,6 +14,7 @@ add_action('acf/init', function () {
         'mode' => 'preview',
         'supports' => [
             'mode' => false,
+            'align' => ['wide'],
             'jsx' => true,
         ],
         'render_template' => __DIR__ . '/template.php',

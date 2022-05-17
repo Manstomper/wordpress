@@ -1,19 +1,97 @@
 .block-boxes {
-  > h2 {
-    text-align: center;
+  display: flex;
+  gap: $gutter;
+
+  + .block-boxes {
+    margin-top: $gutter;
   }
 
-  .wp-block-column {
-    padding: 15px;
+  &.is-style-collapse {
+    gap: unset;
 
-    h2 {
-      text-align: inherit;
+    + .block-boxes {
+      margin-top: 0;
     }
   }
 
-  .wp-block-cover {
-    height: 100%;
-    min-height: 30px;
-    background-color: rgb(0 0 0 / 20%);
+  > .block-box {
+    display: flex;
+    flex-flow: row wrap;
+    flex-basis: 0;
+    flex-grow: 1;
+    padding: $gutter;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &.vertical-align-top {
+      &-center {
+        justify-content: center;
+        text-align: center;
+
+        .wp-block-buttons {
+          justify-content: center;
+        }
+      }
+
+      &-right {
+        justify-content: flex-end;
+        text-align: right;
+
+        .wp-block-buttons {
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    &.vertical-align-center {
+      align-content: center;
+      justify-content: center;
+      text-align: center;
+
+      .wp-block-buttons {
+        justify-content: center;
+      }
+
+      &-left {
+        align-content: center;
+      }
+
+      &-right {
+        align-content: center;
+        justify-content: flex-end;
+        text-align: right;
+
+        .wp-block-buttons {
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    &.vertical-align-bottom {
+      &-left {
+        align-content: flex-end;
+      }
+
+      &-center {
+        align-content: flex-end;
+        justify-content: center;
+        text-align: center;
+
+        .wp-block-buttons {
+          justify-content: center;
+        }
+      }
+
+      &-right {
+        align-content: flex-end;
+        justify-content: flex-end;
+        text-align: right;
+
+        .wp-block-buttons {
+          justify-content: flex-end;
+        }
+      }
+    }
   }
 }

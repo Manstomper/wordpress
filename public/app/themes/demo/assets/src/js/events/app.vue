@@ -17,15 +17,15 @@ watch(searchTerms, (value) => {
   }
 });
 
-const allEvents = useGetQuery('/wp-json/rig/events');
+const { items } = useGetQuery('/wp-json/rig/events');
 
 const filteredEvents = computed(() => {
   if (searchTerms.value.length >= 3) {
-    return allEvents.value.filter((item) => {
+    return items.value.filter((item) => {
       return item.title.toLowerCase().includes(searchTerms.value.toLowerCase());
     });
   }
-  return allEvents.value.slice(0);
+  return items.value.slice(0);
 });
 
 const events = computed(() => {
@@ -52,6 +52,7 @@ function setPage(pg) {
     side, which means it expects a limited amount of items.
   </p>
 
+  <p v-if="error">An error has occurred.</p>
   <p v-if="!events">No results</p>
   <ul v-else>
     <li v-for="event in events" :key="event.id">

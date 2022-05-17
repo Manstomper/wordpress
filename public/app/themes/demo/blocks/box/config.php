@@ -6,15 +6,17 @@ add_action('acf/init', function () {
     }
 
     acf_register_block([
-        'name' => 'accordion',
-        'title' => __('Accordion', 'rig'),
+        'name' => 'box',
+        'title' => __('Box', 'rig'),
         'description' => '',
-        'category' => 'custom',
-        'icon' => 'arrow-down-alt',
+        'category' => 'restricted',
+        'icon' => 'block-default',
         'mode' => 'preview',
         'supports' => [
             'mode' => false,
+            'color' => true,
             'align' => false,
+            'align_content' => 'matrix',
             'jsx' => true,
         ],
         'render_template' => __DIR__ . '/template.php',

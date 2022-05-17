@@ -1,26 +1,26 @@
 import { isRef, ref, unref, watchEffect } from 'vue';
 import axios from 'axios';
 
-function getParams(data) {
-  if (data.taxonomyTerm) {
-    data.taxQuery = {
-      taxonomy: data.taxonomyTerm.taxonomy,
-      field: 'id',
-      terms: data.taxonomyTerm.id,
-    };
-  }
-  else {
-    data.taxQuery = null;
-  }
-
-  delete data.taxonomyTerm;
-
-  return data;
-}
-
 export function usePostQuery(url, data = null) {
   const posts = ref([]);
-  const foundPosts = ref(0);
+  const foundPosts = ref();
+  const error = ref(false);
+
+  const getParams = function (data) {
+    if (data.taxonomyTerm) {
+      data.taxQuery = {
+        taxonomy: data.taxonomyTerm.taxonomy,
+        field: 'id',
+        terms: data.taxonomyTerm.id,
+      };
+    } else {
+      data.taxQuery = null;
+    }
+
+    delete data.taxonomyTerm;
+
+    return data;
+  };
 
   function query() {
     axios
@@ -31,7 +31,10 @@ export function usePostQuery(url, data = null) {
           foundPosts.value = response.data.foundPosts;
         }
       })
-      .catch(() => {});
+      .catch((e) => {
+        console.debug(e);
+        error.value = true;
+      });
   }
 
   if (isRef(url) || isRef(data)) {
@@ -40,20 +43,32 @@ export function usePostQuery(url, data = null) {
     query();
   }
 
-  return { posts, foundPosts };
+  return { posts, foundPosts, error };
 }
 
 export function useGetQuery(url) {
-  const data = ref([]);
+  const items = ref([]);
+  const error = ref(false);
 
-  axios
-    .get(unref(url))
-    .then((response) => {
-      if (response.data) {
-        data.value = response.data;
-      }
-    })
-    .catch(() => {});
+  function query() {
+    axios
+      .get(unref(url))
+      .then((response) => {
+        if (response.data) {
+          items.value = response.data;
+        }
+      })
+      .catch((e) => {
+        console.debug(e);
+        error.value = true;
+      });
+  }
 
-  return data;
+  if (isRef(url)) {
+    watchEffect(query);
+  } else {
+    query();
+  }
+
+  return { items, error };
 }
