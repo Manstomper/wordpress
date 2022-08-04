@@ -30,3 +30,4 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 # Config
 ADD ./local/php80/fpm.conf /usr/local/etc/php-fpm.d/zz-site.conf
+ADD ./local/php80/php.ini /usr/local/etc/php/conf.d/site.ini

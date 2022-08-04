@@ -38,18 +38,18 @@
   "require": {
     "php": "~8.0.0",
     "composer/installers": "^2",
-    "johnpbloch/wordpress": "^5.9",
+    "johnpbloch/wordpress": "^6",
     "koodimonni/composer-dropin-installer": "^1.3",
-    "koodimonni-language/core-fi": "^5.9",
+    "koodimonni-language/core-fi": "^6",
 
     "advanced-custom-fields/advanced-custom-fields-pro": "^5",
-    "wpackagist-plugin/wordpress-seo": "^17",
-    "wpackagist-plugin/safe-svg": "^1.9.10",
-    "wpackagist-plugin/polylang": "^3.1.4",
-    "wpackagist-plugin/lock-reusable-blocks": "^0.3.0"
+    "wpackagist-plugin/wordpress-seo": "^19",
+    "wpackagist-plugin/safe-svg": "^2",
+    "wpackagist-plugin/polylang": "^3",
+    "wpackagist-plugin/lock-reusable-blocks": "^0.6"
   },
   "require-dev": {
-    "wpackagist-plugin/fakerpress": "^0.5.2"
+    "wpackagist-plugin/fakerpress": "^0.5"
   },
   "config": {
     "vendor-dir": "public/vendor",

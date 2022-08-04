@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-30T09:55:40+00:00\n"
+"POT-Creation-Date: 2022-08-04T09:42:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: rig\n"
@@ -30,6 +30,10 @@ msgstr ""
 msgid "Banner"
 msgstr ""
 
+#: blocks/box/config.php:10
+msgid "Box"
+msgstr ""
+
 #: blocks/boxes/config.php:10
 msgid "Boxes"
 msgstr ""
@@ -44,6 +48,10 @@ msgstr ""
 msgid "Persons"
 msgstr ""
 
+#: blocks/posts/config.php:10
+msgid "Posts"
+msgstr ""
+
 #: content-types/event/settings.php:9
 msgid "Events"
 msgstr ""
@@ -52,56 +60,28 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: content-types/event/settings.php:21
+#: content-types/event/settings.php:35
 msgid "Event types"
 msgstr ""
 
-#: content-types/event/settings.php:22
+#: content-types/event/settings.php:36
 msgid "Event type"
 msgstr ""
 
-#: content-types/event/settings.php:34
+#: content-types/event/settings.php:71
 msgid "Event footer"
 msgstr ""
 
-#: global/admin.php:26
+#: inc/admin.php:26
 msgid "Theme"
 msgstr ""
 
-#: global/settings.php:16
+#: inc/admin.php:33
+msgid "Restricted"
+msgstr ""
+
+#: inc/settings.php:16
 msgid "Main menu"
-msgstr ""
-
-#: assets/dist/admin.js:17
-#: assets/dist/admin.js:48
-#: assets/src/js/admin/blocks/sample.js:11
-#: assets/src/js/admin/blocks/sample.js:42
-msgid "Sample block"
-msgstr ""
-
-#: assets/dist/admin.js:105
-#: assets/src/js/admin/formats-styles.js:13
-msgid "Default"
-msgstr ""
-
-#: assets/dist/admin.js:110
-#: assets/src/js/admin/formats-styles.js:18
-msgid "Collapse"
-msgstr ""
-
-#: assets/dist/admin.js:117
-#: assets/src/js/admin/formats-styles.js:25
-msgid "Image on left"
-msgstr ""
-
-#: assets/dist/admin.js:122
-#: assets/src/js/admin/formats-styles.js:30
-msgid "Image on right"
-msgstr ""
-
-#: assets/dist/admin.js:126
-#: assets/src/js/admin/formats-styles.js:34
-msgid "Image above"
 msgstr ""
 
 #: theme.json

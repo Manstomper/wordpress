@@ -39,7 +39,7 @@ services:
       # Exposing port because we use webpack-dev-server to automatically reload when Javascript or CSS changes
       - "3000:3000"
     volumes:
-      - ./public/app/themes/demo/assets:/usr/src
+      - ./:/usr/src
     # Directory in which the command on the next line is run
     working_dir: /usr/src
     command: sh -c "npm install && npm run dev"

@@ -2,14 +2,12 @@
 .env
 
 # Junk files
-node_modules
 desktop.ini
 .DS_Store
 .netbeans.xml
-.sass_cache
-assets/dist
 
 # Built files
+node_modules
 public/vendor
 public/wp
 public/.htaccess
@@ -20,4 +18,4 @@ public/app/mu-plugins/*/
 public/app/upgrade
 public/app/uploads/*
 !public/app/uploads/.gitkeep
-public/app/themes/*/assets/dist
+public/app/themes/*/assets

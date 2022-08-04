@@ -37,7 +37,7 @@ add_filter('intermediate_image_sizes', function ($sizes) {
  */
 add_action('wp_enqueue_scripts', function () {
     if (!defined('WP_ENV') || WP_ENV !== 'development') {
-        $uri = get_stylesheet_directory_uri() . '/assets/dist';
+        $uri = get_stylesheet_directory_uri() . '/assets';
     } else {
         $uri = 'http://localhost:3000';
     }
