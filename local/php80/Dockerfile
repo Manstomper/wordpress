@@ -1,4 +1,5 @@
-FROM php:8.0.14-fpm-alpine3.15
+FROM php:8.1.9-fpm-alpine3.16
+#FROM php:8.0.22-fpm-alpine3.16
 
 RUN apk update \
     && apk add --no-cache \
@@ -16,12 +17,10 @@ RUN apk update \
     && docker-php-ext-install mysqli \
     # Remove unnecessary files
     && rm -rf /usr/src/php* \
-    && rm -rf /usr/local/lib/php/test \
-    && rm /usr/local/bin/phpdbg \
     && rm -rf /var/cache/*
 
-# Composer
-COPY --from=composer:2.2.5 /usr/bin/composer /usr/local/bin/composer
+# Composer. Update version when appropriate.
+COPY --from=composer:2.3.10 /usr/bin/composer /usr/local/bin/composer
 
 # WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
