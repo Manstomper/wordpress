@@ -12,6 +12,5 @@ if (!$comments) {
         <blockquote>
             <p><?= $comment->comment_content; ?></p>
         </blockquote>
-        }
     <?php } ?>
 </section>
