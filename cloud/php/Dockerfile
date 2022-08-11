@@ -1,4 +1,4 @@
-FROM rig/php:8.0.14-mysqli-gd-intl
+FROM php:8.1.9
 
 COPY ./public/vendor /public/vendor
 COPY ./public/wp /public/wp

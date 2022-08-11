@@ -1,4 +1,4 @@
-FROM rig/nginx:1.21.5
+FROM nginx:1.23.1
 
 COPY ./public/vendor /public/vendor
 COPY ./public/wp /public/wp

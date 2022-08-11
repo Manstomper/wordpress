@@ -13,21 +13,21 @@ List valid compute zones with `gcloud compute zones list`
 
 Linux, MacOS:
 ```
-PROJECT_ID="my-first-project-20220128"
-PROJECT_NAME="My first project"
-REPOSITORY_NAME="my-first-repository"
+PROJECT_ID="my-project"
+PROJECT_NAME="My project"
+REPOSITORY_NAME="my-repository"
 REPOSITORY_LOCATION="europe-north1"
 COMPUTE_ZONE="europe-north1-a"
-CLUSTER_NAME="my-first-cluster"
+CLUSTER_NAME="my-cluster"
 ```
 Windows PowerShell:
 ```
-Set-Variable -Name "PROJECT_ID" -Value "my-first-project-20220128"
-Set-Variable -Name "PROJECT_NAME" -Value "My first project"
-Set-Variable -Name "REPOSITORY_NAME" -Value "my-first-repository"
+Set-Variable -Name "PROJECT_ID" -Value "my-project"
+Set-Variable -Name "PROJECT_NAME" -Value "My project"
+Set-Variable -Name "REPOSITORY_NAME" -Value "my-repository"
 Set-Variable -Name "REPOSITORY_LOCATION" -Value "europe-north1"
 Set-Variable -Name "COMPUTE_ZONE" -Value "europe-north1-a"
-Set-Variable -Name "CLUSTER_NAME" -Value "my-first-cluster"
+Set-Variable -Name "CLUSTER_NAME" -Value "my-cluster"
 ```
 
 ## Install tools
