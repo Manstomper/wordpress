@@ -57,7 +57,7 @@ You will be prompted to enable the necessary APIs.
 1. Build the nginx image with `docker build . -f "$(pwd)/cloud/nginx/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
 1. Push the nginx image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
 1. Delete the nginx image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/nginx:1.21.5`
-1. Build the PHP image with `docker build . -f "$(pwd)/cloud/php80/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
+1. Build the PHP image with `docker build . -f "$(pwd)/cloud/php/Dockerfile" -t $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
 1. Push the php image with `docker push $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
 1. Delete the php image with `docker rmi $REPOSITORY_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/php:8.0.14`
 1. Tag the MySQL image with `docker tag mariadb:10.3.32 europe-north1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/mariadb:10.3.32`

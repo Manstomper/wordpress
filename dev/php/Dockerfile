@@ -1,5 +1,4 @@
 FROM php:8.1.9-fpm-alpine3.16
-#FROM php:8.0.22-fpm-alpine3.16
 
 RUN apk update \
     && apk add --no-cache \
@@ -28,5 +27,5 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     && mv wp-cli.phar /usr/local/bin/wp
 
 # Config
-ADD ./local/php80/fpm.conf /usr/local/etc/php-fpm.d/zz-site.conf
-ADD ./local/php80/php.ini /usr/local/etc/php/conf.d/site.ini
+ADD ./dev/php/fpm.conf /usr/local/etc/php-fpm.d/zz-site.conf
+ADD ./dev/php/php.ini /usr/local/etc/php/conf.d/site.ini
