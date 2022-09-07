@@ -23,6 +23,7 @@ services:
     environment:
       - WP_ENV=development
       - WP_HOME=$WP_HOME
+      - PHP_ERROR_LEVEL=$PHP_ERROR_LEVEL
       - ACF_PRO_LICENSE_KEY=$ACF_PRO_LICENSE_KEY
     volumes:
       - ./:/app-mount
