@@ -1,9 +1,7 @@
 <?php
 
-/**
- * This file is required in the root directory so WordPress can find it.
- * WP is hardcoded to look in its own directory or one directory up for wp-config.php.
- */
+// This file is required in the root directory so WordPress can find it.
+// WP is hardcoded to look in its own directory or one directory up for wp-config.php.
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -47,6 +45,7 @@ define('WP_DEBUG_DISPLAY', (WP_ENV === 'developemnt'));
 define('WP_DEBUG_LOG', false);
 define('SCRIPT_DEBUG', false);
 
+// Allow setting custom error level, because some plugins generate a large amount of deprecation notices
 if (WP_ENV === 'development' && getenv('PHP_ERROR_LEVEL')) {
     error_reporting((int) getenv('PHP_ERROR_LEVEL'));
     ini_set('display_errors', 1);
@@ -65,10 +64,7 @@ if (WP_ENV === 'development' && getenv('PHP_ERROR_LEVEL')) {
     ];
 }
 
-/**
- * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
- * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes
- */
+// Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
     $_SERVER['HTTPS'] = 'on';
 }

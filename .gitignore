@@ -1,5 +1,6 @@
-# Files with secrets
+# Files with secrets and/or data
 .env
+/*.sql
 
 # Junk files
 desktop.ini
@@ -19,3 +20,6 @@ public/app/upgrade
 public/app/uploads/*
 !public/app/uploads/.gitkeep
 public/app/themes/*/assets
+
+# Temporary
+public/app/themes/twentytwentytwo

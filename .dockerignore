@@ -1,6 +1,8 @@
-/public/app/themes/*/assets/node_modules
-/public/app/themes/*/assets/src
+node_modules
+/assets
+/*.sql
 /*.sh
+/dev/*.sh
 .env
 .env.local
 .gitkeep
