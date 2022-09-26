@@ -1,7 +1,6 @@
 #!/bin/bash
 
 printf -v FILE "${PWD##*/}-%(%Y%m%d)T.sql" -1
-CONTAINER=$(docker-compose ps -q mysql)
 
 read -p "Exporting database to $FILE. Proceed? (y/n) " proceed
 
@@ -9,45 +8,37 @@ if test "$proceed" != 'y'; then
     exit 0
 fi
 
-DB_COMMANDS=$'
-  mysql -u"root" -p"password" -e "DROP DATABASE IF EXISTS tempdb; CREATE DATABASE tempdb;"
+CONTAINER_ID=$(docker-compose ps -q mysql)
 
-  mysqldump -u"root" -p"password" wordpress | mysql -u"root" -p"password" tempdb
+# Read variables from .env
+# https://gist.github.com/mihow/9c7f559807069a03e302605691f85572?permalink_comment_id=3898844#gistcomment-3898844
+set -a && source <(cat .env | sed -e '/^#/d;/^\s*$/d' -e "s/'/'\\\''/g" -e "s/=\(.*\)/='\1'/g") && set +a
 
-  mysql -u"root" -p"password" tempdb -e "
-      DELETE FROM wp_posts WHERE post_type = \'revision\';
-      DELETE pm FROM wp_postmeta pm LEFT JOIN wp_posts p ON p.ID = pm.post_id WHERE p.ID IS NULL;
-      DELETE FROM wp_options WHERE option_name LIKE \'_transient_%\';
-      DELETE FROM wp_comments WHERE comment_approved = \'spam\';
-      TRUNCATE wp_users;
-      TRUNCATE wp_usermeta;
-      INSERT INTO wp_users VALUES (
-          1, \'admin\', \'$P$Bs/LIA9ovAG8FCFdK/1FnQKLGMdjin0\', \'admin\', \'a@b.fi\', \'\', \'1970-01-01 00:00:00\', \'\', 0, \'admin\'
-      );
-      INSERT INTO wp_usermeta VALUES (
-          1, 1, \'wp_capabilities\', \'a:1:{s:13:"administrator";b:1;}\'
-      );
-      UPDATE wp_posts SET post_author = 1;
-  "
+# Do the following:
+#    - Delete transients
+#    - Delete spam comments
+#    - Delete orphaned post meta
+#    - Delete orphaned taxonomy term relationships
+#    - Delete orphaned comments
+DB_COMMANDS='
+    TBL="'$TABLE_PREFIX'"
 
-  POST_TYPES=$(mysql -N -B -u"root" -p"password" tempdb -e "SELECT DISTINCT post_type from wp_posts WHERE post_type NOT IN (
-      \'acf-field\', \'acf-field-group\', \'attachment\', \'polylang_mo\', \'revision\', \'wp_global_styles\'
-  );")
+    mysql -uroot -ppassword -e "DROP DATABASE IF EXISTS tempdb; CREATE DATABASE tempdb;"
 
-  for t in $POST_TYPES; do
-      mysql -u"root" -p"password" tempdb -e "DELETE FROM wp_posts WHERE post_type = \'$t\' AND ID NOT IN (
-          SELECT * FROM (
-              SELECT ID FROM wp_posts WHERE post_type = \'$t\' ORDER BY post_date DESC LIMIT 5
-          ) a
-      );"
-  done
+    mysqldump -uroot -ppassword wordpress | mysql -uroot -ppassword tempdb
+
+    mysql -uroot -ppassword tempdb -e "
+        DELETE FROM ${TBL}options WHERE option_name LIKE '\''_transient_%'\'';
+        DELETE FROM ${TBL}comments WHERE comment_approved = '\''spam'\'';
+        DELETE pm FROM ${TBL}postmeta pm LEFT JOIN ${TBL}posts p ON p.ID = pm.post_id WHERE p.ID IS NULL;
+        DELETE tr FROM ${TBL}term_relationships tr LEFT JOIN ${TBL}posts p ON tr.object_id = p.ID WHERE p.ID IS NULL;
+        DELETE c FROM ${TBL}comments c LEFT JOIN ${TBL}posts p ON p.ID = c.comment_post_ID WHERE p.ID IS NULL;
+    "
 '
 
-docker exec $CONTAINER /bin/sh -c "$DB_COMMANDS" \
-    && docker exec $CONTAINER mysqldump -u"root" -p"password" tempdb > "$FILE" \
-    && find $FILE -type f -exec sed -i -E "s/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b/x@y.dev/g" {} \;
+# Run above commands, then dump database
+docker exec $CONTAINER_ID /bin/bash -c "$DB_COMMANDS" \
+    && docker exec $CONTAINER_ID mysqldump -uroot -ppassword tempdb > "$FILE"
 
-docker exec $CONTAINER mysql -u"root" -p"password" -e "DROP DATABASE IF EXISTS tempdb;"
-
-# Add this before the line starting with "&& find $FILE" to list email addresses caught by regex (for debugging purposes)
-# && grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" $FILE \
+# Drop temporary database
+docker exec $CONTAINER_ID mysql -uroot -ppassword -e "DROP DATABASE IF EXISTS tempdb;"

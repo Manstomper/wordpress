@@ -7,7 +7,6 @@ require_once __DIR__ . '/inc/helpers.php';
 require_once __DIR__ . '/inc/settings.php';
 require_once __DIR__ . '/inc/rest.php';
 require_once __DIR__ . '/inc/admin.php';
-require_once __DIR__ . '/inc/menu-walker.php';
 require_once __DIR__ . '/inc/plugins/polylang.php';
 
 /**

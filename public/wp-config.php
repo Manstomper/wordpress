@@ -22,7 +22,7 @@ define('DB_PASSWORD', 'password');
 define('DB_HOST', 'mysql');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
-$table_prefix = 'wp_';
+$table_prefix = getenv('TABLE_PREFIX') ?: 'wp_';
 
 define('AUTH_KEY', getenv('WP_AUTH_KEY'));
 define('SECURE_AUTH_KEY', getenv('WP_SECURE_AUTH_KEY'));
