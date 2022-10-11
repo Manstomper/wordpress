@@ -48,7 +48,6 @@ define('SCRIPT_DEBUG', false);
 // Allow setting custom error level, because some plugins generate a large amount of deprecation notices
 if (WP_ENV === 'development' && getenv('PHP_ERROR_LEVEL')) {
     error_reporting((int) getenv('PHP_ERROR_LEVEL'));
-    ini_set('display_errors', 1);
 
     $GLOBALS['wp_filter'] = [
         'enable_wp_debug_mode_checks' => [
