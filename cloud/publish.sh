@@ -7,8 +7,8 @@ REPOSITORY_LOCATION="europe-north1"
 COMPUTE_ZONE="europe-north1-a"
 CLUSTER_NAME="my-cluster"
 KUBE_CONTEXT="gke_my-project_europe-north1-a_my-cluster"
-NGINX_VERSION="1.23.1"
-PHP_VERSION="8.1.9"
+NGINX_VERSION="1.23.2"
+PHP_VERSION="8.1.12"
 
 kubectl config use-context $KUBE_CONTEXT \
     && docker compose run --rm -v "$(pwd):/usr/src" -w /usr/src node sh -c "npm run build" \

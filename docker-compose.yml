@@ -2,24 +2,27 @@
 version: "3.8"
 
 volumes:
-  # A named volume for the WordPress database (without it, a volume will be created but it is deleted along with containers)
+  # A named volume for the WordPress database. Without it, a volume will be created but it is deleted when containers are deleted.
   wpdb:
 services:
   nginx:
-    # An image we built from the official nginx image https://hub.docker.com/_/nginx
-    image: rig/nginx:1.23.1
+    # The official nginx image https://hub.docker.com/_/nginx
+    image: nginx:1.23.2
     ports:
-      # Our app works from http://localhost from a port defined in .env (8080 is set in custom config file copied to nginx image)
+      # Our app works from http://localhost from a port defined in .env (8080 is set in custom config file copied to the nginx image)
       - "$NGINX_PORT:8080"
     volumes:
       # Makes app code visible to nginx by bind-mounting local directory onto container
       - ./:/app-mount
+      # Config file
+      - ./dev/nginx/site.conf:/etc/nginx/conf.d/site.conf
     # Making sure that certain services are running before starting this one
     depends_on:
       - php
       - mysql
   php:
-    image: rig/php:8.1.9
+    # An image we built using the official php-fpm image (see dev/php/Dockerfile)
+    image: rig/php:8.1.12
     environment:
       - WP_ENV=development
       - WP_HOME=$WP_HOME
@@ -28,14 +31,14 @@ services:
     volumes:
       - ./:/app-mount
   mysql:
-    image: mariadb:10.8.3
+    image: mariadb:10.9.4
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=wordpress
     volumes:
       - wpdb:/var/lib/mysql
   node:
-    image: node:16.16.0-alpine3.16
+    image: node:16.18.1-alpine3.16
     ports:
       # Exposing port because we use webpack-dev-server to automatically reload when Javascript or CSS changes
       - "3000:3000"

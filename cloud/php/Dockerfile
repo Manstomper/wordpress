@@ -1,4 +1,4 @@
-FROM php:8.1.9
+FROM php:8.1.12
 
 COPY ./public/vendor /public/vendor
 COPY ./public/wp /public/wp

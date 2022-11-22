@@ -2,8 +2,7 @@
   "name": "rig/wp-demo",
   "description": "A demo WordPress project",
   "type": "project",
-  "version": "1.0.0",
-  "license": "Public domain",
+  "license": "CC-PDDC",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": [
@@ -42,7 +41,7 @@
     "koodimonni/composer-dropin-installer": "^1.3",
     "koodimonni-language/core-fi": "^6",
 
-    "advanced-custom-fields/advanced-custom-fields-pro": "^5",
+    "wpackagist-plugin/advanced-custom-fields": "^5",
     "wpackagist-plugin/wordpress-seo": "^19",
     "wpackagist-plugin/safe-svg": "^2",
     "wpackagist-plugin/polylang": "^3",
