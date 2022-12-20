@@ -22,11 +22,11 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.12",
+        "version": "6.0.6",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%ACF_PRO_LICENSE_KEY}&t=5.12"
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%ACF_PRO_LICENSE_KEY}&t=6.0.6"
         },
         "require": {
           "ffraenz/private-composer-installer": "^5.0"
@@ -35,23 +35,23 @@
     }
   ],
   "require": {
-    "php": "~8.1.9",
-    "composer/installers": "^2",
-    "johnpbloch/wordpress": "^6",
-    "koodimonni/composer-dropin-installer": "^1.3",
-    "koodimonni-language/core-fi": "^6",
-
-    "wpackagist-plugin/advanced-custom-fields": "^5",
-    "wpackagist-plugin/wordpress-seo": "^19",
-    "wpackagist-plugin/safe-svg": "^2",
-    "wpackagist-plugin/polylang": "^3",
+    "php": "~8.1.12",
+    "composer/installers": "^2.2",
+    "johnpbloch/wordpress": "^6.1.1",
+    "koodimonni/composer-dropin-installer": "^1.4",
+    "koodimonni-language/core-fi": "^6.1.1",
+    "wp-cli/wp-cli": "^2.7.1",
+    "wpackagist-plugin/advanced-custom-fields": "^6.0.6",
+    "wpackagist-plugin/wordpress-seo": "^19.13",
+    "wpackagist-plugin/safe-svg": "^2.0.3",
+    "wpackagist-plugin/polylang": "^3.3",
     "wpackagist-plugin/lock-reusable-blocks": "^0.6"
   },
   "require-dev": {
-    "wpackagist-plugin/fakerpress": "^0.5"
+    "wpackagist-plugin/fakerpress": "^0.5.3"
   },
   "config": {
-    "vendor-dir": "public/vendor",
+    "vendor-dir": "vendor",
     "allow-plugins": {
       "composer/installers": true,
       "johnpbloch/wordpress-core": true,
@@ -84,7 +84,11 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "rm -rf ./public/wp/wp-content/themes/*/; rm -rf ./public/wp/wp-content/plugins/*/; rm -rf ./public/wp/wp-content/plugins/hello.php"
+      "rm -rf ./public/wp/wp-content/themes/*/",
+      "rm -rf ./public/wp/wp-content/plugins/*/",
+      "rm -rf ./public/wp/wp-content/plugins/hello.php",
+      "ln -sfn /app-mount/vendor/bin/wp /bin/wp",
+      "ln -sfn /app-mount/themes/demo /app-mount/public/app/themes/"
     ]
   }
 }

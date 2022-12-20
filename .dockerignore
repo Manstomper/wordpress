@@ -2,10 +2,11 @@ node_modules
 /assets
 /*.sql
 /*.sh
-/dev/*.sh
+/.local/*.sh
 .env
 .env.local
 .gitkeep
 .dockerignore
 README.md
-README.cloud.md
+.cloud/README.cloud.md
+.cloud/*.sh

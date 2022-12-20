@@ -1,4 +1,5 @@
 # Docker Compose file format version
+# https://docs.docker.com/compose/compose-file/compose-versioning/
 version: "3.8"
 
 volumes:
@@ -9,26 +10,28 @@ services:
     # The official nginx image https://hub.docker.com/_/nginx
     image: nginx:1.23.2
     ports:
-      # Our app works from http://localhost from a port defined in .env (8080 is set in custom config file copied to the nginx image)
+      # Our app works from http://localhost from a port defined in the /.env file
+      # 8080 is set in custom config file copied to the nginx image)
       - "$NGINX_PORT:8080"
     volumes:
       # Makes app code visible to nginx by bind-mounting local directory onto container
       - ./:/app-mount
       # Config file
-      - ./dev/nginx/site.conf:/etc/nginx/conf.d/site.conf
-    # Making sure that certain services are running before starting this one
+      - ./.local/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    # Making sure that necessary services are running
     depends_on:
       - php
       - mysql
   php:
-    # An image we built using the official php-fpm image (see dev/php/Dockerfile)
-    image: rig/php:8.1.12
+    # An image we built using the official php-fpm image (see .local/php/Dockerfile)
+    image: wp/php:8.1.12
     environment:
       - WP_ENV=development
       - WP_HOME=$WP_HOME
       - PHP_ERROR_LEVEL=$PHP_ERROR_LEVEL
       - ACF_PRO_LICENSE_KEY=$ACF_PRO_LICENSE_KEY
     volumes:
+      # Directory must be mounted to the PHP container as well
       - ./:/app-mount
   mysql:
     image: mariadb:10.9.4
@@ -38,7 +41,7 @@ services:
     volumes:
       - wpdb:/var/lib/mysql
   node:
-    image: node:16.18.1-alpine3.16
+    image: node:18.12.1-alpine3.16
     ports:
       # Exposing port because we use webpack-dev-server to automatically reload when Javascript or CSS changes
       - "3000:3000"
@@ -46,4 +49,4 @@ services:
       - ./:/usr/src
     # Directory in which the command on the next line is run
     working_dir: /usr/src
-    command: sh -c "npm install && npm run dev"
+    command: npm run dev

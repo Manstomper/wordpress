@@ -9,17 +9,12 @@ desktop.ini
 
 # Built files
 node_modules
-public/vendor
+vendor
 public/wp
 public/.htaccess
 public/app/languages
 public/app/plugins/*
-!public/app/plugins/.gitkeep
 public/app/mu-plugins/*/
 public/app/upgrade
 public/app/uploads/*
-!public/app/uploads/.gitkeep
 public/app/themes/*/assets
-
-# Temporary
-public/app/themes/twentytwentytwo

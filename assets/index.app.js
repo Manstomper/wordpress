@@ -2,7 +2,6 @@
 import './admin/dev-notice.js';
 import './js/posts/main.js';
 import './js/events/main.js';
-import './js/swiper.js';
 import './js/toggle.js';
 
 // CSS
