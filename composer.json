@@ -45,10 +45,13 @@
     "wpackagist-plugin/wordpress-seo": "^19.13",
     "wpackagist-plugin/safe-svg": "^2.0.3",
     "wpackagist-plugin/polylang": "^3.3",
-    "wpackagist-plugin/lock-reusable-blocks": "^0.6"
+    "wpackagist-plugin/lock-reusable-blocks": "^0.6",
+    "wpackagist-plugin/elasticpress": "^4.4"
   },
   "require-dev": {
-    "wpackagist-plugin/fakerpress": "^0.5.3"
+    "wpackagist-plugin/fakerpress": "^0.5.3",
+    "wpackagist-plugin/debug-bar": "^1.1.4",
+    "wpackagist-plugin/debug-bar-elasticpress": "^2.1.1"
   },
   "config": {
     "vendor-dir": "vendor",

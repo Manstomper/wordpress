@@ -50,3 +50,11 @@ services:
     # Directory in which the command on the next line is run
     working_dir: /usr/src
     command: npm run dev
+  elasticsearch:
+    image: elasticsearch:8.5.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
