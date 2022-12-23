@@ -39,7 +39,7 @@ add_action('wp_enqueue_scripts', function () {
     if (!defined('WP_ENV') || WP_ENV !== 'development') {
         $uri = get_stylesheet_directory_uri() . '/assets';
     } else {
-        $uri = 'http://localhost:3000';
+        $uri = 'http://localhost:' . getenv('NODE_PORT');
     }
 
     wp_enqueue_style('app', $uri . '/app.css');

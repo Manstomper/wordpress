@@ -7,7 +7,7 @@ const StylelintPlugin = require('stylelint-webpack-plugin');
 module.exports = merge(prodConfig, {
   devServer: {
     host: '0.0.0.0',
-    port: 3000,
+    port: 3001,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },

@@ -10,6 +10,7 @@ desktop.ini
 # Built files
 node_modules
 vendor
+themes/*/assets
 public/wp
 public/.htaccess
 public/app/languages

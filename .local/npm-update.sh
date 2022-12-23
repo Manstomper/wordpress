@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker compose exec node sh -c "cd /usr/src && npm update && npm audit fix"
+docker compose exec -w /usr/src node sh -c "npm update && npm audit fix && npm run dev"
