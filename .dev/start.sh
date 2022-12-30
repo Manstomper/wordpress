@@ -9,3 +9,5 @@ else
 
     docker compose restart
 fi
+
+source .env && echo "The site should now work from http://localhost:$WEB_PORT"

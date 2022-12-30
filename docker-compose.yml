@@ -5,6 +5,7 @@ version: "3.8"
 volumes:
   # A named volume for the WordPress database. Without it, a volume will be created but it is deleted when containers are deleted.
   db:
+  elastic:
 services:
   web:
     # nginx image from the Docker Hub https://hub.docker.com/_/nginx
@@ -12,18 +13,18 @@ services:
     ports:
       # Our app works from http://localhost and the port defined in .env
       # 8080 is set in custom config file copied to the nginx image
-      - "$WEB_SERVER_PORT:8080"
+      - "$WEB_PORT:8080"
     volumes:
       # Bind-mount local directory onto container to make app code visible to nginx
       - ./:/app-mount
       # Mounting config file
-      - ./.local/nginx/site.conf:/etc/nginx/conf.d/site.conf
+      - ./.dev/nginx/site.conf:/etc/nginx/conf.d/site.conf
     # Making sure that necessary services are running
     depends_on:
       - php
       - mysql
   php:
-    # An image we built using the official php-fpm image (see .local/php/Dockerfile)
+    # An image we built using the official php-fpm image (see .dev/php/Dockerfile)
     image: wp/php:8.1.12
     environment:
       - WP_ENV=development
@@ -59,3 +60,5 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - "$ELASTICSEARCH_PORT:9200"
+    volumes:
+      - elastic:/usr/share/elasticsearch/data

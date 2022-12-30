@@ -13,23 +13,23 @@
     "axios": "^1.2.1",
     "css-loader": "^6.7.3",
     "mini-css-extract-plugin": "^2.7.2",
-    "sass": "^1.57.1",
     "sass-loader": "^13.2",
-    "vue": "^3.2.45",
+    "sass": "^1.57.1",
     "vue-loader": "^17.0.1",
     "vue-template-compiler": "^2.7.14",
+    "vue": "^3.2.45",
     "webpack-cli": "^5.0.1",
     "webpack": "^5.74"
   },
   "devDependencies": {
-    "eslint": "^8.30",
-    "eslint-webpack-plugin": "^3.2",
     "eslint-plugin-vue": "^9.8",
-    "stylelint": "^14.16",
-    "stylelint-webpack-plugin": "^3.3",
+    "eslint-webpack-plugin": "^3.2",
+    "eslint": "^8.30",
     "stylelint-config-standard-scss": "^6.1",
-    "webpack-merge": "^5.8",
-    "webpack-dev-server": "^4.11.1"
+    "stylelint-webpack-plugin": "^3.3",
+    "stylelint": "^14.16",
+    "webpack-dev-server": "^4.11.1",
+    "webpack-merge": "^5.8"
   },
   "engines": {
     "node": "^18",

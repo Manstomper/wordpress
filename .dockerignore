@@ -2,9 +2,9 @@ node_modules
 /assets
 /*.sql
 /*.sh
-/.local/*.sh
+/.dev/*.sh
+/.dev/.env.local
 .env
-.env.local
 .gitkeep
 .dockerignore
 README.md
