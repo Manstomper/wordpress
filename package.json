@@ -19,7 +19,7 @@
     "vue-template-compiler": "^2.7.14",
     "vue": "^3.2.45",
     "webpack-cli": "^5.0.1",
-    "webpack": "^5.74"
+    "webpack": "^5.76"
   },
   "devDependencies": {
     "eslint-plugin-vue": "^9.8",
