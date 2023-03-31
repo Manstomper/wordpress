@@ -5,14 +5,16 @@ RUN apk update \
         # Dependency required by the intl extension
         icu-dev \
         # Dependencies required by the gd extension
-        libjpeg-turbo-dev \
-        libpng-dev \
-    # intl
+        libjpeg-turbo-dev libwebp-dev libpng-dev \
+        # ImageMagick and dependency required by the imagick extension (uncomment if necessary)
+        #build-base autoconf imagemagick imagemagick-dev \
+    # The intl extension
     && docker-php-ext-install -j$(nproc) intl \
-    # gd
-    && docker-php-ext-configure gd --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
-    # mysqli
+    # The gd extension
+    && docker-php-ext-configure gd --with-jpeg --with-webp && docker-php-ext-install -j$(nproc) gd \
+    # The imagick extension (uncomment if necessary)
+    #&& pecl install imagick && docker-php-ext-enable imagick \
+    # The mysqli extension
     && docker-php-ext-install mysqli
     # Remove unnecessary files
     # Commented out until all build-time dependencies are cleaned

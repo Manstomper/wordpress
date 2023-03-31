@@ -33,8 +33,9 @@ services:
       - PHP_ERROR_LEVEL=$PHP_ERROR_LEVEL
       - ACF_PRO_LICENSE_KEY=$ACF_PRO_LICENSE_KEY
     volumes:
-      # App code drectory must be mounted to PHP container as well
+      # App code directory must be mounted to PHP container as well
       - ./:/app-mount
+    working_dir: /app-mount/public
   mysql:
     image: mariadb:10.9.4
     environment:
