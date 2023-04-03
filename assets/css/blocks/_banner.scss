@@ -1,0 +1,28 @@
+.block-banner {
+  &.has-background {
+    padding-top: $gutter;
+    padding-bottom: $gutter;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    max-width: $max-width;
+    margin: 0 auto;
+  }
+
+  .image,
+  .text {
+    flex-grow: 1;
+    width: 50%;
+  }
+
+  .text {
+    padding: $gutter;
+  }
+
+  &.is-style-image-right .image {
+    order: 1;
+  }
+}

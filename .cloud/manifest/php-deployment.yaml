@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  labels:
+    app: php
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+        - name: php
+          image: europe-north1-docker.pkg.dev/my-first-project-20220128/my-first-repository/php:8.0.14
+          ports:
+            - containerPort: 9000
+          env:
+            - name: WP_ENV
+              value: production
+            - name: WP_HOME
+              value: "http://foo.bar"
+          imagePullPolicy: Always
+      restartPolicy: Always

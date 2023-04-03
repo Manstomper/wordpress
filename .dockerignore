@@ -1,0 +1,13 @@
+node_modules
+/assets
+/*.sql
+/*.gz
+/*.sh
+/.dev/*.sh
+/.dev/.env.local
+.env
+.gitkeep
+.dockerignore
+README.md
+.cloud/README.cloud.md
+.cloud/*.sh

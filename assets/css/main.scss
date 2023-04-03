@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+// Theme core
+@import "variables";
+@import "fontello";
+@import "global";
+@import "helpers";
+
+// Theme components
+@import "components/app-header";
+@import "components/app-footer";
+
+// Blocks
+@import "blocks/accordion";
+@import "blocks/banner";
+@import "blocks/boxes";
+@import "blocks/buttons";
+@import "blocks/cover";
+@import "blocks/embed";
+@import "blocks/group";
+@import "blocks/image";
+@import "blocks/posts";
+@import "blocks/pullquote";
+@import "blocks/quote";
+@import "blocks/table";
+
+.dev-notice {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  right: 20%;
+  max-width: 40%;
+  padding: 8px 15px 8px 30px;
+  background-color: #eee;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0px 2px rgb(0 0 0 / 20%);
+  font-size: 14px;
+  line-height: 20px;
+  overflow: hidden;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &::before {
+    content: "\00D7";
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  &.is-collapsed {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+  }
+
+  &.is-collapsed > * {
+    display: none;
+  }
+
+  &.is-collapsed::before {
+    content: "+";
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+/*
+Example code. Not to be used as-is in production.
+*/
+#sample-image {
+  width: 200px;
+  height: 120px;
+  padding: 5px;
+  background-image: url("./../img/photo-sample.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  outline: 1px dashed #999;
+}
+
+.posts {
+  position: relative;
+
+  .loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0 0 0 / 20%);
+  }
+}

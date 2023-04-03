@@ -1,0 +1,33 @@
+.block-accordion {
+  > button {
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: "";
+      position: relative;
+      width: 24px;
+      height: 16px;
+      left: -2px;
+      margin-left: -10px;
+      background-image: url("./../img/chevron.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: rotate(90deg);
+      filter: invert(100%);
+    }
+
+    &[aria-expanded="true"]::before {
+      transform: rotate(-90deg);
+    }
+  }
+
+  > div {
+    display: none;
+    padding: $gutter;
+
+    &.is-open {
+      display: block;
+    }
+  }
+}

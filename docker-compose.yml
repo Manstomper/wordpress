@@ -1,0 +1,66 @@
+# Docker Compose file format version
+# https://docs.docker.com/compose/compose-file/compose-versioning/
+version: "3.8"
+
+volumes:
+  # A named volume for the WordPress database. Without it, a volume will be created but it is deleted when containers are deleted.
+  db:
+  #elastic:
+services:
+  web:
+    # nginx image from the Docker Hub https://hub.docker.com/_/nginx
+    #image: 1.23.4-alpine3.17
+    image: nginx:1.23.4-alpine3.17-slim
+    ports:
+      # Our app works from http://localhost and the port defined in .env
+      # 8080 is set in custom config file copied to the nginx image
+      - "$WEB_PORT:8080"
+    volumes:
+      # Bind-mount local directory onto container to make app code visible to nginx
+      - ./:/app-mount
+      # Mount config file
+      - ./.dev/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    # Make sure that necessary services are running
+    depends_on:
+      - php
+      - mysql
+  php:
+    # An image we built using the official php-fpm image (see .dev/php/Dockerfile)
+    image: wp/php:8.1.17
+    environment:
+      - WP_ENV=development
+      - WP_HOME=$WP_HOME
+      - NODE_PORT=$NODE_PORT
+      - PHP_ERROR_LEVEL=$PHP_ERROR_LEVEL
+      - ACF_PRO_LICENSE_KEY=$ACF_PRO_LICENSE_KEY
+    volumes:
+      # App code directory must be mounted to PHP container as well
+      - ./:/app-mount
+    working_dir: /app-mount/public
+  mysql:
+    image: mariadb:10.7.8
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - db:/var/lib/mysql
+  node:
+    image: node:18.15.0-alpine3.17
+    ports:
+      # Exposing port because we use webpack-dev-server to automatically reload when Javascript or CSS changes
+      - "$NODE_PORT:$NODE_PORT"
+    volumes:
+      - ./:/usr/src
+    # Directory in which the command on the next line is run
+    working_dir: /usr/src
+    command: npm run dev
+  #elasticsearch:
+  #  image: elasticsearch:8.6.2
+  #  environment:
+  #    - discovery.type=single-node
+  #    - xpack.security.enabled=false
+  #    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #  ports:
+  #    - "$ELASTICSEARCH_PORT:9200"
+  #  volumes:
+  #    - elastic:/usr/share/elasticsearch/data

@@ -1,0 +1,38 @@
+{
+  "name": "@rig/wp-demo",
+  "description": "",
+  "version": "1.0.0",
+  "author": "RG",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo \"Error: nothing to start\" && exit 1",
+    "dev": "webpack-dev-server --mode development --config ./assets/webpack.config.dev.js",
+    "build": "webpack --mode production --config ./assets/webpack.config.js"
+  },
+  "dependencies": {
+    "axios": "^1.2.1",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.5",
+    "sass-loader": "^13.2.2",
+    "sass": "^1.60",
+    "vue-loader": "^17.0.1",
+    "vue-template-compiler": "^2.7.14",
+    "vue": "^3.2.47",
+    "webpack-cli": "^5.0.1",
+    "webpack": "^5.77"
+  },
+  "devDependencies": {
+    "eslint-plugin-vue": "^9.10",
+    "eslint-webpack-plugin": "^4",
+    "eslint": "^8.37",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-webpack-plugin": "^4.1",
+    "stylelint": "^15.4",
+    "webpack-dev-server": "^4.13.2",
+    "webpack-merge": "^5.8"
+  },
+  "engines": {
+    "node": "^18",
+    "npm": "^9"
+  }
+}
