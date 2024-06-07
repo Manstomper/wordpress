@@ -1,13 +1,15 @@
 #!/bin/sh
 
-if [[ $(docker compose ps -q php 2>&1) =~ "no such service" ]]; then
-    echo "Container does not appear to exist. Building and starting..."
+# I came to the conclusion that this is not necessary. Just bookmark the site and run docker compose (re)start
 
-    "${BASH_SOURCE%/*}/rebuild.sh"
-else
-    echo "Container appears to exist. Restarting..."
+#if [[ $(docker compose ps -q php 2>&1) =~ "no such service" ]]; then
+#    echo "Container does not appear to exist. Building and starting..."
 
-    docker compose restart
-fi
+#    "${BASH_SOURCE%/*}/build.sh"
+#else
+#    echo "Container appears to exist. Restarting..."
 
-source .env && echo "The site should now work from http://localhost:$WEB_PORT"
+#    docker compose restart
+#fi
+
+#source .env && echo "The site should now work from http://localhost:$WEB_PORT"

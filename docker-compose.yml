@@ -1,21 +1,16 @@
-# Docker Compose file format version
-# https://docs.docker.com/compose/compose-file/compose-versioning/
-version: "3.8"
-
 volumes:
-  # A named volume for the WordPress database. Without it, a volume will be created but it is deleted when containers are deleted.
+  # A named volume for the WordPress database. Without it, a volume will be created but is deleted when containers are deleted.
   db:
-  elastic:
 services:
   web:
     # nginx image from the Docker Hub https://hub.docker.com/_/nginx
-    image: nginx:1.23.2
+    image: nginx:1.27.0-alpine3.19-perl
     ports:
-      # Our app works from http://localhost and the port defined in .env
-      # 8080 is set in custom config file copied to the nginx image
+      # Our app works from http://localhost and the port defined in .env (boilerplate found in .dev/env.local)
+      # 8080 is set in a custom config file copied to the nginx image
       - "$WEB_PORT:8080"
     volumes:
-      # Bind-mount local directory onto container to make app code visible to nginx
+      # Bind-mounting local directory onto container to make app code visible to nginx
       - ./:/app-mount
       # Mounting config file
       - ./.dev/nginx/site.conf:/etc/nginx/conf.d/site.conf
@@ -24,12 +19,11 @@ services:
       - php
       - mysql
   php:
-    # An image we built using the official php-fpm image (see .dev/php/Dockerfile)
-    image: wp/php:8.1.12
+    # An image we have built (or will build) using the official php-fpm image (see .dev/php/Dockerfile)
+    image: wp/php:8
     environment:
       - WP_ENV=development
       - WP_HOME=$WP_HOME
-      - NODE_PORT=$NODE_PORT
       - PHP_ERROR_LEVEL=$PHP_ERROR_LEVEL
       - ACF_PRO_LICENSE_KEY=$ACF_PRO_LICENSE_KEY
     volumes:
@@ -37,29 +31,16 @@ services:
       - ./:/app-mount
     working_dir: /app-mount/public
   mysql:
-    image: mariadb:10.9.4
+    image: mariadb:11.4.2-ubi9
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=wordpress
     volumes:
       - db:/var/lib/mysql
   node:
-    image: node:18.12.1-alpine3.16
-    ports:
-      # Exposing port because we use webpack-dev-server to automatically reload when Javascript or CSS changes
-      - "$NODE_PORT:$NODE_PORT"
+    image: node:20.13.1-alpine3.20
     volumes:
       - ./:/usr/src
     # Directory in which the command on the next line is run
     working_dir: /usr/src
     command: npm run dev
-  elasticsearch:
-    image: elasticsearch:8.5.3
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "$ELASTICSEARCH_PORT:9200"
-    volumes:
-      - elastic:/usr/share/elasticsearch/data

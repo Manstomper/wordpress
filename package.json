@@ -6,33 +6,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "echo \"Error: nothing to start\" && exit 1",
-    "dev": "webpack-dev-server --mode development --config ./assets/webpack.config.dev.js",
+    "dev": "webpack --mode development --config ./assets/webpack.config.dev.js",
     "build": "webpack --mode production --config ./assets/webpack.config.js"
   },
   "dependencies": {
-    "axios": "^1.2.1",
-    "css-loader": "^6.7.3",
-    "mini-css-extract-plugin": "^2.7.2",
-    "sass-loader": "^13.2",
-    "sass": "^1.57.1",
-    "vue-loader": "^17.0.1",
-    "vue-template-compiler": "^2.7.14",
-    "vue": "^3.2.45",
-    "webpack-cli": "^5.0.1",
-    "webpack": "^5.74"
+    "css-loader": "^7.1",
+    "mini-css-extract-plugin": "^2.9",
+    "sass-loader": "^14.2",
+    "sass": "^1.77",
+    "vue-loader": "^17.4",
+    "vue-template-compiler": "^2.7",
+    "vue": "^3.4",
+    "webpack-cli": "^5.1",
+    "webpack": "^5.91"
   },
   "devDependencies": {
-    "eslint-plugin-vue": "^9.8",
-    "eslint-webpack-plugin": "^3.2",
-    "eslint": "^8.30",
-    "stylelint-config-standard-scss": "^6.1",
-    "stylelint-webpack-plugin": "^3.3",
-    "stylelint": "^14.16",
-    "webpack-dev-server": "^4.11.1",
-    "webpack-merge": "^5.8"
+    "eslint-plugin-vue": "^9.26",
+    "eslint-webpack-plugin": "^4.2",
+    "eslint": "^9.4",
+    "stylelint-config-standard-scss": "^13.1",
+    "stylelint-webpack-plugin": "^5.0",
+    "stylelint": "^16.6",
+    "webpack-merge": "^5.10"
   },
   "engines": {
-    "node": "^18",
-    "npm": "^8"
+    "node": "^20",
+    "npm": "^10"
   }
 }

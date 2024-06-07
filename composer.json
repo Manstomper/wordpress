@@ -35,24 +35,21 @@
     }
   ],
   "require": {
-    "php": "~8.1.12",
+    "php": "~8.3.8",
     "composer/installers": "^2.2",
-    "johnpbloch/wordpress": "^6.1",
+    "johnpbloch/wordpress": "^6.5",
     "koodimonni/composer-dropin-installer": "^1.4",
-    "koodimonni-language/core-fi": "^6.1",
-    "wp-cli/wp-cli": "^2.7",
+    "koodimonni-language/core-fi": "^6.5",
+    "wp-cli/wp-cli": "^2.10",
     "wp-cli/extension-command": "^2.1",
     "wpackagist-plugin/advanced-custom-fields": "^6",
-    "wpackagist-plugin/wordpress-seo": "^20",
+    "wpackagist-plugin/wordpress-seo": "^22",
     "wpackagist-plugin/safe-svg": "^2",
-    "wpackagist-plugin/polylang": "^3.3",
-    "wpackagist-plugin/lock-reusable-blocks": "^0.6",
-    "wpackagist-plugin/elasticpress": "^4.4"
+    "wpackagist-plugin/polylang": "^3.6"
   },
   "require-dev": {
-    "wpackagist-plugin/debug-bar": "^1.1.4",
-    "wpackagist-plugin/debug-bar-elasticpress": "^2.1.1",
-    "wpackagist-plugin/query-monitor": "^3.11.1"
+    "wpackagist-plugin/debug-bar": "^1",
+    "wpackagist-plugin/query-monitor": "^3"
   },
   "config": {
     "vendor-dir": "vendor",
